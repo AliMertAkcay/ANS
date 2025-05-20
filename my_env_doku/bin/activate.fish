@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/ali_mert_akcay/Dokumente/Semester_6/ANS_Analogeschaltungstechnik/Dokumentation/manuscript-tutorial/my_env_doku
+set -gx VIRTUAL_ENV /home/ali-mert-akcay/Documents/ANS_Dokumentation/ANS/my_env_doku
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
