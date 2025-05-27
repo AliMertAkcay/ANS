@@ -18,7 +18,7 @@ author:
     roles: []
     affiliations:
       - Curvenote
-  - name: Erlich
+  - name: Erlich Nguefack Takoubo
     orcid:
     corresponding: false
     roles: []
@@ -424,7 +424,6 @@ plt.ylabel("Freqeuenz in Hz")
 plt.xlabel("Kapazität in Farad")
 plt.xscale('log')
 ```
-
 
 ::: {#refs}
 :::
