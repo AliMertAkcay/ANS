@@ -409,5 +409,22 @@ plt.legend()
 plt.show()
 ```
 
+# Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand
+```{python}
+Rcom = 1e3
+Ccom = np.linspace(1e-12,1e-6,10000)
+
+f0 = (1/(Rcom*Ccom))*(1/(2*np.pi))
+plt.figure("Theorehtische Grenzfreqeuenz in Abhängigkeit von C")
+plt.title("Theorehtische Grenzfreqeuenz in Abhängigkeit von C")
+plt.plot(Ccom,f0)
+plt.grid()
+plt.legend()
+plt.ylabel("Freqeuenz in Hz")
+plt.xlabel("Kapazität in Farad")
+plt.xscale('log')
+```
+
+
 ::: {#refs}
 :::
