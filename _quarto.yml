@@ -1,5 +1,7 @@
 project:
-  type: manuscript
+  #type: manuscript
+  execute-dir: project
+  #type: manuscript
 
 lang: de
 
@@ -11,6 +13,9 @@ execute:
 
 format:
   html:
+    code-fold: true
+    code-summary: "Code anzeigen"
+    code-tools: true
     theme: flatly
   pdf:
     documentclass: scrreprt
@@ -33,3 +38,4 @@ format:
 #  epub:
 #    theme: flatly
 #    output-file: ans_bericht
+

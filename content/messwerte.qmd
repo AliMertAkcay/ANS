@@ -13,49 +13,49 @@ import pandas as pd
 
 ```{python}
 # Messwerte Tiefpassfilter mit Q1
-dfLPFQ1 = pd.read_csv("../Data/Messung1_LPF.csv", sep=',')
+dfLPFQ1 = pd.read_csv("Data/Messung1_LPF.csv", sep=',')
 fTPQ1 = np.array(dfLPFQ1['Frequency [Hz]'])
 gainTPQ1=np.array(dfLPFQ1[' Amplitude [dB]'])
 phaseTPQ1 = np.array(dfLPFQ1[' Phase [deg]'])
 
 # Messwerte Tiefpassfilter mit Q10
-dfLPFQ10 = pd.read_csv("../Data/Messung2_LPF.csv",sep=',')
+dfLPFQ10 = pd.read_csv("Data/Messung2_LPF.csv",sep=',')
 fTPQ10 = np.array(dfLPFQ10['Frequency [Hz]'])
 gainTPQ10=np.array(dfLPFQ10[' Amplitude [dB]'])
 phaseTPQ10 = np.array(dfLPFQ10[' Phase [deg]'])
 
 # Messwerte Hochpassfilter mit Q1
-dfHPFQ1 = pd.read_csv("../Data/Messung1_HPF.csv",sep=',')
+dfHPFQ1 = pd.read_csv("Data/Messung1_HPF.csv",sep=',')
 fHPFQ1 = np.array(dfHPFQ1['Frequency [Hz]'])
 gainHPFQ1=np.array(dfHPFQ1[' Amplitude [dB]'])
 phaseHPFQ1 = np.array(dfHPFQ1[' Phase [deg]'])
 
 # Messwerte Hochpassfilter mit Q10
-dfHPFQ10 = pd.read_csv("../Data/Messung2_HPF.csv",sep=',')
+dfHPFQ10 = pd.read_csv("Data/Messung2_HPF.csv",sep=',')
 fHPFQ10 = np.array(dfHPFQ10['Frequency [Hz]'])
 gainHPFQ10=np.array(dfHPFQ10[' Amplitude [dB]'])
 phaseHPFQ10 = np.array(dfHPFQ10[' Phase [deg]'])
 
 # Messwerte Bandpassfilter mit Q1
-dfBPFQ1 = pd.read_csv("../Data/Messung1_BPF.csv",sep=',')
+dfBPFQ1 = pd.read_csv("Data/Messung1_BPF.csv",sep=',')
 fBPFQ1 = np.array(dfBPFQ1['Frequency [Hz]'])
 gainBPFQ1=np.array(dfBPFQ1[' Amplitude [dB]'])
 phaseBPFQ1 = np.array(dfBPFQ1[' Phase [deg]'])
 
 # Messwerte Bandpassfilter mit Q10
-dfBPFQ10 = pd.read_csv("../Data/Messung2_BPF.csv",sep=',')
+dfBPFQ10 = pd.read_csv("Data/Messung2_BPF.csv",sep=',')
 fBPFQ10 = np.array(dfBPFQ10['Frequency [Hz]'])
 gainBPFQ10=np.array(dfBPFQ10[' Amplitude [dB]'])
 phaseBPFQ10 = np.array(dfBPFQ10[' Phase [deg]'])
 
 # Messwerte Bandsperre mit Q1
-dfBSFQ1 = pd.read_csv("../Data/Messung1_BSF.csv",sep=',')
+dfBSFQ1 = pd.read_csv("Data/Messung1_BSF.csv",sep=',')
 fBSFQ1 = np.array(dfBSFQ1['Frequency [Hz]'])
 gainBSFQ1=np.array(dfBSFQ1[' Amplitude [dB]'])
 phaseBSFQ1 = np.array(dfBSFQ1[' Phase [deg]'])
 
 # Messwerte Bandsperre mit Q10
-dfBSFQ10 = pd.read_csv("../Data/Messung2_BSF.csv",sep=',')
+dfBSFQ10 = pd.read_csv("Data/Messung2_BSF.csv",sep=',')
 fBSFQ10 = np.array(dfBSFQ10['Frequency [Hz]'])
 gainBSFQ10=np.array(dfBSFQ10[' Amplitude [dB]'])
 phaseBSFQ10 = np.array(dfBSFQ10[' Phase [deg]'])
@@ -64,7 +64,7 @@ phaseBSFQ10 = np.array(dfBSFQ10[' Phase [deg]'])
 ```{python} 
 # -----------------------------------Einladen der Simulations Werte -----------------------------------------
 # Werte für die Tiefpassfilter mit güte 1
-filepath1 = '../spice_kicad/FSQ1.raw'
+filepath1 = './spice_kicad/FSQ1.raw'
 l1 = Ltspice(filepath1)
 l1.parse() # Data loading sequence. It may take few minutes for huge file.
 
@@ -76,7 +76,7 @@ Vlpf1 = l1.get_data('v(lpf)')
 
 # Werte für die Tiefpassfilter mit güte 10
 
-filepath10 = '../spice_kicad/FSQ10.raw'
+filepath10 = './spice_kicad/FSQ10.raw'
 l2 = Ltspice(filepath10)
 l2.parse()
 
@@ -235,19 +235,19 @@ Die Güte hat ein Problem in der Rellen Schaltung
 ```{python} 
 # Einladen der Messwerte
 # ----- Butter1uF ------------- 
-Butter1uF = pd.read_csv("../Data/4.5_1uF_Data.csv",sep=',')
+Butter1uF = pd.read_csv("./Data/4.5_1uF_Data.csv",sep=',')
 fButter1uf = np.array(Butter1uF['Frequency [Hz]'])
 gain1uf=np.array(Butter1uF[' Amplitude [dB]'])
 phase1uf = np.array(Butter1uF[' Phase [deg]'])
 
 # ------Butter 0.1 uF ---------- 
-Butter01uF = pd.read_csv("../Data/4.5_0.1uF_Data.csv",sep=',')
+Butter01uF = pd.read_csv("./Data/4.5_0.1uF_Data.csv",sep=',')
 fButter01uf = np.array(Butter01uF['Frequency [Hz]'])
 gain01uf=np.array(Butter01uF[' Amplitude [dB]'])
 phase01uf = np.array(Butter01uF[' Phase [deg]'])
 
 # ------Butter 0.01uF -------- f0 = 
-Butter001uF = pd.read_csv("../Data/4.5_0.01uf_Data.csv",sep=',')
+Butter001uF = pd.read_csv("./Data/4.5_0.01uf_Data.csv",sep=',')
 fButter001uf = np.array(Butter001uF['Frequency [Hz]'])
 gain001uf=np.array(Butter001uF[' Amplitude [dB]'])
 phase001uf = np.array(Butter001uF[' Phase [deg]'])
@@ -257,7 +257,7 @@ phase001uf = np.array(Butter001uF[' Phase [deg]'])
 # Einladen der Simuliertenwerte
 
 # Werte aus der Simulation mit 1 uF  
-filepath3 = '../spice_kicad/Butterworththirdorder1u.raw'
+filepath3 = './spice_kicad/Butterworththirdorder1u.raw'
 l3 = Ltspice(filepath3)
 l3.parse() # Data loading sequence. It may take few minutes for huge file.
 
@@ -270,7 +270,7 @@ Vout1u  = l3.get_data('v(Vout)')
 
 # Werte aus der Simulation mit 0.1 uF
 
-filepath4 = '../spice_kicad/Butterworththirdorder0.1u.raw'
+filepath4 = './spice_kicad/Butterworththirdorder0.1u.raw'
 l4 = Ltspice(filepath4)
 l4.parse() # Data loading sequence. It may take few minutes for huge file.
 
@@ -283,7 +283,7 @@ Vout01u  = l4.get_data('v(Vout)')
 
 # Werte aus der Simulation mit 0.01 uF
 
-filepath5 = '../spice_kicad/Butterworththirdorder0.01u.raw'
+filepath5 = './spice_kicad/Butterworththirdorder0.01u.raw'
 l5 = Ltspice(filepath5)
 l5.parse() # Data loading sequence. It may take few minutes for huge file.
 
