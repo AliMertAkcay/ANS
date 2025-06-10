@@ -87,8 +87,6 @@ Vhpf10 = l2.get_data('v(hpf)')  # https://www.ti.com/lit/ds/symlink tl082-n.pdf
 Vlpf10 = l2.get_data('v(lpf)')
 ```
 
-# Vergleich der Messwerte mit den Simulationswerten
-
 
 ## Tiefpassfilter
 
@@ -105,18 +103,18 @@ plt.legend()
 plt.show()
 ```
 
-# Vergleich der Messwerte mit den Simulationswerten
+### Vergleich der Messwerte mit den Simulationswerten
 Vergleicht man die in Abbildung 2 abgebildeten Amplitudengände des Tiefpassfilters, erkennt man ab ca. 10kHz bei Güte 1, bzw. 50kHz bei Güte 10, Abweichungen der gemessenen zu der theoretischen Simulation aus KiCad. Bei höheren Frequenzen kommen mehrerere Faktoren zusammen, die das ideale Verhalten beeinträchtigen:
     - Parasitäre Effekte: Bei den theoretischen Modellen werden   die Streukapazitäten und -induktivitäten, die in den realen Bauelementen vorhanden sind, nicht berücksichtigt. Diese parasiäten Effekten werden aber bei hohen Frequenzen zunehmend relevant und könnten einer der Faktoren der Abweichungen sein.
     - Frequenzabhängiges Bauteilverhalten: Mit steigender Frequenz sinkt der Widerstand vom Kondensator. Bei steigender Frequenz ändert sich damit das Spannungsverhältnis, was zu Abweichungen führt.
     - Nicht-idealen Eigenschaften eines OpAmps: Zum Beispiel die endliche Verstärkung, Offsetspannungen und Eingangs-Bias-Ströme, haben potenziell die größten Auswirkungen auf die Leistung eines Biquad-Filters. Diese Fehlerquellen können zu Verzerrungen, Verlust der Genauigkeit und Fehlern in der Frequenzgangkurve führen. Besonders bei präzisen Filtern und Anwendungen, die eine exakte Frequenzantwort erfordern (z. B. Audio- oder Kommunikationssysteme), müssen diese nicht-idealen Effekte berücksichtigt und in der Schaltungs- oder Filtergestaltung ausgeglichen werden.Um diese Probleme zu minimieren, wird in der Praxis häufig Präzisions-OpAmps verwendet, die geringe Fehlerquellen aufweise
 
-## Dokumentierte Abweichungen
+### Dokumentierte Abweichungen
 In den Versuchsergebnissen wurden bereits erhebliche Abweichungen zwischen berechneten und gemessenen Werten dokumentiert:
     - Die Abweichungen der Grenzfrequenz beträgt 1,57kHz bzw. 15,8%
     - Die absolute Abweichung zwischen ReÜberschwingen im Übergangsbereich: Im Bereich um 1000 Hz zeigt insbesondere die Q10-Simulation (orange) ein deutliches Überschwingen, das beim Q10-Wert mit seiner steileren Flankensteilheit zu erwarten ist
     
-## Spezielle Effekte bei hohen Frequenzen
+### Spezielle Effekte bei hohen Frequenzen
 Bei Frequenzen deutlich über der Grenzfrequenz kommen zusätzliche Effekte zum Tragen:
     - Die Filtersteilheit realer Filter kann von den theoretischen abweichen.
     - Belastungseffekte durch nachfolgeden Stufen verändern die Filtercharakteristik. Wenn beispielsweise ein Hochpass an einen Tiefpass angeschlossen wird, verändert sich das Übertragungsverhalten durch die Parallelschaltung.
@@ -149,13 +147,13 @@ plt.legend()
 plt.show()
 ```
 
-# Vergleich der Messwerte mit den Simulationswerten
+### Vergleich der Messwerte mit den Simulationswerten
 Bei den Amplitudengänge des Hochpassfilters aus Abbildung 4 gibt es ähnliche Gründe für die Abweichungen wie beim Tiefpassfilter, aber mit dem Unterschied, dass sie hier bei sehr niedrigen Frequenzen und ebenfalls sehr niedrigen dB-Werten auftreten. Dabei gibt es mehrere Faktoren, die diese Abweichungen erklären:
     - Reales Verhalten der Bauelemente: Bei extrem niedrigen Frequenzen verhalten sich Kondensatoren nicht mehr ideal. Während ein idealer Kondensator bei sehr niedrigen Frequenzen wie eine vollständige Sperre wirken sollte, haben reale Kondensatoren Leckströme, die einen gewissen Signaldurchlass ermöglichen
     - Parasitäre Effekte: Reale Bauteile besitzen Parallelwiderstände, die besonders bei niedrigen Frequenzen zum Tragen kommen. Bei Kondensatoren führt dies dazu, dass sie nicht mehr als perfekte Isolatoren wirken
     - Rauscheffekte und Messgenauigkeit: Bei sehr niedirgen dB-Werten (unter -80dB) stoßen Messgeräte an ihre Grenzen, was zu unregelmäßigen Messergebnissen führen kann.
 
-## Dokumentierte Abweichungen
+### Dokumentierte Abweichungen
 Im angezeigten Amplitudengang des Hochpassfilters sind mehrere charakteristische Abweichungen erkennbar:
     - Starker Einbruch bei Q1-Messung: Die rote Linie (gemessener Q1-Hochpass) zeigt bei etwa 20-30 Hz einen markanten Einbruch auf fast -110 dB, der in der Simulation nicht vorkommt. Dies deutet auf resonante Effekte zwischen den realen Bauteilen hin
     - Flacherer Anstieg bei niedrigen Frequenzen: Der Anstieg der gemessenen Kurven (rot und grün) ist bei sehr niedrigen Frequenzen weniger steil als bei den simulierten Kurven, was auf die nicht-idealen Eigenschaften der Bauelemente zurückzuführen ist
@@ -295,9 +293,9 @@ Vlpf5 = l5.get_data('v(lpf)')
 Vout001u  = l5.get_data('v(Vout)') 
 
 ```
-# Plot und Vergleich:
+## Plot und Vergleich:
 
-## Butterworth 1uF
+### Butterworth 1uF
 ```{python}
 plt.figure("Amplitudengang Butterworth TP 1uF")
 plt.title("Amplitudengang Butterworth 1uF")
@@ -319,7 +317,7 @@ plt.grid()
 plt.legend()
 plt.show()
 ```
-## Butterworthfilter 0.1uF
+### Butterworthfilter 0.1uF
 ```{python}
 plt.figure("Amplitudengang Butterworth TP 0.1uF")
 plt.title("Amplitudengang Butterworth 0.1uF")
@@ -341,7 +339,7 @@ plt.grid()
 plt.legend()
 plt.show()
 ```
-# Butterworthfilter 0.01uF
+### Butterworthfilter 0.01uF
 
 ```{python}
 plt.figure("Amplitudengang Butterworth TP 0.01uF")
@@ -365,7 +363,7 @@ plt.legend()
 plt.show()
 ```
 
-# Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand
+<!--### Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand
 ```{python}
 Rcom = 1e3
 Ccom = np.linspace(1e-12,1e-6,10000)
@@ -380,5 +378,6 @@ plt.ylabel("Freqeuenz in Hz")
 plt.xlabel("Kapazität in Farad")
 plt.xscale('log')
 ```
+-->
 
 [@baker2010]

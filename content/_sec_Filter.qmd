@@ -1,20 +1,17 @@
 # Filter-Entwurf
-In diesem Labor wird zusätzlich zum Biquadfilter ein Butterworth Tiefpass filterentwurfen und implementiert zunächst ist es jedoch wichtig sich mit der Spezifikation von Filtern auseinander zu setzen und mit diese eine gewisse Spezifikation zu setzen.
 
-Das Tolaranzschema für Filter ist in Abbildung... Dargestellt.
+## Herleitung der Übertragungsfunktion des Biquad Filters
 
-Die passbandedge lässt sich über die Kapazität $C_{COM}$ so wie dem Widerstand $R_{COM}$ einstellen, siehe Formel.. .
-$\omega_0 = \frac{1}{R_{COM} \cdot C_{COM}}$
+TODO: Wolte Erlich machen
 
-Die Güte an der Biquad Schaltung lässt sich mit dem Widerstand .. Einstellen. Die Güte gibt an wie sehr der Frequenzgang sich um die eingestellte Grenzfreqeunz $f_0 = \frac{\omega_0}{2 \cdot \pi} $ sich ändert 
-<!--TODO: Das noch genauer Beschreiben-->
 
-## Herleitung des Butterworth-Filter Third Order 
-Die Übertragungsfunktion eines ButterworthThridorders ist in der Formel ... gezeigt.
+## Herleitung der Übertragungsfunktion Tiefpassfilter dritter Ordnung
+
+Die Übertragungsfunktion eines Tiefpassfilters dritter Ordnung mit der Butterworth approximation ist in der Gleichung ... gezeigt.
 
 $H_{BW}(s) = \frac{H_0 \cdot {\omega_0}^3}{a\cdot s^3 +b\cdot S^2 +c \cdot S + (\omega_0)^3}$
 
-Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss and die Gleichung... angepasst werden.
+Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss die Gleichung... angepasst werden.
 
 $\frac{H_0}{1+\frac{s}{\omega_0 \cdot Q} + \frac{s^2}{{\omega_0}^2}}$
 
@@ -22,12 +19,23 @@ Die Gleichung ... kann zu besseren Herleitung als einfacher Bruch umgeschrieben 
 
 $= \frac{H_0 \cdot (\omega_0)^2}{(\omega_0)^2+\frac{s}{Q} \cdot \omega_0 +s^2}$
 
-Bei Genauerer Betrachung stellt man fest das mit dem Multiplizieren des Zusätzlichen Terms $\frac{\omega_0}{\omega_0 + s}$
+Bei Genauer Betrachung stellt man fest das mit dem Multiplizieren des Zusätzlichen Terms $\frac{\omega_0}{\omega_0 + s}$
 die Ursprüngliche Butterworth Übertragungsfunktion gewonnen werden kann siehe Herleitung....
 
 $\frac{H_0 \cdot (\omega_0)^2}{(\omega_0)^2+\frac{s}{Q} \cdot \omega_0 +s^2} \cdot \frac{\omega_0}{\omega_0 + s}$
 
 $\frac{H_0 \cdot (\omega_0)^3} {(\omega_0)^3 + \frac{s}{Q}\omega_0^2+s^2\omega_0+\omega_0^2s + \frac{s^2}{Q}\omega_0 + s^3}$
+
 Um geformt:
-TODO : Noch nicht fertig Hergeleitet:
-$H_{BW3}(s) = \frac{H_0 \¢dot (\omega_0)^3}{s^3 + s^2(\omega_0+\omega_0)}$
+
+$H_{BW3}(s) = \frac{H_0 \cdot (\omega_0)^3}{s^3 + s^2(\omega_0+\frac{\omega_0}{Q})+s(\frac{(\omega_0)^2}{Q}+(\omega_0)^2) +(\omega_0)^3}$
+
+Um diese Gewünschte Übertragungsfunktion zu erhalten muss der Term ... an den Tiefpassfilter in der Schaltung dazu geschaltet werden.
+Der Term... wird mit der Übertragungsfunktion ... Realisiert die daraus Resuliertende schaltung und die Gesammtschaltung ist in Abbildung... gezeigt.
+
+$\frac{\omega_0}{\omega_0 +s} = -\frac{R_2}{R_1} \cdot \frac{\frac{1}{R_{com} \cdot C_{com}}}{R_{com} \cdot C_{com} +s} \cdot -\frac{R_2}{R_1}$
+
+
+
+
+

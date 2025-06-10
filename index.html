@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.24">
+<head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.7.31" />
 
-<meta name="author" content="Ali_Mert_Akcay">
-<meta name="author" content="Julian Stolle">
-<meta name="author" content="Erlich Nguefack Takoubo">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+<meta name="author" content="Ali_Mert_Akcay" />
+<meta name="author" content="Julian Stolle" />
+<meta name="author" content="Erlich Nguefack Takoubo" />
 
 <title>Entwurf und PCD Design eines universellen Biquad Filters</title>
 <style>
@@ -80,18 +82,7 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-a37c72dd2dbac68997fcdc15a3622e78.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-63053770681cd859736509ad0a841bee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<!-- htmldependencies:E3FAD763 -->
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -125,16 +116,16 @@ window.Quarto = {
 
 </head>
 
-<body class="quarto-light">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Andere Formate</h2><ul><li><a href="ans_bericht.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Entwurf und PCD Design eines universellen Biquad Filters</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Gesamten Code zeigen</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Gesamten Code verbergen</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Quellcode anzeigen</a></li></ul></div></div>
+<h1 class="title">Entwurf und PCD Design eines universellen Biquad Filters</h1>
 </div>
 
 
@@ -190,324 +181,365 @@ window.Quarto = {
 
 <section id="einleitung" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Einleitung</h1>
+<p>Diese Dokumention beschäftigt sich mit dem Filterentwurf eines Aktiven Biqaudfilters siehe Abbildung… sowie eines Aktiven Butterworth Tiefpassfilters dritter ordnung. Die dafür notwendige Schritte so wie der Implementierung wird in diesem Dokument vorgeführt und dessen Ergebnisse Diskutiert.</p>
+<p>Der Biquadfilter zweiter Ordnung beinhaltet alle vier genängigen Filtertypen, welche im Labor gemessen und verglichen werden mit der Theorehtischen Schaltung. Um ein Butterworth Tiefpassfilter zu erlangen wird die in der Abbildung.. gezeigte Schaltung um ein zusätzlichen Integrator mit einem invertierenden Verstärker ergänzt Siehe Abblidung…</p>
+<p>TODO: BILD EINFÜGEN</p>
+<p>Die zu entwerfende Aktive Tiefpassschaltung wird für drei unterschiedliche passband edge Frequenz untersucht:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(f_0 = 159.155\)</span></th>
+<th><span class="math inline">\(f_0 = 1591.55\)</span></th>
+<th><span class="math inline">\(f_0 =15915.494\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(R_{com}\)</span></td>
+<td><span class="math inline">\(1k\Omega\)</span></td>
+<td><span class="math inline">\(1k\Omega\)</span></td>
+<td><span class="math inline">\(1k\Omega\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(C_{com}\)</span></td>
+<td><span class="math inline">\(1\mu F\)</span></td>
+<td><span class="math inline">\(0.1 \mu F\)</span></td>
+<td><span class="math inline">\(0.01 \mu F\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Hier bei ergibt sich die passband edge Freqeunz aus der gleichung <span class="math inline">\(\omega_0 = \frac{1}{R_{COM} \cdot C_{COM}}\)</span></p>
+<p>Die Spezfikation von Filtern beruht auf einem Toleranzschema wie in Abbildung… gezeigt.</p>
+<p>TODO:Bild Einfügen</p>
+<p>Da der Biquadfilter durch eine Butterworthaproximation Entwurfen wurde so wie die Erweiterte schaltung ist im Durchlassbereich ein Glatterverlauf zu erwarten je nach Grundverstärkung entwerder um 0dB oder höher.</p>
+<p>Die Güte an der Biquad Schaltung lässt sich mit dem Widerstand .. Einstellen. Die Güte gibt an wie sehr der Frequenzgang sich um die eingestellte Grenzfreqeunz $f_0 = $ sich ändert</p>
+<p>TODO: Das noch genauer Beschreiben</p>
 </section>
 <section id="filter-entwurf" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Filter-Entwurf</h1>
-<p>In diesem Labor wird zusätzlich zum Biquadfilter ein Butterworth Tiefpass filterentwurfen und implementiert zunächst ist es jedoch wichtig sich mit der Spezifikation von Filtern auseinander zu setzen und mit diese eine gewisse Spezifikation zu setzen.</p>
-<p>Das Tolaranzschema für Filter ist in Abbildung… Dargestellt.</p>
-<p>Die passbandedge lässt sich über die Kapazität <span class="math inline">\(C_{COM}\)</span> so wie dem Widerstand <span class="math inline">\(R_{COM}\)</span> einstellen, siehe Formel.. . <span class="math inline">\(\Omega_0 = \frac{1}{R_{COM}*C_{COM}}\)</span></p>
-<p>Die Güte an der Biquad Schaltung lässt sich mit dem Widerstand .. Einstellen. Die Güte gibt an wie sehr der Frequenzgang sich um die eingestellte Grenzfreqeunz $f_0 = $ sich ändert <!--TODO: Das noch genauer Beschreiben--></p>
-<section id="herleitung-des-butterworth-filter-third-order" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="herleitung-des-butterworth-filter-third-order"><span class="header-section-number">2.1</span> Herleitung des Butterworth-Filter Third Order</h2>
-<p>Die Übertragungsfunktion eines ButterworthThridorders ist in der Formel … gezeigt.</p>
-<p><span class="math inline">\(H_{BW}(s) = \frac{H_0 \cdot {\Omega_0}^3}{a\cdot S^3 +b\cdot S^2 +c \cdot S + (\Omega_0)^3}\)</span></p>
-<p>Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss and die Gleichung… angepasst werden.</p>
-<p><span class="math inline">\(\frac{H_0}{1+\frac{S}{\Omega_0 \cdot Q} + \frac{S^2}{{\Omega_0}^2}}\)</span></p>
+<section id="herleitung-der-übertragungsfunktion-des-biquad-filters" class="level2" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Herleitung der Übertragungsfunktion des Biquad Filters</h2>
+<p>TODO: Wolte Erlich machen</p>
+</section>
+<section id="herleitung-der-übertragungsfunktion-tiefpassfilter-dritter-ordnung" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span> Herleitung der Übertragungsfunktion Tiefpassfilter dritter Ordnung</h2>
+<p>Die Übertragungsfunktion eines Tiefpassfilters dritter Ordnung mit der Butterworth approximation ist in der Gleichung … gezeigt.</p>
+<p><span class="math inline">\(H_{BW}(s) = \frac{H_0 \cdot {\omega_0}^3}{a\cdot s^3 +b\cdot S^2 +c \cdot S + (\omega_0)^3}\)</span></p>
+<p>Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss die Gleichung… angepasst werden.</p>
+<p><span class="math inline">\(\frac{H_0}{1+\frac{s}{\omega_0 \cdot Q} + \frac{s^2}{{\omega_0}^2}}\)</span></p>
+<p>Die Gleichung … kann zu besseren Herleitung als einfacher Bruch umgeschrieben werden siehe Gleichung.</p>
+<p><span class="math inline">\(= \frac{H_0 \cdot (\omega_0)^2}{(\omega_0)^2+\frac{s}{Q} \cdot \omega_0 +s^2}\)</span></p>
+<p>Bei Genauer Betrachung stellt man fest das mit dem Multiplizieren des Zusätzlichen Terms <span class="math inline">\(\frac{\omega_0}{\omega_0 + s}\)</span> die Ursprüngliche Butterworth Übertragungsfunktion gewonnen werden kann siehe Herleitung….</p>
+<p><span class="math inline">\(\frac{H_0 \cdot (\omega_0)^2}{(\omega_0)^2+\frac{s}{Q} \cdot \omega_0 +s^2} \cdot \frac{\omega_0}{\omega_0 + s}\)</span></p>
+<p><span class="math inline">\(\frac{H_0 \cdot (\omega_0)^3} {(\omega_0)^3 + \frac{s}{Q}\omega_0^2+s^2\omega_0+\omega_0^2s + \frac{s^2}{Q}\omega_0 + s^3}\)</span></p>
+<p>Um geformt:</p>
+<p><span class="math inline">\(H_{BW3}(s) = \frac{H_0 \cdot (\omega_0)^3}{s^3 + s^2(\omega_0+\frac{\omega_0}{Q})+s(\frac{(\omega_0)^2}{Q}+(\omega_0)^2) +(\omega_0)^3}\)</span></p>
+<p>Um diese Gewünschte Übertragungsfunktion zu erhalten muss der Term … an den Tiefpassfilter in der Schaltung dazu geschaltet werden. Der Term… wird mit der Übertragungsfunktion … Realisiert die daraus Resuliertende schaltung und die Gesammtschaltung ist in Abbildung… gezeigt.</p>
+<p><span class="math inline">\(\frac{\omega_0}{\omega_0 +s} = -\frac{R_2}{R_1} \cdot \frac{\frac{1}{R_{com} \cdot C_{com}}}{R_{com} \cdot C_{com} +s} \cdot -\frac{R_2}{R_1}\)</span></p>
+<!--{{< include content/_sec_Charakterisierung.qmd >}}-->
 </section>
 </section>
-<section id="charakterisierung" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Charakterisierung</h1>
+<section id="messautomatisierung" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Messautomatisierung</h1>
 </section>
 <section id="biquad-filterschaltung" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Biquad Filterschaltung</h1>
 <!-- [Biquadschaltung](../images/Biquadschaltung.png){#fig-map}
 
 Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentation behandelt. Es handelt sich hierbei um ein Universellen Biquad Filter welcher 4 Filter Typen in einem Realisiert. Eine wichtiger Parameter von Filtern ist die Güte dies lässt sich mit dem Widerstand R5 einstellen. Bei steigender güte sinkt je nach Filter Type entweder die Bandbreite z.B. beim Notchfilter (bandsperre) oder beim Bandpass und beim Tiefpassfilter bzw Hochapssfilter die Übergangsfrequenz sprich die breite.-->
-<div id="459e8224" class="cell" data-execution_count="1">
+<div id="b7c8dfae" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ltspice <span class="im">import</span> Ltspice</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div>
 </details>
 </div>
-<div id="066724e8" class="cell" data-execution_count="2">
+<div id="fb1933cb" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Tiefpassfilter mit Q1</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dfLPFQ1 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung1_LPF.csv"</span>, sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fTPQ1 <span class="op">=</span> np.array(dfLPFQ1[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>gainTPQ1<span class="op">=</span>np.array(dfLPFQ1[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>phaseTPQ1 <span class="op">=</span> np.array(dfLPFQ1[<span class="st">' Phase [deg]'</span>])</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Tiefpassfilter mit Q1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dfLPFQ1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung1_LPF.csv&quot;</span>, sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fTPQ1 <span class="op">=</span> np.array(dfLPFQ1[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>gainTPQ1<span class="op">=</span>np.array(dfLPFQ1[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>phaseTPQ1 <span class="op">=</span> np.array(dfLPFQ1[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Tiefpassfilter mit Q10</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>dfLPFQ10 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung2_LPF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fTPQ10 <span class="op">=</span> np.array(dfLPFQ10[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>gainTPQ10<span class="op">=</span>np.array(dfLPFQ10[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>phaseTPQ10 <span class="op">=</span> np.array(dfLPFQ10[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>dfLPFQ10 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung2_LPF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fTPQ10 <span class="op">=</span> np.array(dfLPFQ10[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>gainTPQ10<span class="op">=</span>np.array(dfLPFQ10[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>phaseTPQ10 <span class="op">=</span> np.array(dfLPFQ10[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Hochpassfilter mit Q1</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>dfHPFQ1 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung1_HPF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>fHPFQ1 <span class="op">=</span> np.array(dfHPFQ1[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>gainHPFQ1<span class="op">=</span>np.array(dfHPFQ1[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>phaseHPFQ1 <span class="op">=</span> np.array(dfHPFQ1[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>dfHPFQ1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung1_HPF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>fHPFQ1 <span class="op">=</span> np.array(dfHPFQ1[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>gainHPFQ1<span class="op">=</span>np.array(dfHPFQ1[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>phaseHPFQ1 <span class="op">=</span> np.array(dfHPFQ1[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Hochpassfilter mit Q10</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>dfHPFQ10 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung2_HPF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fHPFQ10 <span class="op">=</span> np.array(dfHPFQ10[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>gainHPFQ10<span class="op">=</span>np.array(dfHPFQ10[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>phaseHPFQ10 <span class="op">=</span> np.array(dfHPFQ10[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>dfHPFQ10 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung2_HPF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fHPFQ10 <span class="op">=</span> np.array(dfHPFQ10[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>gainHPFQ10<span class="op">=</span>np.array(dfHPFQ10[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>phaseHPFQ10 <span class="op">=</span> np.array(dfHPFQ10[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Bandpassfilter mit Q1</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>dfBPFQ1 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung1_BPF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>fBPFQ1 <span class="op">=</span> np.array(dfBPFQ1[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>gainBPFQ1<span class="op">=</span>np.array(dfBPFQ1[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>phaseBPFQ1 <span class="op">=</span> np.array(dfBPFQ1[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>dfBPFQ1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung1_BPF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>fBPFQ1 <span class="op">=</span> np.array(dfBPFQ1[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>gainBPFQ1<span class="op">=</span>np.array(dfBPFQ1[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>phaseBPFQ1 <span class="op">=</span> np.array(dfBPFQ1[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Bandpassfilter mit Q10</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>dfBPFQ10 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung2_BPF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>fBPFQ10 <span class="op">=</span> np.array(dfBPFQ10[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>gainBPFQ10<span class="op">=</span>np.array(dfBPFQ10[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>phaseBPFQ10 <span class="op">=</span> np.array(dfBPFQ10[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>dfBPFQ10 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung2_BPF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>fBPFQ10 <span class="op">=</span> np.array(dfBPFQ10[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>gainBPFQ10<span class="op">=</span>np.array(dfBPFQ10[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>phaseBPFQ10 <span class="op">=</span> np.array(dfBPFQ10[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Bandsperre mit Q1</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>dfBSFQ1 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung1_BSF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>fBSFQ1 <span class="op">=</span> np.array(dfBSFQ1[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>gainBSFQ1<span class="op">=</span>np.array(dfBSFQ1[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>phaseBSFQ1 <span class="op">=</span> np.array(dfBSFQ1[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>dfBSFQ1 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung1_BSF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>fBSFQ1 <span class="op">=</span> np.array(dfBSFQ1[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>gainBSFQ1<span class="op">=</span>np.array(dfBSFQ1[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>phaseBSFQ1 <span class="op">=</span> np.array(dfBSFQ1[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Bandsperre mit Q10</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>dfBSFQ10 <span class="op">=</span> pd.read_csv(<span class="st">"Data/Messung2_BSF.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>fBSFQ10 <span class="op">=</span> np.array(dfBSFQ10[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>gainBSFQ10<span class="op">=</span>np.array(dfBSFQ10[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>phaseBSFQ10 <span class="op">=</span> np.array(dfBSFQ10[<span class="st">' Phase [deg]'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>dfBSFQ10 <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/Messung2_BSF.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>fBSFQ10 <span class="op">=</span> np.array(dfBSFQ10[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>gainBSFQ10<span class="op">=</span>np.array(dfBSFQ10[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>phaseBSFQ10 <span class="op">=</span> np.array(dfBSFQ10[<span class="st">&#39; Phase [deg]&#39;</span>])</span></code></pre></div>
 </details>
 </div>
-<div id="f153c1b6" class="cell" data-execution_count="3">
+<div id="7b78e12a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------Einladen der Simulations Werte -----------------------------------------</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------Einladen der Simulations Werte -----------------------------------------</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte für die Tiefpassfilter mit güte 1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>filepath1 <span class="op">=</span> <span class="st">'./spice_kicad/FSQ1.raw'</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>filepath1 <span class="op">=</span> <span class="st">&#39;./spice_kicad/FSQ1.raw&#39;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>l1 <span class="op">=</span> Ltspice(filepath1)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>l1.parse() <span class="co"># Data loading sequence. It may take few minutes for huge file.</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> l1.get_frequency()</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Vbpf1 <span class="op">=</span> l1.get_data(<span class="st">'v(bpf)'</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>Vbsf1 <span class="op">=</span> l1.get_data(<span class="st">'v(bsf)'</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>Vhpf1 <span class="op">=</span> l1.get_data(<span class="st">'v(hpf)'</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Vlpf1 <span class="op">=</span> l1.get_data(<span class="st">'v(lpf)'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Vbpf1 <span class="op">=</span> l1.get_data(<span class="st">&#39;v(bpf)&#39;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>Vbsf1 <span class="op">=</span> l1.get_data(<span class="st">&#39;v(bsf)&#39;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>Vhpf1 <span class="op">=</span> l1.get_data(<span class="st">&#39;v(hpf)&#39;</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Vlpf1 <span class="op">=</span> l1.get_data(<span class="st">&#39;v(lpf)&#39;</span>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte für die Tiefpassfilter mit güte 10</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>filepath10 <span class="op">=</span> <span class="st">'./spice_kicad/FSQ10.raw'</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>filepath10 <span class="op">=</span> <span class="st">&#39;./spice_kicad/FSQ10.raw&#39;</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>l2 <span class="op">=</span> Ltspice(filepath10)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>l2.parse()</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> l2.get_frequency()</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>Vbpf10 <span class="op">=</span> l2.get_data(<span class="st">'v(bpf)'</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>Vbsf10 <span class="op">=</span> l2.get_data(<span class="st">'v(bsf)'</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>Vhpf10 <span class="op">=</span> l2.get_data(<span class="st">'v(hpf)'</span>)  <span class="co"># https://www.ti.com/lit/ds/symlink tl082-n.pdf</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Vlpf10 <span class="op">=</span> l2.get_data(<span class="st">'v(lpf)'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>Vbpf10 <span class="op">=</span> l2.get_data(<span class="st">&#39;v(bpf)&#39;</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>Vbsf10 <span class="op">=</span> l2.get_data(<span class="st">&#39;v(bsf)&#39;</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>Vhpf10 <span class="op">=</span> l2.get_data(<span class="st">&#39;v(hpf)&#39;</span>)  <span class="co"># https://www.ti.com/lit/ds/symlink tl082-n.pdf</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Vlpf10 <span class="op">=</span> l2.get_data(<span class="st">&#39;v(lpf)&#39;</span>)</span></code></pre></div>
 </details>
 </div>
-</section>
-<section id="vergleich-der-messwerte-mit-den-simulationswerten" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Vergleich der Messwerte mit den Simulationswerten</h1>
-<section id="tiefpassfilter" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="tiefpassfilter"><span class="header-section-number">5.1</span> Tiefpassfilter</h2>
-<div id="0acb234c" class="cell" data-execution_count="4">
+<section id="tiefpassfilter" class="level2" data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span> Tiefpassfilter</h2>
+<div id="fbe3d913" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Tiefpass filters"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang des Tiefpassfilters"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vlpf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 TP Simulation"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vlpf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 TP Simulation"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ1,gainTPQ1,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen Q1'</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ10,gainTPQ10,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen Q10'</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang des Tiefpass filters&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang des Tiefpassfilters&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vlpf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 TP Simulation&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vlpf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 TP Simulation&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ1,gainTPQ1,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen Q1&#39;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ10,gainTPQ10,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen Q10&#39;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-5-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="vergleich-der-messwerte-mit-den-simulationswerten-1" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Vergleich der Messwerte mit den Simulationswerten</h1>
+<section id="vergleich-der-messwerte-mit-den-simulationswerten" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1"><span class="header-section-number">4.1.1</span> Vergleich der Messwerte mit den Simulationswerten</h3>
 <p>Vergleicht man die in Abbildung 2 abgebildeten Amplitudengände des Tiefpassfilters, erkennt man ab ca. 10kHz bei Güte 1, bzw. 50kHz bei Güte 10, Abweichungen der gemessenen zu der theoretischen Simulation aus KiCad. Bei höheren Frequenzen kommen mehrerere Faktoren zusammen, die das ideale Verhalten beeinträchtigen: - Parasitäre Effekte: Bei den theoretischen Modellen werden die Streukapazitäten und -induktivitäten, die in den realen Bauelementen vorhanden sind, nicht berücksichtigt. Diese parasiäten Effekten werden aber bei hohen Frequenzen zunehmend relevant und könnten einer der Faktoren der Abweichungen sein. - Frequenzabhängiges Bauteilverhalten: Mit steigender Frequenz sinkt der Widerstand vom Kondensator. Bei steigender Frequenz ändert sich damit das Spannungsverhältnis, was zu Abweichungen führt. - Nicht-idealen Eigenschaften eines OpAmps: Zum Beispiel die endliche Verstärkung, Offsetspannungen und Eingangs-Bias-Ströme, haben potenziell die größten Auswirkungen auf die Leistung eines Biquad-Filters. Diese Fehlerquellen können zu Verzerrungen, Verlust der Genauigkeit und Fehlern in der Frequenzgangkurve führen. Besonders bei präzisen Filtern und Anwendungen, die eine exakte Frequenzantwort erfordern (z. B. Audio- oder Kommunikationssysteme), müssen diese nicht-idealen Effekte berücksichtigt und in der Schaltungs- oder Filtergestaltung ausgeglichen werden.Um diese Probleme zu minimieren, wird in der Praxis häufig Präzisions-OpAmps verwendet, die geringe Fehlerquellen aufweise</p>
-<section id="dokumentierte-abweichungen" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="dokumentierte-abweichungen"><span class="header-section-number">6.1</span> Dokumentierte Abweichungen</h2>
+</section>
+<section id="dokumentierte-abweichungen" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2"><span class="header-section-number">4.1.2</span> Dokumentierte Abweichungen</h3>
 <p>In den Versuchsergebnissen wurden bereits erhebliche Abweichungen zwischen berechneten und gemessenen Werten dokumentiert: - Die Abweichungen der Grenzfrequenz beträgt 1,57kHz bzw. 15,8% - Die absolute Abweichung zwischen ReÜberschwingen im Übergangsbereich: Im Bereich um 1000 Hz zeigt insbesondere die Q10-Simulation (orange) ein deutliches Überschwingen, das beim Q10-Wert mit seiner steileren Flankensteilheit zu erwarten ist</p>
 </section>
-<section id="spezielle-effekte-bei-hohen-frequenzen" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="spezielle-effekte-bei-hohen-frequenzen"><span class="header-section-number">6.2</span> Spezielle Effekte bei hohen Frequenzen</h2>
+<section id="spezielle-effekte-bei-hohen-frequenzen" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3"><span class="header-section-number">4.1.3</span> Spezielle Effekte bei hohen Frequenzen</h3>
 <p>Bei Frequenzen deutlich über der Grenzfrequenz kommen zusätzliche Effekte zum Tragen: - Die Filtersteilheit realer Filter kann von den theoretischen abweichen. - Belastungseffekte durch nachfolgeden Stufen verändern die Filtercharakteristik. Wenn beispielsweise ein Hochpass an einen Tiefpass angeschlossen wird, verändert sich das Übertragungsverhalten durch die Parallelschaltung. Diese Beobachtungen decken sich mit der Grafik, die deutliche Unterschiede zwischen Suimulation und Messung im Breich ab 10kHz zeigt, insbesondere bei der Tiefe der Dämpfungskurve und dem erneuten Anstieg bei sehr hohen Frequenzen.</p>
-<div id="4d96c7ca" class="cell" data-execution_count="5">
+<div id="87c9a96a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Tiefpass filters"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang des Tiefpass filters"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vlpf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 TP Simulation"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vlpf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 TP Simulation"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ1,phaseTPQ1,<span class="st">".:"</span>,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen Q1'</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ10,phaseTPQ10,<span class="st">".:"</span>,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen Q10'</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang des Tiefpass filters&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang des Tiefpass filters&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vlpf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 TP Simulation&quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vlpf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 TP Simulation&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ1,phaseTPQ1,<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen Q1&#39;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fTPQ10,phaseTPQ10,<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen Q10&#39;</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="hochpassfilter" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="hochpassfilter"><span class="header-section-number">6.3</span> Hochpassfilter</h2>
-<div id="e37919f5" class="cell" data-execution_count="6">
+</section>
+<section id="hochpassfilter" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span> Hochpassfilter</h2>
+<div id="82270d9b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Hochpassfilters"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang des Hochpassfilters"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vhpf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 HP Simulation"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vhpf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 HP Simulation"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ1,gainHPFQ1,label<span class="op">=</span><span class="st">'Hochpassfilter gemessen Q1'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ10,gainHPFQ10,label<span class="op">=</span><span class="st">'Hochpassfilter gemessen Q10'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang des Hochpassfilters&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang des Hochpassfilters&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vhpf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 HP Simulation&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vhpf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 HP Simulation&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ1,gainHPFQ1,label<span class="op">=</span><span class="st">&#39;Hochpassfilter gemessen Q1&#39;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ10,gainHPFQ10,label<span class="op">=</span><span class="st">&#39;Hochpassfilter gemessen Q10&#39;</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="vergleich-der-messwerte-mit-den-simulationswerten-2" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Vergleich der Messwerte mit den Simulationswerten</h1>
+<section id="vergleich-der-messwerte-mit-den-simulationswerten-1" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1"><span class="header-section-number">4.2.1</span> Vergleich der Messwerte mit den Simulationswerten</h3>
 <p>Bei den Amplitudengänge des Hochpassfilters aus Abbildung 4 gibt es ähnliche Gründe für die Abweichungen wie beim Tiefpassfilter, aber mit dem Unterschied, dass sie hier bei sehr niedrigen Frequenzen und ebenfalls sehr niedrigen dB-Werten auftreten. Dabei gibt es mehrere Faktoren, die diese Abweichungen erklären: - Reales Verhalten der Bauelemente: Bei extrem niedrigen Frequenzen verhalten sich Kondensatoren nicht mehr ideal. Während ein idealer Kondensator bei sehr niedrigen Frequenzen wie eine vollständige Sperre wirken sollte, haben reale Kondensatoren Leckströme, die einen gewissen Signaldurchlass ermöglichen - Parasitäre Effekte: Reale Bauteile besitzen Parallelwiderstände, die besonders bei niedrigen Frequenzen zum Tragen kommen. Bei Kondensatoren führt dies dazu, dass sie nicht mehr als perfekte Isolatoren wirken - Rauscheffekte und Messgenauigkeit: Bei sehr niedirgen dB-Werten (unter -80dB) stoßen Messgeräte an ihre Grenzen, was zu unregelmäßigen Messergebnissen führen kann.</p>
-<section id="dokumentierte-abweichungen-1" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="dokumentierte-abweichungen-1"><span class="header-section-number">7.1</span> Dokumentierte Abweichungen</h2>
+</section>
+<section id="dokumentierte-abweichungen-1" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2"><span class="header-section-number">4.2.2</span> Dokumentierte Abweichungen</h3>
 <p>Im angezeigten Amplitudengang des Hochpassfilters sind mehrere charakteristische Abweichungen erkennbar: - Starker Einbruch bei Q1-Messung: Die rote Linie (gemessener Q1-Hochpass) zeigt bei etwa 20-30 Hz einen markanten Einbruch auf fast -110 dB, der in der Simulation nicht vorkommt. Dies deutet auf resonante Effekte zwischen den realen Bauteilen hin - Flacherer Anstieg bei niedrigen Frequenzen: Der Anstieg der gemessenen Kurven (rot und grün) ist bei sehr niedrigen Frequenzen weniger steil als bei den simulierten Kurven, was auf die nicht-idealen Eigenschaften der Bauelemente zurückzuführen ist - Überschwingen im Übergangsbereich: Im Bereich um 1000 Hz zeigt insbesondere die Q10-Simulation (orange) ein deutliches Überschwingen, das beim Q10-Wert mit seiner steileren Flankensteilheit zu erwarten ist</p>
-<div id="bdc3b65b" class="cell" data-execution_count="7">
+<div id="be8df457" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Hochpassfilters"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang des Hochpassfilters"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vhpf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 HP Simulation"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vhpf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 HP Simulation"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ1,phaseHPFQ1,label<span class="op">=</span><span class="st">'Hochpassfilter gemessen Q1'</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ10,phaseHPFQ10,label<span class="op">=</span><span class="st">'Hochpassfilter gemessen Q10'</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang des Hochpassfilters&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang des Hochpassfilters&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vhpf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 HP Simulation&quot;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vhpf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 HP Simulation&quot;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ1,phaseHPFQ1,label<span class="op">=</span><span class="st">&#39;Hochpassfilter gemessen Q1&#39;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fHPFQ10,phaseHPFQ10,label<span class="op">=</span><span class="st">&#39;Hochpassfilter gemessen Q10&#39;</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="bandpassfilter" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="bandpassfilter"><span class="header-section-number">7.2</span> Bandpassfilter</h2>
-<div id="27d81af8" class="cell" data-execution_count="8">
+</section>
+<section id="bandpassfilter" class="level2" data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span> Bandpassfilter</h2>
+<div id="3e4dc8df" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Bandpassfilters"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang des Bandpassfilters"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbpf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"https://www.ti.com/lit/ds/symlink/tl082-n.pdfQ1 BPF Simulation"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbpf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 BPF Simulation"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ1,gainBPFQ1,label<span class="op">=</span><span class="st">'Bandpassfilter gemessen Q1'</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ10,gainBPFQ10,label<span class="op">=</span><span class="st">'Bandpassfilter gemessen Q10'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang des Bandpassfilters&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang des Bandpassfilters&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbpf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;https://www.ti.com/lit/ds/symlink/tl082-n.pdfQ1 BPF Simulation&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbpf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 BPF Simulation&quot;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ1,gainBPFQ1,label<span class="op">=</span><span class="st">&#39;Bandpassfilter gemessen Q1&#39;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ10,gainBPFQ10,label<span class="op">=</span><span class="st">&#39;Bandpassfilter gemessen Q10&#39;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="7399c2ae" class="cell" data-execution_count="9">
+<div id="c5a6b62a" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Bandpassfilters"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang des Bandpassfilters"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vbpf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 BPF Simulation"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vbpf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 BPF Simulation"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ1,phaseBPFQ1,label<span class="op">=</span><span class="st">'Bandpassfilter gemessen Q1'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ10,phaseBPFQ10,label<span class="op">=</span><span class="st">'Bandpassfilter gemessen Q10'</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang des Bandpassfilters&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang des Bandpassfilters&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vbpf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 BPF Simulation&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vbpf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 BPF Simulation&quot;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ1,phaseBPFQ1,label<span class="op">=</span><span class="st">&#39;Bandpassfilter gemessen Q1&#39;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBPFQ10,phaseBPFQ10,label<span class="op">=</span><span class="st">&#39;Bandpassfilter gemessen Q10&#39;</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="bandstopfilter" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="bandstopfilter"><span class="header-section-number">7.3</span> Bandstopfilter</h2>
-<div id="b3d0ea2c" class="cell" data-execution_count="10">
+<section id="bandstopfilter" class="level2" data-number="4.4">
+<h2 data-number="4.4"><span class="header-section-number">4.4</span> Bandstopfilter</h2>
+<div id="0400d0db" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Bandstopfilters"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang des Bandstopfilters"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbsf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 BSF Simulation"</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbsf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 BSF Simulation"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ1,gainBSFQ1,label<span class="op">=</span><span class="st">'Bandstopfilter gemessen Q1'</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ10,gainBSFQ10,label<span class="op">=</span><span class="st">'Bandstopfilter gemessen Q10'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang des Bandstopfilters&quot;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang des Bandstopfilters&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbsf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 BSF Simulation&quot;</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vbsf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 BSF Simulation&quot;</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ1,gainBSFQ1,label<span class="op">=</span><span class="st">&#39;Bandstopfilter gemessen Q1&#39;</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ10,gainBSFQ10,label<span class="op">=</span><span class="st">&#39;Bandstopfilter gemessen Q10&#39;</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-11-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="c5e82d12" class="cell" data-execution_count="11">
+<div id="d6807d0f" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Bandstopfilters"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang des Bandstopfilters"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vbsf1)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q1 BSF Simulation"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vbsf10)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Q10 BSF Simulation"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ1,phaseBSFQ1,label<span class="op">=</span><span class="st">'Bandstopfilter gemessen Q1'</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ10,phaseBSFQ10,label<span class="op">=</span><span class="st">'Bandstopfilter gemessen Q10'</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang des Bandstopfilters&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang des Bandstopfilters&quot;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f1,np.degrees(np.angle(Vbsf1)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q1 BSF Simulation&quot;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.plot(f2,np.degrees(np.angle(Vbsf10)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Q10 BSF Simulation&quot;</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ1,phaseBSFQ1,label<span class="op">=</span><span class="st">&#39;Bandstopfilter gemessen Q1&#39;</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.plot(fBSFQ10,phaseBSFQ10,label<span class="op">=</span><span class="st">&#39;Bandstopfilter gemessen Q10&#39;</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
@@ -515,239 +547,243 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 <p>Die Güte hat ein Problem in der Rellen Schaltung</p>
 </section>
 </section>
-<section id="butterworthfilter" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Butterworthfilter</h1>
-<div id="ac31666d" class="cell" data-execution_count="12">
+<section id="butterworthfilter" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Butterworthfilter</h1>
+<div id="4197fe14" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Messwerte</span></span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Messwerte</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ----- Butter1uF ------------- </span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Butter1uF <span class="op">=</span> pd.read_csv(<span class="st">"./Data/4.5_1uF_Data.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fButter1uf <span class="op">=</span> np.array(Butter1uF[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>gain1uf<span class="op">=</span>np.array(Butter1uF[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>phase1uf <span class="op">=</span> np.array(Butter1uF[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Butter1uF <span class="op">=</span> pd.read_csv(<span class="st">&quot;./Data/4.5_1uF_Data.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fButter1uf <span class="op">=</span> np.array(Butter1uF[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>gain1uf<span class="op">=</span>np.array(Butter1uF[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>phase1uf <span class="op">=</span> np.array(Butter1uF[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ------Butter 0.1 uF ---------- </span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>Butter01uF <span class="op">=</span> pd.read_csv(<span class="st">"./Data/4.5_0.1uF_Data.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>fButter01uf <span class="op">=</span> np.array(Butter01uF[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>gain01uf<span class="op">=</span>np.array(Butter01uF[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>phase01uf <span class="op">=</span> np.array(Butter01uF[<span class="st">' Phase [deg]'</span>])</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>Butter01uF <span class="op">=</span> pd.read_csv(<span class="st">&quot;./Data/4.5_0.1uF_Data.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>fButter01uf <span class="op">=</span> np.array(Butter01uF[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>gain01uf<span class="op">=</span>np.array(Butter01uF[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>phase01uf <span class="op">=</span> np.array(Butter01uF[<span class="st">&#39; Phase [deg]&#39;</span>])</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ------Butter 0.01uF -------- f0 = </span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>Butter001uF <span class="op">=</span> pd.read_csv(<span class="st">"./Data/4.5_0.01uf_Data.csv"</span>,sep<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>fButter001uf <span class="op">=</span> np.array(Butter001uF[<span class="st">'Frequency [Hz]'</span>])</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>gain001uf<span class="op">=</span>np.array(Butter001uF[<span class="st">' Amplitude [dB]'</span>])</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>phase001uf <span class="op">=</span> np.array(Butter001uF[<span class="st">' Phase [deg]'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>Butter001uF <span class="op">=</span> pd.read_csv(<span class="st">&quot;./Data/4.5_0.01uf_Data.csv&quot;</span>,sep<span class="op">=</span><span class="st">&#39;,&#39;</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>fButter001uf <span class="op">=</span> np.array(Butter001uF[<span class="st">&#39;Frequency [Hz]&#39;</span>])</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>gain001uf<span class="op">=</span>np.array(Butter001uF[<span class="st">&#39; Amplitude [dB]&#39;</span>])</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>phase001uf <span class="op">=</span> np.array(Butter001uF[<span class="st">&#39; Phase [deg]&#39;</span>])</span></code></pre></div>
 </details>
 </div>
-<div id="a21d64d6" class="cell" data-execution_count="13">
+<div id="f83d0985" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Simuliertenwerte</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Simuliertenwerte</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte aus der Simulation mit 1 uF  </span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>filepath3 <span class="op">=</span> <span class="st">'./spice_kicad/Butterworththirdorder1u.raw'</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>filepath3 <span class="op">=</span> <span class="st">&#39;./spice_kicad/Butterworththirdorder1u.raw&#39;</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>l3 <span class="op">=</span> Ltspice(filepath3)</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>l3.parse() <span class="co"># Data loading sequence. It may take few minutes for huge file.</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>f3 <span class="op">=</span> l3.get_frequency()</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>Vbpf3 <span class="op">=</span> l3.get_data(<span class="st">'v(bpf)'</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>Vbsf3 <span class="op">=</span> l3.get_data(<span class="st">'v(bsf)'</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>Vhpf3 <span class="op">=</span> l3.get_data(<span class="st">'v(hpf)'</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>Vlpf3 <span class="op">=</span> l3.get_data(<span class="st">'v(lpf)'</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>Vout1u  <span class="op">=</span> l3.get_data(<span class="st">'v(Vout)'</span>) </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>Vbpf3 <span class="op">=</span> l3.get_data(<span class="st">&#39;v(bpf)&#39;</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>Vbsf3 <span class="op">=</span> l3.get_data(<span class="st">&#39;v(bsf)&#39;</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>Vhpf3 <span class="op">=</span> l3.get_data(<span class="st">&#39;v(hpf)&#39;</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>Vlpf3 <span class="op">=</span> l3.get_data(<span class="st">&#39;v(lpf)&#39;</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>Vout1u  <span class="op">=</span> l3.get_data(<span class="st">&#39;v(Vout)&#39;</span>) </span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte aus der Simulation mit 0.1 uF</span></span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>filepath4 <span class="op">=</span> <span class="st">'./spice_kicad/Butterworththirdorder0.1u.raw'</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>filepath4 <span class="op">=</span> <span class="st">&#39;./spice_kicad/Butterworththirdorder0.1u.raw&#39;</span></span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>l4 <span class="op">=</span> Ltspice(filepath4)</span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>l4.parse() <span class="co"># Data loading sequence. It may take few minutes for huge file.</span></span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>f4 <span class="op">=</span> l4.get_frequency()</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>Vbpf4 <span class="op">=</span> l4.get_data(<span class="st">'v(bpf)'</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>Vbsf4 <span class="op">=</span> l4.get_data(<span class="st">'v(bsf)'</span>)</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>Vhpf4 <span class="op">=</span> l4.get_data(<span class="st">'v(hpf)'</span>)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>Vlpf4 <span class="op">=</span> l4.get_data(<span class="st">'v(lpf)'</span>)</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>Vout01u  <span class="op">=</span> l4.get_data(<span class="st">'v(Vout)'</span>) </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>Vbpf4 <span class="op">=</span> l4.get_data(<span class="st">&#39;v(bpf)&#39;</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>Vbsf4 <span class="op">=</span> l4.get_data(<span class="st">&#39;v(bsf)&#39;</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>Vhpf4 <span class="op">=</span> l4.get_data(<span class="st">&#39;v(hpf)&#39;</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>Vlpf4 <span class="op">=</span> l4.get_data(<span class="st">&#39;v(lpf)&#39;</span>)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>Vout01u  <span class="op">=</span> l4.get_data(<span class="st">&#39;v(Vout)&#39;</span>) </span>
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Werte aus der Simulation mit 0.01 uF</span></span>
 <span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>filepath5 <span class="op">=</span> <span class="st">'./spice_kicad/Butterworththirdorder0.01u.raw'</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>filepath5 <span class="op">=</span> <span class="st">&#39;./spice_kicad/Butterworththirdorder0.01u.raw&#39;</span></span>
 <span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>l5 <span class="op">=</span> Ltspice(filepath5)</span>
 <span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>l5.parse() <span class="co"># Data loading sequence. It may take few minutes for huge file.</span></span>
 <span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>f5 <span class="op">=</span> l5.get_frequency()</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>Vbpf5 <span class="op">=</span> l5.get_data(<span class="st">'v(bpf)'</span>)</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>Vbsf5 <span class="op">=</span> l5.get_data(<span class="st">'v(bsf)'</span>)</span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>Vhpf5 <span class="op">=</span> l5.get_data(<span class="st">'v(hpf)'</span>)</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>Vlpf5 <span class="op">=</span> l5.get_data(<span class="st">'v(lpf)'</span>)</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>Vout001u  <span class="op">=</span> l5.get_data(<span class="st">'v(Vout)'</span>) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>Vbpf5 <span class="op">=</span> l5.get_data(<span class="st">&#39;v(bpf)&#39;</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>Vbsf5 <span class="op">=</span> l5.get_data(<span class="st">&#39;v(bsf)&#39;</span>)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>Vhpf5 <span class="op">=</span> l5.get_data(<span class="st">&#39;v(hpf)&#39;</span>)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>Vlpf5 <span class="op">=</span> l5.get_data(<span class="st">&#39;v(lpf)&#39;</span>)</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>Vout001u  <span class="op">=</span> l5.get_data(<span class="st">&#39;v(Vout)&#39;</span>) </span></code></pre></div>
 </details>
 </div>
-</section>
-<section id="plot-und-vergleich" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Plot und Vergleich:</h1>
-<section id="butterworth-1uf" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="butterworth-1uf"><span class="header-section-number">9.1</span> Butterworth 1uF</h2>
-<div id="b2fc36e6" class="cell" data-execution_count="14">
+<section id="plot-und-vergleich" class="level2" data-number="5.1">
+<h2 data-number="5.1"><span class="header-section-number">5.1</span> Plot und Vergleich:</h2>
+<section id="butterworth-1uf" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span> Butterworth 1uF</h3>
+<div id="fd3b8f8c" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 1uF"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang Butterworth 1uF"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f3,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vout1u)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Simulation"</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter1uf,gain1uf,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen'</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang Butterworth TP 1uF&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang Butterworth 1uF&quot;</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f3,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vout1u)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Simulation&quot;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter1uf,gain1uf,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen&#39;</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-15-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="69e04b7e" class="cell" data-execution_count="15">
+<div id="fb4740f3" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 1uF"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang Butterworth 1uF"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f3,np.degrees(np.angle(Vout1u)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Simulation"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter1uf,phase1uf,label<span class="op">=</span><span class="st">'Butterworth gemessen'</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang Butterworth TP 1uF&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang Butterworth 1uF&quot;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f3,np.degrees(np.angle(Vout1u)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Simulation&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter1uf,phase1uf,label<span class="op">=</span><span class="st">&#39;Butterworth gemessen&#39;</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-16-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="butterworthfilter-0.1uf" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="butterworthfilter-0.1uf"><span class="header-section-number">9.2</span> Butterworthfilter 0.1uF</h2>
-<div id="c2cac054" class="cell" data-execution_count="16">
+<section id="butterworthfilter-0.1uf" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2"><span class="header-section-number">5.1.2</span> Butterworthfilter 0.1uF</h3>
+<div id="6b0dd61f" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 0.1uF"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang Butterworth 0.1uF"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f4,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vout01u)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Simulation"</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter01uf,gain01uf,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen'</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang Butterworth TP 0.1uF&quot;</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang Butterworth 0.1uF&quot;</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f4,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vout01u)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Simulation&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter01uf,gain01uf,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen&#39;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-17-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="d5724141" class="cell" data-execution_count="17">
+<div id="dece4a38" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 0.1uF"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang Butterworth 0.1uF"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f4,np.degrees(np.angle(Vout01u)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Simulation"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter01uf,phase01uf,label<span class="op">=</span><span class="st">'Butterworth gemessen'</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang Butterworth TP 0.1uF&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang Butterworth 0.1uF&quot;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f4,np.degrees(np.angle(Vout01u)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Simulation&quot;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter01uf,phase01uf,label<span class="op">=</span><span class="st">&#39;Butterworth gemessen&#39;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="butterworthfilter-0.01uf" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Butterworthfilter 0.01uF</h1>
-<div id="4838739b" class="cell" data-execution_count="18">
+<section id="butterworthfilter-0.01uf" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3"><span class="header-section-number">5.1.3</span> Butterworthfilter 0.01uF</h3>
+<div id="005f321c" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 0.01uF"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Amplitudengang Butterworth 0.01uF"</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f5,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vout001u)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Simulation"</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter001uf,gain001uf,label<span class="op">=</span><span class="st">'Tiefpassfilter gemessen'</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Amplitudengang Butterworth TP 0.01uF&quot;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Amplitudengang Butterworth 0.01uF&quot;</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f5,<span class="dv">20</span><span class="op">*</span>np.log10(<span class="bu">abs</span>(Vout001u)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Simulation&quot;</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter001uf,gain001uf,label<span class="op">=</span><span class="st">&#39;Tiefpassfilter gemessen&#39;</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-19-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="2f97cc6f" class="cell" data-execution_count="19">
+<div id="2f7ea438" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 0.01uF"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Phasengang Butterworth 0.01uF"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f5,np.degrees(np.angle(Vout001u)),<span class="st">".:"</span>,label<span class="op">=</span><span class="st">"Simulation"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter001uf,phase001uf,label<span class="op">=</span><span class="st">'Butterworth gemessen'</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">&quot;Phasengang Butterworth TP 0.01uF&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Phasengang Butterworth 0.01uF&quot;</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.plot(f5,np.degrees(np.angle(Vout001u)),<span class="st">&quot;.:&quot;</span>,label<span class="op">=</span><span class="st">&quot;Simulation&quot;</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.plot(fButter001uf,phase001uf,label<span class="op">=</span><span class="st">&#39;Butterworth gemessen&#39;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">&#39;log&#39;</span>)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+<figure>
+<p><img src="index_files/figure-html/cell-20-output-1.png" class="img-fluid" /></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="grenzfreqeunz-funktion-für-unterschiedliche-kapazitätswerte-bei-gleichbleibendem-widerstand" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand</h1>
-<div id="a26ffa69" class="cell" data-execution_count="20">
-<details class="code-fold">
-<summary>Code anzeigen</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Rcom <span class="op">=</span> <span class="fl">1e3</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Ccom <span class="op">=</span> np.linspace(<span class="fl">1e-12</span>,<span class="fl">1e-6</span>,<span class="dv">10000</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>f0 <span class="op">=</span> (<span class="dv">1</span><span class="op">/</span>(Rcom<span class="op">*</span>Ccom))<span class="op">*</span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>np.pi))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Theorehtische Grenzfreqeuenz in Abhängigkeit von C"</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Theorehtische Grenzfreqeuenz in Abhängigkeit von C"</span>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.plot(Ccom,f0)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Freqeuenz in Hz"</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Kapazität in Farad"</span>)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_17749/460434748.py:9: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
-  plt.legend()</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-21-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<!--### Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand
+
+::: {#423e6436 .cell execution_count=20}
+``` {.python .cell-code}
+Rcom = 1e3
+Ccom = np.linspace(1e-12,1e-6,10000)
+
+f0 = (1/(Rcom*Ccom))*(1/(2*np.pi))
+plt.figure("Theorehtische Grenzfreqeuenz in Abhängigkeit von C")
+plt.title("Theorehtische Grenzfreqeuenz in Abhängigkeit von C")
+plt.plot(Ccom,f0)
+plt.grid()
+plt.legend()
+plt.ylabel("Freqeuenz in Hz")
+plt.xlabel("Kapazität in Farad")
+plt.xscale('log')
+```
+
+::: {.cell-output .cell-output-stderr}
+```
+/tmp/ipykernel_67231/460434748.py:9: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  plt.legend()
+```
+:::
+
+::: {.cell-output .cell-output-display}
+![](index_files/figure-html/cell-21-output-2.png){}
+:::
+:::
+
+
+-->
 <p><span class="citation" data-cites="baker2010">(<a href="#ref-baker2010" role="doc-biblioref">Baker 2010</a>)</span></p>
+</section>
+</section>
+</section>
+<section id="entwurf-der-pcb-schaltung" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Entwurf der PCB Schaltung</h1>
 </section>
 <section id="literaturverzeichnis" class="level1 unnumbered">
 <h1 class="unnumbered">Literaturverzeichnis</h1>
@@ -757,12 +793,58 @@ Baker, R. Jacob. 2010. <em><span>CMOS</span>: Circuit Design, Layout, and Simula
 </div>
 </div>
 <!-- -->
-
+<div class="quarto-embedded-source-code">
+<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Entwurf und PCD Design eines universellen Biquad Filters&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Ali_Mert_Akcay</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0009-0007-2343-9680</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">    corresponding: true</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">    email: aakcay@stud.hs-bremen.de</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">    roles:</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">      - Reschersche</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">      - Project administration</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - Software</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - Visualization</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation:</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: Hochschule Bremen - City University of Applied Sciences (HSB)</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">        city: Bremen</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">        state: Germany</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">        url: https://www.hs-bremen.de  </span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Julian Stolle</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: </span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">    corresponding: true</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">    roles: &quot;Lead author&quot;</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Erlich Nguefack Takoubo</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid:</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">    corresponind: true</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">    roles: &quot;Lead author&quot;</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="an">keyword:</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">  - Filter Design </span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">  - PCB</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> |</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Lorem ipsum </span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> last-modified</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_Einleitung.qmd &gt;}}</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_Filter.qmd &gt;}}</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--{{&lt; include content/_sec_Charakterisierung.qmd &gt;}}--&gt;</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_Messautomatisierung.qmd &gt;}}</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/messwerte.qmd &gt;}}</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_PCB_Entwurf.qmd &gt;}}</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/references.qmd &gt;}}</span></code></pre></div>
+</div>
 </section>
 
 </main>
 <!-- /main column -->
-<script id="quarto-html-after-body" type="application/javascript">
+<script id = "quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1211,53 +1293,9 @@ Baker, R. Jacob. 2010. <em><span>CMOS</span>: Circuit Design, Layout, and Simula
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Quellcode</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Entwurf und PCD Design eines universellen Biquad Filters"</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Ali_Mert_Akcay</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0009-0007-2343-9680</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">    corresponding: true</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">    email: aakcay@stud.hs-bremen.de</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">    roles:</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">      - Reschersche</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">      - Project administration</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - Software</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - Visualization</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation:</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: Hochschule Bremen - City University of Applied Sciences (HSB)</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">        city: Bremen</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">        state: Germany</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">        url: https://www.hs-bremen.de  </span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Julian Stolle</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: </span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">    corresponding: true</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co">    roles: "Lead author"</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Erlich Nguefack Takoubo</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid:</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co">    corresponind: true</span></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">    roles: "Lead author"</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="an">keyword:</span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co">  - Filter Design </span></span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co">  - PCB</span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> |</span></span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Lorem ipsum </span></span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> last-modified</span></span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_Einleitung.qmd &gt;}}</span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_Filter.qmd &gt;}}</span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/_sec_Charakterisierung.qmd &gt;}}</span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/messwerte.qmd &gt;}}</span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>{{&lt; include content/references.qmd &gt;}}</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+  </script>
 </div> <!-- /content -->
 
+</body>
 
-
-
-</body></html>
+</html>
