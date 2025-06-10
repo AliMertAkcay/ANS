@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -88,11 +88,40 @@ div.csl-indent {
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-a37c72dd2dbac68997fcdc15a3622e78.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-dc44167a0b6d28f4847139e5925e902e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-63053770681cd859736509ad0a841bee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -141,7 +170,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">31. Mai 2025</p>
+      <p class="date">10. Juni 2025</p>
     </div>
   </div>
   
@@ -164,24 +193,27 @@ div.csl-indent {
 </section>
 <section id="filter-entwurf" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Filter-Entwurf</h1>
+<p>In diesem Labor wird zusätzlich zum Biquadfilter ein Butterworth Tiefpass filterentwurfen und implementiert zunächst ist es jedoch wichtig sich mit der Spezifikation von Filtern auseinander zu setzen und mit diese eine gewisse Spezifikation zu setzen.</p>
+<p>Das Tolaranzschema für Filter ist in Abbildung… Dargestellt.</p>
+<p>Die passbandedge lässt sich über die Kapazität <span class="math inline">\(C_{COM}\)</span> so wie dem Widerstand <span class="math inline">\(R_{COM}\)</span> einstellen, siehe Formel.. . <span class="math inline">\(\Omega_0 = \frac{1}{R_{COM}*C_{COM}}\)</span></p>
+<p>Die Güte an der Biquad Schaltung lässt sich mit dem Widerstand .. Einstellen. Die Güte gibt an wie sehr der Frequenzgang sich um die eingestellte Grenzfreqeunz $f_0 = $ sich ändert <!--TODO: Das noch genauer Beschreiben--></p>
+<section id="herleitung-des-butterworth-filter-third-order" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="herleitung-des-butterworth-filter-third-order"><span class="header-section-number">2.1</span> Herleitung des Butterworth-Filter Third Order</h2>
+<p>Die Übertragungsfunktion eines ButterworthThridorders ist in der Formel … gezeigt.</p>
+<p><span class="math inline">\(H_{BW}(s) = \frac{H_0 \cdot {\Omega_0}^3}{a\cdot S^3 +b\cdot S^2 +c \cdot S + (\Omega_0)^3}\)</span></p>
+<p>Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss and die Gleichung… angepasst werden.</p>
+<p><span class="math inline">\(\frac{H_0}{1+\frac{S}{\Omega_0 \cdot Q} + \frac{S^2}{{\Omega_0}^2}}\)</span></p>
+</section>
 </section>
 <section id="charakterisierung" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Charakterisierung</h1>
 </section>
 <section id="biquad-filterschaltung" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Biquad Filterschaltung</h1>
-<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../images/Biquadschaltung.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;1: Biquadschaltung
-</figcaption>
-</figure>
-</div>
-<p>Die in <strong>Abbildung 1</strong> gezeigt schaltung wird in diesem Abschnit der Dokumentation behandelt. Es handelt sich hierbei um ein Universellen Biquad Filter welcher 4 Filter Typen in einem Realisiert. Eine wichtiger Parameter von Filtern ist die Güte dies lässt sich mit dem Widerstand R5 einstellen. Bei steigender güte sinkt je nach Filter Type entweder die Bandbreite z.B. beim Notchfilter (bandsperre) oder beim Bandpass und beim Tiefpassfilter bzw Hochapssfilter die Übergangsfrequenz sprich die breite.</p>
-<div id="9048e107" class="cell" data-execution_count="1">
+<!-- [Biquadschaltung](../images/Biquadschaltung.png){#fig-map}
+
+Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentation behandelt. Es handelt sich hierbei um ein Universellen Biquad Filter welcher 4 Filter Typen in einem Realisiert. Eine wichtiger Parameter von Filtern ist die Güte dies lässt sich mit dem Widerstand R5 einstellen. Bei steigender güte sinkt je nach Filter Type entweder die Bandbreite z.B. beim Notchfilter (bandsperre) oder beim Bandpass und beim Tiefpassfilter bzw Hochapssfilter die Übergangsfrequenz sprich die breite.-->
+<div id="459e8224" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -190,7 +222,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bf947166" class="cell" data-execution_count="2">
+<div id="066724e8" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Tiefpassfilter mit Q1</span></span>
@@ -242,7 +274,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>phaseBSFQ10 <span class="op">=</span> np.array(dfBSFQ10[<span class="st">' Phase [deg]'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="63de3aed" class="cell" data-execution_count="3">
+<div id="f153c1b6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------Einladen der Simulations Werte -----------------------------------------</span></span>
@@ -275,7 +307,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <h1 data-number="5"><span class="header-section-number">5</span> Vergleich der Messwerte mit den Simulationswerten</h1>
 <section id="tiefpassfilter" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="tiefpassfilter"><span class="header-section-number">5.1</span> Tiefpassfilter</h2>
-<div id="b70fe41b" class="cell" data-execution_count="4">
+<div id="0acb234c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Tiefpass filters"</span>)</span>
@@ -309,7 +341,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <section id="spezielle-effekte-bei-hohen-frequenzen" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="spezielle-effekte-bei-hohen-frequenzen"><span class="header-section-number">6.2</span> Spezielle Effekte bei hohen Frequenzen</h2>
 <p>Bei Frequenzen deutlich über der Grenzfrequenz kommen zusätzliche Effekte zum Tragen: - Die Filtersteilheit realer Filter kann von den theoretischen abweichen. - Belastungseffekte durch nachfolgeden Stufen verändern die Filtercharakteristik. Wenn beispielsweise ein Hochpass an einen Tiefpass angeschlossen wird, verändert sich das Übertragungsverhalten durch die Parallelschaltung. Diese Beobachtungen decken sich mit der Grafik, die deutliche Unterschiede zwischen Suimulation und Messung im Breich ab 10kHz zeigt, insbesondere bei der Tiefe der Dämpfungskurve und dem erneuten Anstieg bei sehr hohen Frequenzen.</p>
-<div id="247bfc49" class="cell" data-execution_count="5">
+<div id="4d96c7ca" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Tiefpass filters"</span>)</span>
@@ -334,7 +366,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="hochpassfilter" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="hochpassfilter"><span class="header-section-number">6.3</span> Hochpassfilter</h2>
-<div id="2d77440f" class="cell" data-execution_count="6">
+<div id="e37919f5" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Hochpassfilters"</span>)</span>
@@ -364,7 +396,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <section id="dokumentierte-abweichungen-1" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="dokumentierte-abweichungen-1"><span class="header-section-number">7.1</span> Dokumentierte Abweichungen</h2>
 <p>Im angezeigten Amplitudengang des Hochpassfilters sind mehrere charakteristische Abweichungen erkennbar: - Starker Einbruch bei Q1-Messung: Die rote Linie (gemessener Q1-Hochpass) zeigt bei etwa 20-30 Hz einen markanten Einbruch auf fast -110 dB, der in der Simulation nicht vorkommt. Dies deutet auf resonante Effekte zwischen den realen Bauteilen hin - Flacherer Anstieg bei niedrigen Frequenzen: Der Anstieg der gemessenen Kurven (rot und grün) ist bei sehr niedrigen Frequenzen weniger steil als bei den simulierten Kurven, was auf die nicht-idealen Eigenschaften der Bauelemente zurückzuführen ist - Überschwingen im Übergangsbereich: Im Bereich um 1000 Hz zeigt insbesondere die Q10-Simulation (orange) ein deutliches Überschwingen, das beim Q10-Wert mit seiner steileren Flankensteilheit zu erwarten ist</p>
-<div id="373080c8" class="cell" data-execution_count="7">
+<div id="bdc3b65b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Hochpassfilters"</span>)</span>
@@ -389,7 +421,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="bandpassfilter" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="bandpassfilter"><span class="header-section-number">7.2</span> Bandpassfilter</h2>
-<div id="be42f437" class="cell" data-execution_count="8">
+<div id="27d81af8" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Bandpassfilters"</span>)</span>
@@ -411,7 +443,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </div>
 </div>
 </div>
-<div id="b820a98a" class="cell" data-execution_count="9">
+<div id="7399c2ae" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Bandpassfilters"</span>)</span>
@@ -436,7 +468,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="bandstopfilter" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="bandstopfilter"><span class="header-section-number">7.3</span> Bandstopfilter</h2>
-<div id="5fec0243" class="cell" data-execution_count="10">
+<div id="b3d0ea2c" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Bandstopfilters"</span>)</span>
@@ -458,7 +490,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </div>
 </div>
 </div>
-<div id="a2fb5cdb" class="cell" data-execution_count="11">
+<div id="c5e82d12" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Bandstopfilters"</span>)</span>
@@ -485,7 +517,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="butterworthfilter" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Butterworthfilter</h1>
-<div id="c7b80b39" class="cell" data-execution_count="12">
+<div id="ac31666d" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Messwerte</span></span>
@@ -508,7 +540,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>phase001uf <span class="op">=</span> np.array(Butter001uF[<span class="st">' Phase [deg]'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="836bc2a6" class="cell" data-execution_count="13">
+<div id="a21d64d6" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Simuliertenwerte</span></span>
@@ -557,7 +589,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <h1 data-number="9"><span class="header-section-number">9</span> Plot und Vergleich:</h1>
 <section id="butterworth-1uf" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="butterworth-1uf"><span class="header-section-number">9.1</span> Butterworth 1uF</h2>
-<div id="c1123555" class="cell" data-execution_count="14">
+<div id="b2fc36e6" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 1uF"</span>)</span>
@@ -577,7 +609,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </div>
 </div>
 </div>
-<div id="e4c4a477" class="cell" data-execution_count="15">
+<div id="69e04b7e" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 1uF"</span>)</span>
@@ -600,7 +632,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="butterworthfilter-0.1uf" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="butterworthfilter-0.1uf"><span class="header-section-number">9.2</span> Butterworthfilter 0.1uF</h2>
-<div id="207691a8" class="cell" data-execution_count="16">
+<div id="c2cac054" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 0.1uF"</span>)</span>
@@ -620,7 +652,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </div>
 </div>
 </div>
-<div id="ce28aaf4" class="cell" data-execution_count="17">
+<div id="d5724141" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 0.1uF"</span>)</span>
@@ -644,7 +676,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="butterworthfilter-0.01uf" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Butterworthfilter 0.01uF</h1>
-<div id="a4a1408f" class="cell" data-execution_count="18">
+<div id="4838739b" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 0.01uF"</span>)</span>
@@ -664,7 +696,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </div>
 </div>
 </div>
-<div id="ed8496e9" class="cell" data-execution_count="19">
+<div id="2f97cc6f" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 0.01uF"</span>)</span>
@@ -687,7 +719,7 @@ Abbildung&nbsp;1: Biquadschaltung
 </section>
 <section id="grenzfreqeunz-funktion-für-unterschiedliche-kapazitätswerte-bei-gleichbleibendem-widerstand" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand</h1>
-<div id="a201467b" class="cell" data-execution_count="20">
+<div id="a26ffa69" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Rcom <span class="op">=</span> <span class="fl">1e3</span></span>
@@ -704,7 +736,7 @@ Abbildung&nbsp;1: Biquadschaltung
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_34958/460434748.py:9: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+<pre><code>/tmp/ipykernel_17749/460434748.py:9: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()</code></pre>
 </div>
 <div class="cell-output cell-output-display">

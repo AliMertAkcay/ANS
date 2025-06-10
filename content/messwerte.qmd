@@ -1,8 +1,8 @@
 # Biquad Filterschaltung
 
-![Biquadschaltung](../images/Biquadschaltung.png){#fig-map}
+<!-- [Biquadschaltung](../images/Biquadschaltung.png){#fig-map}
 
-Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentation behandelt. Es handelt sich hierbei um ein Universellen Biquad Filter welcher 4 Filter Typen in einem Realisiert. Eine wichtiger Parameter von Filtern ist die Güte dies lässt sich mit dem Widerstand R5 einstellen. Bei steigender güte sinkt je nach Filter Type entweder die Bandbreite z.B. beim Notchfilter (bandsperre) oder beim Bandpass und beim Tiefpassfilter bzw Hochapssfilter die Übergangsfrequenz sprich die breite.
+Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentation behandelt. Es handelt sich hierbei um ein Universellen Biquad Filter welcher 4 Filter Typen in einem Realisiert. Eine wichtiger Parameter von Filtern ist die Güte dies lässt sich mit dem Widerstand R5 einstellen. Bei steigender güte sinkt je nach Filter Type entweder die Bandbreite z.B. beim Notchfilter (bandsperre) oder beim Bandpass und beim Tiefpassfilter bzw Hochapssfilter die Übergangsfrequenz sprich die breite.-->
 
 ```{python}
 import matplotlib.pyplot as plt
