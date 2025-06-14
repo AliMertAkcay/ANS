@@ -36,10 +36,10 @@ bibliography: references.bib
 ---
 
 {{< include content/_sec_Einleitung.qmd >}}
+{{< include content/_sec_Charakterisierung.qmd >}}
 {{< include content/_sec_Filter.qmd >}}
-
-<!--{{< include content/_sec_Charakterisierung.qmd >}}-->
 {{< include content/_sec_Messautomatisierung.qmd >}}
-{{< include content/messwerte.qmd >}}
+{{< include content/_sec_BiquadFilterschaltung.qmd >}}
+{{< include content/_sec_Butterworth.qmd >}}
 {{< include content/_sec_PCB_Entwurf.qmd >}}
 {{< include content/references.qmd >}}

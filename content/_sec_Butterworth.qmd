@@ -1,0 +1,166 @@
+# Butterworthfilter 
+
+```{python} 
+# Einladen der Messwerte
+# ----- Butter1uF ------------- 
+Butter1uF = pd.read_csv("./Data/4.5_1uF_Data.csv",sep=',')
+fButter1uf = np.array(Butter1uF['Frequency [Hz]'])
+gain1uf=np.array(Butter1uF[' Amplitude [dB]'])
+phase1uf = np.array(Butter1uF[' Phase [deg]'])
+
+# ------Butter 0.1 uF ---------- 
+Butter01uF = pd.read_csv("./Data/4.5_0.1uF_Data.csv",sep=',')
+fButter01uf = np.array(Butter01uF['Frequency [Hz]'])
+gain01uf=np.array(Butter01uF[' Amplitude [dB]'])
+phase01uf = np.array(Butter01uF[' Phase [deg]'])
+
+# ------Butter 0.01uF -------- f0 = 
+Butter001uF = pd.read_csv("./Data/4.5_0.01uf_Data.csv",sep=',')
+fButter001uf = np.array(Butter001uF['Frequency [Hz]'])
+gain001uf=np.array(Butter001uF[' Amplitude [dB]'])
+phase001uf = np.array(Butter001uF[' Phase [deg]'])
+
+```
+```{python}
+# Einladen der Simuliertenwerte
+
+# Werte aus der Simulation mit 1 uF  
+filepath3 = './spice_kicad/Butterworththirdorder1u.raw'
+l3 = Ltspice(filepath3)
+l3.parse() # Data loading sequence. It may take few minutes for huge file.
+
+f3 = l3.get_frequency()
+Vbpf3 = l3.get_data('v(bpf)')
+Vbsf3 = l3.get_data('v(bsf)')
+Vhpf3 = l3.get_data('v(hpf)')
+Vlpf3 = l3.get_data('v(lpf)')
+Vout1u  = l3.get_data('v(Vout)') 
+
+# Werte aus der Simulation mit 0.1 uF
+
+filepath4 = './spice_kicad/Butterworththirdorder0.1u.raw'
+l4 = Ltspice(filepath4)
+l4.parse() # Data loading sequence. It may take few minutes for huge file.
+
+f4 = l4.get_frequency()
+Vbpf4 = l4.get_data('v(bpf)')
+Vbsf4 = l4.get_data('v(bsf)')
+Vhpf4 = l4.get_data('v(hpf)')
+Vlpf4 = l4.get_data('v(lpf)')
+Vout01u  = l4.get_data('v(Vout)') 
+
+# Werte aus der Simulation mit 0.01 uF
+
+filepath5 = './spice_kicad/Butterworththirdorder0.01u.raw'
+l5 = Ltspice(filepath5)
+l5.parse() # Data loading sequence. It may take few minutes for huge file.
+
+f5 = l5.get_frequency()
+Vbpf5 = l5.get_data('v(bpf)')
+Vbsf5 = l5.get_data('v(bsf)')
+Vhpf5 = l5.get_data('v(hpf)')
+Vlpf5 = l5.get_data('v(lpf)')
+Vout001u  = l5.get_data('v(Vout)') 
+
+```
+
+```{python}
+# Einladen der Theorehtischen werte aus der Übertragungsfunktion
+# ----- Butter1uF ------------- 
+Butterscipy1uF = pd.read_csv("./PythonData/Butterworth1uF.csv",sep=',')
+fButterscipy1uf = np.array(Butterscipy1uF['Frequency [Hz]'])
+gainscipy1uf=np.array(Butterscipy1uF['Amplitude [dB]'])
+phasescipy1uf = np.array(Butterscipy1uF['Phase [deg]'])
+
+# ------Butter 0.1 uF ---------- 
+Butterscipy01uF = pd.read_csv("./PythonData/Butterworth0.1uF.csv",sep=',')
+fButterscipy01uf = np.array(Butterscipy01uF['Frequency [Hz]'])
+gainscipy01uf=np.array(Butterscipy01uF['Amplitude [dB]'])
+phasescipy01uf = np.array(Butterscipy01uF['Phase [deg]'])
+
+# ------Butter 0.01uF -------- f0 = 
+Butterscipy001uF = pd.read_csv("./PythonData/Butterworth0.01uF.csv",sep=',')
+fButterscipy001uf = np.array(Butterscipy001uF['Frequency [Hz]'])
+gainscipy001uf=np.array(Butterscipy001uF['Amplitude [dB]'])
+phasescipy001uf = np.array(Butterscipy001uF['Phase [deg]'])
+
+```
+
+## Plot und Vergleich:
+
+
+### Butterworth 1uF
+```{python}
+plt.figure("Amplitudengang Butterworth TP 1uF")
+plt.title("Amplitudengang Butterworth 1uF")
+plt.plot(f3,20*np.log10(abs(Vout1u)),".:",label="Simulation")
+plt.plot(fButter1uf,gain1uf,label='Tiefpassfilter gemessen')
+plt.plot(fButterscipy1uf,gainscipy1uf,label="Scipy Übertragungsfunktion")
+plt.xscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+```{python}
+plt.figure("Phasengang Butterworth TP 1uF")
+plt.title("Phasengang Butterworth 1uF")
+plt.plot(f3,np.degrees(np.angle(Vout1u)),".:",label="Simulation")
+plt.plot(fButter1uf,phase1uf,label='Butterworth gemessen')
+plt.plot(fButterscipy1uf,phasescipy1uf,label="Scipy Übertragungsfunktion")
+plt.xscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+```
+### Butterworthfilter 0.1uF
+```{python}
+plt.figure("Amplitudengang Butterworth TP 0.1uF")
+plt.title("Amplitudengang Butterworth 0.1uF")
+plt.plot(f4,20*np.log10(abs(Vout01u)),".:",label="Simulation")
+plt.plot(fButter01uf,gain01uf,label='Tiefpassfilter gemessen')
+plt.plot(fButterscipy01uf,gainscipy01uf,label="Scipy Übertragungsfunktion")
+plt.xscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+```{python}
+plt.figure("Phasengang Butterworth TP 0.1uF")
+plt.title("Phasengang Butterworth 0.1uF")
+plt.plot(f4,np.degrees(np.angle(Vout01u)),".:",label="Simulation")
+plt.plot(fButter01uf,phase01uf,label='Butterworth gemessen')
+plt.plot(fButterscipy01uf,phasescipy01uf,label="Scipy Übertragungsfunktion")
+plt.xscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+```
+### Butterworthfilter 0.01uF
+
+```{python}
+plt.figure("Amplitudengang Butterworth TP 0.01uF")
+plt.title("Amplitudengang Butterworth 0.01uF")
+plt.plot(f5,20*np.log10(abs(Vout001u)),".:",label="Simulation")
+plt.plot(fButter001uf,gain001uf,label='Tiefpassfilter gemessen')
+plt.plot(fButterscipy001uf,gainscipy001uf,label="Scipy Übertragungsfunktion")
+plt.xscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+```{python}
+plt.figure("Phasengang Butterworth TP 0.01uF")
+plt.title("Phasengang Butterworth 0.01uF")
+plt.plot(f5,np.degrees(np.angle(Vout001u)),".:",label="Simulation")
+plt.plot(fButter001uf,phase001uf,label='Butterworth gemessen')
+plt.plot(fButterscipy001uf,phasescipy001uf,label="Scipy Übertragungsfunktion")
+plt.xscale('log')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+## Diskussion der Messwerte
