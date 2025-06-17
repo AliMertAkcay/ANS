@@ -2,8 +2,148 @@
 
 ## Herleitung der Übertragungsfunktion des Biquad Filters
 
-TODO: Wolte Erlich machen
 
+In der  oberen Schaltung aus Kicad sind die blauen  Spannungen , die sie für uns interessant sind.
+
+
+
+
+Die KHN-Struktur liefert vier  Ausgänge: Hochpass \( V_{01}(s) \), Bandpass \( V_{02}(s) \) , Tiefpass \( V_{03}(s) \) und Bandsperre \( V_{04}(s) \).
+
+Ziel ist die Herleitung der Hochpass-Übertragungsfunktion:
+
+\begin{equation}
+H_{LP}(s) = \frac{V_{01}(s)}{V_{i}(s)}
+\label{eq:HLP_def}
+\end{equation}
+
+\subsection*{Schaltungsprinzip}
+Die Struktur besteht aus 2 Integratoren und 2 invertierenden Addierern .
+Daraus kann man folgende  grundlegende Formeln herleiten  :
+
+
+
+\begin{equation}
+V_{02}(s) = \frac{-1}{sRC} \cdot V_{01}(s)
+\label{eq:0P1}
+\end{equation}
+
+
+\begin{equation}
+V_{03}(s) = \frac{-1}{sRC} \cdot V_{02}(s)
+\label{eq:0P2}
+\end{equation}
+
+\begin{equation}
+V_{01}(s) = \frac{-R}{R} \cdot (V_{03}(s)+ V_{04}(s) ) = - (V_{03}(s)+ V_{04}(s) )
+\label{eq:0P3}
+\end{equation}
+
+\begin{equation}
+V_{04}(s) = \frac{-R}{R} \cdot ( \frac{V_{02}(s)}{Q} + V_{i}(s)\cdot H_{0} ) = - ( \frac{V_{02}(s)}{Q} + V_{i}(s)\cdot H_{0} )
+\label{eq:0P4}
+\end{equation}
+
+Im nächsten Schritt wollen wir die Gleichungen ineinander einsetzen : 
+
+Nun setzen wir  \eqref{eq:0P1} in \eqref{eq:0P2} ein:
+
+\eqref{eq:0P1} in \eqref{eq:0P2}
+ $ \Rightarrow $
+\begin{equation}
+V_{03}(s) = \frac{1}{(sRC)^2} \cdot V_{01}(s)
+\label{eq:0P5}
+\end{equation}
+
+\eqref{eq:0P2} in \eqref{eq:0P3}
+$ \Rightarrow $
+\begin{equation}
+V_{01}(s) = - \left( V_{01}\cdot  \frac{1}{(sRC)^2} +  V_{04} \right) 
+\label{eq:0P6}
+\end{equation}
+
+\eqref{eq:0P1} in \eqref{eq:0P4}
+$ \Rightarrow $
+
+
+\begin{equation}
+V_{04}(s) = -  ( \frac{\frac{-1}{sRC}}{Q} + V_{i}(s)\cdot H_{0} )
+\label{eq:0P7}
+\end{equation}
+
+\eqref{eq:0P6}
+$ \Rightarrow $
+\begin{equation}
+V_{04}(s) = -V_{01} \left( 1 +  \frac{1}{(sRC)^2}  \right) 
+\label{eq:0P8}
+\end{equation}
+
+\eqref{eq:0P7} und  \eqref{eq:0P8}
+$ \Rightarrow $
+\begin{equation}
+V_{01}(s) \cdot \frac{1}{sRCQ} - H_{0}\cdot V_{i} = -V_{01} \left( 1 +  \frac{1}{(sRC)^2}  \right) 
+\label{eq:0P9}
+\end{equation}
+
+$ \Rightarrow $
+
+\begin{equation}
+    V_{01} \left( 1 +  \frac{1}{(sRC)^2} + \frac{1}{sRCQ}  \right)  = H_{0}\cdot V_{i} 
+\label{eq:0P9}
+\end{equation}
+
+$ \Rightarrow $
+
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0}}{\left( 1 +  \frac{1}{(sRC)^2} + \frac{1}{sRCQ}  \right)  } 
+\label{eq:0P10}
+\end{equation}
+
+Da $\omega_{0} = \frac{1}{RC}$
+ergibt sich : 
+
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0}}{\left( 1 +  \frac{ (\omega_{0})^2 }{(s^2}  + \frac{\omega_{0}}{s\cdot Q}  \right)  } 
+\label{eq:0P11}
+\end{equation}
+
+Multipliziert man  mit $s^2$ ergibt sich :
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0} \cdot(s^2)}{\left( s^2 +  \omega_{0}^2  + \omega_{0} \frac{s}{Q} \right)  } 
+\label{eq:0P12}
+\end{equation}
+Teilt man oben und unten durch 
+$\omega_{0}^2$ ergibt sich endlich :  
+
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0} \frac{s^2}{\omega_{0}^2}}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P13}
+\end{equation}
+
+was die gesuchte Übertragungsfunktion  darstellt.
+
+
+Verfährt man auf eine ähnliche Art und Weise  gelangt man auch zu den anderen Übertragungsfunktionen für den Tiefpass , den Bandpass und die Bandsperre :
+
+Für den Bandpass : 
+\begin{equation}
+    \frac{V_{02}}{V_{i}} = \frac{H_{0} \frac{s}{\omega_{0}}}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P14}
+\end{equation}
+
+Für den Tiefpass :
+
+\begin{equation}
+    \frac{V_{03}}{V_{i}} = \frac{H_{0}}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P15}
+\end{equation}
+
+und für die Bandsperre :
+
+\begin{equation}
+    \frac{V_{04}}{V_{i}} = \frac{H_{0} \cdot(1 + \frac{s^2}{\omega_{0}^2})}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P13}
+\end{equation}
 
 ## Herleitung der Übertragungsfunktion Tiefpassfilter dritter Ordnung
 
@@ -34,6 +174,8 @@ Um diese Gewünschte Übertragungsfunktion zu erhalten muss der Term ... an den 
 Der Term... wird mit der Übertragungsfunktion ... Realisiert die daraus Resuliertende schaltung und die Gesammtschaltung ist in Abbildung... gezeigt.
 
 $\frac{\omega_0}{\omega_0 +s} = -\frac{R_2}{R_1} \cdot \frac{\frac{1}{R_{com} \cdot C_{com}}}{R_{com} \cdot C_{com} +s} \cdot -\frac{R_2}{R_1}$
+
+\begin{}
 
 
 

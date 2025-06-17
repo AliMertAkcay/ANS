@@ -42,4 +42,5 @@ bibliography: references.bib
 {{< include content/_sec_BiquadFilterschaltung.qmd >}}
 {{< include content/_sec_Butterworth.qmd >}}
 {{< include content/_sec_PCB_Entwurf.qmd >}}
+{{< include content/_sec_Fazit.qmd >}}
 {{< include content/references.qmd >}}
