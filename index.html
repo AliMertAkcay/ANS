@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.24">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -88,10 +88,10 @@ div.csl-indent {
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-a37c72dd2dbac68997fcdc15a3622e78.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-63053770681cd859736509ad0a841bee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-dc44167a0b6d28f4847139e5925e902e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -345,7 +345,7 @@ V_{01}(s) \cdot \frac{1}{sRCQ} - H_{0}\cdot V_{i} = -V_{01} \left( 1 +  \frac{1}
 <!-- [Biquadschaltung](../images/Biquadschaltung.png){#fig-map}
 
 Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentation behandelt. Es handelt sich hierbei um ein Universellen Biquad Filter welcher 4 Filter Typen in einem Realisiert. Eine wichtiger Parameter von Filtern ist die Güte dies lässt sich mit dem Widerstand R5 einstellen. Bei steigender güte sinkt je nach Filter Type entweder die Bandbreite z.B. beim Notchfilter (bandsperre) oder beim Bandpass und beim Tiefpassfilter bzw Hochapssfilter die Übergangsfrequenz sprich die breite.-->
-<div id="dbab0ec5" class="cell" data-execution_count="1">
+<div id="836cb4ba" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -354,7 +354,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="02ae976a" class="cell" data-execution_count="2">
+<div id="f59f7d8c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Messwerte Tiefpassfilter mit Q1</span></span>
@@ -406,7 +406,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>phaseBSFQ10 <span class="op">=</span> np.array(dfBSFQ10[<span class="st">' Phase [deg]'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="4d2590a1" class="cell" data-execution_count="3">
+<div id="3b13a9c6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------Einladen der Simulations Werte -----------------------------------------</span></span>
@@ -436,7 +436,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </div>
 <section id="tiefpassfilter" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="tiefpassfilter"><span class="header-section-number">5.1</span> Tiefpassfilter</h2>
-<div id="46163deb" class="cell" data-execution_count="4">
+<div id="a6187ee5" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Tiefpass filters"</span>)</span>
@@ -469,7 +469,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 <section id="spezielle-effekte-bei-hohen-frequenzen" class="level3" data-number="5.1.3">
 <h3 data-number="5.1.3" class="anchored" data-anchor-id="spezielle-effekte-bei-hohen-frequenzen"><span class="header-section-number">5.1.3</span> Spezielle Effekte bei hohen Frequenzen</h3>
 <p>Bei Frequenzen deutlich über der Grenzfrequenz kommen zusätzliche Effekte zum Tragen: - Die Filtersteilheit realer Filter kann von den theoretischen abweichen. - Belastungseffekte durch nachfolgeden Stufen verändern die Filtercharakteristik. Wenn beispielsweise ein Hochpass an einen Tiefpass angeschlossen wird, verändert sich das Übertragungsverhalten durch die Parallelschaltung. Diese Beobachtungen decken sich mit der Grafik, die deutliche Unterschiede zwischen Suimulation und Messung im Breich ab 10kHz zeigt, insbesondere bei der Tiefe der Dämpfungskurve und dem erneuten Anstieg bei sehr hohen Frequenzen.</p>
-<div id="eeb0a1d4" class="cell" data-execution_count="5">
+<div id="ed0550ce" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Tiefpass filters"</span>)</span>
@@ -495,7 +495,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </section>
 <section id="hochpassfilter" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="hochpassfilter"><span class="header-section-number">5.2</span> Hochpassfilter</h2>
-<div id="0ef93a87" class="cell" data-execution_count="6">
+<div id="4ea192c7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Hochpassfilters"</span>)</span>
@@ -524,7 +524,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 <section id="dokumentierte-abweichungen-1" class="level3" data-number="5.2.2">
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="dokumentierte-abweichungen-1"><span class="header-section-number">5.2.2</span> Dokumentierte Abweichungen</h3>
 <p>Im angezeigten Amplitudengang des Hochpassfilters sind mehrere charakteristische Abweichungen erkennbar: - Starker Einbruch bei Q1-Messung: Die rote Linie (gemessener Q1-Hochpass) zeigt bei etwa 20-30 Hz einen markanten Einbruch auf fast -110 dB, der in der Simulation nicht vorkommt. Dies deutet auf resonante Effekte zwischen den realen Bauteilen hin - Flacherer Anstieg bei niedrigen Frequenzen: Der Anstieg der gemessenen Kurven (rot und grün) ist bei sehr niedrigen Frequenzen weniger steil als bei den simulierten Kurven, was auf die nicht-idealen Eigenschaften der Bauelemente zurückzuführen ist - Überschwingen im Übergangsbereich: Im Bereich um 1000 Hz zeigt insbesondere die Q10-Simulation (orange) ein deutliches Überschwingen, das beim Q10-Wert mit seiner steileren Flankensteilheit zu erwarten ist</p>
-<div id="e71e91d0" class="cell" data-execution_count="7">
+<div id="6446fccd" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Hochpassfilters"</span>)</span>
@@ -551,7 +551,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </section>
 <section id="bandpassfilter" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="bandpassfilter"><span class="header-section-number">5.3</span> Bandpassfilter</h2>
-<div id="54f58be8" class="cell" data-execution_count="8">
+<div id="dbdaad1e" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Bandpassfilters"</span>)</span>
@@ -573,7 +573,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </div>
 </div>
 </div>
-<div id="7c650a53" class="cell" data-execution_count="9">
+<div id="575f32a6" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Bandpassfilters"</span>)</span>
@@ -598,7 +598,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </section>
 <section id="bandstopfilter" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="bandstopfilter"><span class="header-section-number">5.4</span> Bandstopfilter</h2>
-<div id="6bfa1792" class="cell" data-execution_count="10">
+<div id="00ce0dff" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang des Bandstopfilters"</span>)</span>
@@ -620,7 +620,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </div>
 </div>
 </div>
-<div id="4657b071" class="cell" data-execution_count="11">
+<div id="ee8872c1" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang des Bandstopfilters"</span>)</span>
@@ -644,7 +644,7 @@ Die in **Abbildung 1**  gezeigt schaltung wird in diesem Abschnit der Dokumentat
 </div>
 <!--### Grenzfreqeunz Funktion für unterschiedliche Kapazitätswerte bei gleichbleibendem Widerstand
 
-::: {#e6a0c2fa .cell execution_count=12}
+::: {#d641434c .cell execution_count=12}
 ``` {.python .cell-code}
 Rcom = 1e3
 Ccom = np.linspace(1e-12,1e-6,10000)
@@ -662,7 +662,7 @@ plt.xscale('log')
 
 ::: {.cell-output .cell-output-stderr}
 ```
-/tmp/ipykernel_24457/460434748.py:9: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+/tmp/ipykernel_45607/460434748.py:9: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
   plt.legend()
 ```
 :::
@@ -679,7 +679,7 @@ plt.xscale('log')
 </section>
 <section id="butterworthfilter" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Butterworthfilter</h1>
-<div id="9b903e21" class="cell" data-execution_count="13">
+<div id="874aa465" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Messwerte</span></span>
@@ -702,7 +702,7 @@ plt.xscale('log')
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>phase001uf <span class="op">=</span> np.array(Butter001uF[<span class="st">' Phase [deg]'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5d559f4f" class="cell" data-execution_count="14">
+<div id="0642f32a" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Simuliertenwerte</span></span>
@@ -746,7 +746,7 @@ plt.xscale('log')
 <span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>Vout001u  <span class="op">=</span> l5.get_data(<span class="st">'v(Vout)'</span>) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a005dac1" class="cell" data-execution_count="15">
+<div id="49bd037a" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einladen der Theorehtischen werte aus der Übertragungsfunktion</span></span>
@@ -773,7 +773,7 @@ plt.xscale('log')
 <h2 data-number="6.1" class="anchored" data-anchor-id="plot-und-vergleich"><span class="header-section-number">6.1</span> Plot und Vergleich:</h2>
 <section id="butterworth-1uf" class="level3" data-number="6.1.1">
 <h3 data-number="6.1.1" class="anchored" data-anchor-id="butterworth-1uf"><span class="header-section-number">6.1.1</span> Butterworth 1uF</h3>
-<div id="a382908f" class="cell" data-execution_count="16">
+<div id="7e363172" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 1uF"</span>)</span>
@@ -794,7 +794,7 @@ plt.xscale('log')
 </div>
 </div>
 </div>
-<div id="dd64a4e0" class="cell" data-execution_count="17">
+<div id="9634115d" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 1uF"</span>)</span>
@@ -818,7 +818,7 @@ plt.xscale('log')
 </section>
 <section id="butterworthfilter-0.1uf" class="level3" data-number="6.1.2">
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="butterworthfilter-0.1uf"><span class="header-section-number">6.1.2</span> Butterworthfilter 0.1uF</h3>
-<div id="82acda23" class="cell" data-execution_count="18">
+<div id="e0b4ac9f" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 0.1uF"</span>)</span>
@@ -839,7 +839,7 @@ plt.xscale('log')
 </div>
 </div>
 </div>
-<div id="bfe21af6" class="cell" data-execution_count="19">
+<div id="926821c9" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 0.1uF"</span>)</span>
@@ -863,7 +863,7 @@ plt.xscale('log')
 </section>
 <section id="butterworthfilter-0.01uf" class="level3" data-number="6.1.3">
 <h3 data-number="6.1.3" class="anchored" data-anchor-id="butterworthfilter-0.01uf"><span class="header-section-number">6.1.3</span> Butterworthfilter 0.01uF</h3>
-<div id="907d398c" class="cell" data-execution_count="20">
+<div id="4d40b0b2" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Amplitudengang Butterworth TP 0.01uF"</span>)</span>
@@ -884,7 +884,7 @@ plt.xscale('log')
 </div>
 </div>
 </div>
-<div id="135b73a4" class="cell" data-execution_count="21">
+<div id="89121309" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code anzeigen</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="st">"Phasengang Butterworth TP 0.01uF"</span>)</span>
