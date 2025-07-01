@@ -1,7 +1,6 @@
 project:
-  #type: manuscript
-  execute-dir: project
-  #type: manuscript
+  type: manuscript
+  #execute-dir: project
 
 lang: de
 
