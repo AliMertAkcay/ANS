@@ -44,4 +44,5 @@ bibliography: references.bib
 {{< include content/_sec_PCB_Entwurf.qmd >}}
 {{< include content/_sec_Fazit.qmd >}}
 {{< include content/references.qmd >}}
-{{< include content/_sec_test_plot_messung.qmd >}}
+{{< include PCB_Messung.qmd >}}
+<!--{{< include content/_sec_test_plot_messung.qmd >}}-->

@@ -1,0 +1,83 @@
+# Alle Messwert der PCB_Schaltung
+```{python}
+import scipy.signal as sig
+import pandas as pd
+import matplotlib.pyplot as plt
+
+kondensatoren = ["1uF","100nF","10nF"]
+
+guete = ["1Q","10Q"]
+
+messung = ["BPF2","LPF2","HPF2","BSF2","LPF3"]
+
+Anzahl = len(kondensatoren)*len(guete)*len(messung)
+
+for f,cwert in enumerate(kondensatoren):
+    for s,gueteval in enumerate(guete):
+        for i,FilterTyp in enumerate(messung):
+            
+            # Vergleich mit scipy Aus den jeweiligen übertragungsfunktionen
+            #TODO: Das hier noch machen
+            # Filterparameter
+            #order = 3
+            
+           #R = 1000
+            #cwertnum = np.array([1e-6,0.1e-6,0.01e-6])
+            #Wc =   1/(R*cwertnum) # Cutoff frequency in rad/s
+
+            #fs = 10000 # Sampling frequency in Hz (nur relevant für digital)
+
+            # Butterworth Biquad (analog)
+            #b, a = signal.butter(N=order, Wn=Wc, btype='low', analog=True)
+
+            # Übertragungsfunktion anzeigen
+            #print("Zählerkoeffizienten (b):", b)
+            #print("Nennerkoeffizienten (a):", a)
+
+            # Bode-Diagramm
+            #w, h = signal.freqs(1*b, a)
+            
+            #plt.figure()
+            #frequenzgang = 20 * np.log10(abs(h))
+            #frequenzgangmitf = np.vstack((frequenzgang,w / (2*np.pi)))
+            #plt.semilogx(w / (2*np.pi), frequenzgang)
+            #plt.title('3nd Order Butterworth Low Pass Filter')
+            #plt.xlabel('Frequency [Hz]')
+            #plt.ylabel('Amplitude [dB]')
+            #plt.grid()
+            #plt.show()
+
+            # Auswertung für die Messung
+            #AktuelleFilter = FilterTyp+"_"+gueteval+"_"+cwert
+            
+            AktuelleFilter = FilterTyp+"_"+cwert+"_"+gueteval
+            
+            Data_IN1 = './MessungenPCB/'+AktuelleFilter+".csv"
+            Data_IN2 = './MessungenPCB/'+AktuelleFilter+".csv"
+
+            DF_IN1 = pd.read_csv(Data_IN1)
+            DF_IN2 = pd.read_csv(Data_IN2)
+
+            MAG_dB = DF_IN1[" Amplitude [dB]"]
+            PHASE_deg = DF_IN1[" Phase [deg]"]
+            freqsfloat = DF_IN1["Frequency [Hz]"]
+
+            plt.figure(AktuelleFilter)
+            plt.subplot(2, 1, 1)
+            plt.title(AktuelleFilter)
+            #plt.semilogx(freqs, MAG_dB)
+            plt.plot(freqsfloat,MAG_dB)
+            plt.xscale('log')
+            plt.grid()
+            plt.ylabel('Magnitude in dB')
+            #
+            plt.subplot(2, 1, 2)
+            #plt.semilogx(freqs, PHASE_deg)
+            plt.plot(freqsfloat, PHASE_deg)
+            plt.xscale('log')
+            plt.grid()
+            plt.xlabel('f in Hz')
+            plt.ylabel('Phase in deg')
+            plt.savefig("./MessungenPCB/Figs/"+AktuelleFilter+".png")
+plt.show()
+```
