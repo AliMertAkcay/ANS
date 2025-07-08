@@ -12,14 +12,17 @@ import numpy as np
 import scipy.signal as sig
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.close("all")
 
 # %% Array of tones (GEN):
 # Parameters
 func = 'SINE'
 ampl = 0.2
 offset = 0.0
-endfreq = 1000
-freqs = np.arange(50, endfreq, 10)
+endfreq = 2000
+freqs = np.arange(10, endfreq, 10)
+
+print(freqs)
 
 w = 2 * np.pi * freqs
 N = 16384  # length of data array, STEMlab buffer size
@@ -27,15 +30,33 @@ t = np.linspace(0, 8.389e-3, N)
 ts = 8.389e-3 / N  # sampling time
 
 # %% Data storage and read
-Data_IN1 = 'data/IN1_INT_IN'  # + str(datetime.now().strftime('%Y-%m-%d_%H_%M'))
-Data_IN2 = 'data/IN2_INT_OUT'  # + str(datetime.now().strftime('%Y-%m-%d_%H_%M'))
+#Data_IN1 = 'Messdaten/IN1_INT_IN'  # + str(datetime.now().strftime('%Y-%m-%d_%H_%M'))
+#Data_IN2 = 'Messdaten/IN2_INT_OUT'  # + str(datetime.now().strftime('%Y-%m-%d_%H_%M'))
+
+Data_IN1 = "Messdaten/IN1_INT_IN_LPF_Butterworth_Q10_0.1uF.csv"
+Data_IN2 = "Messdaten/IN2_INT_OUT_LPF_Butterworth_Q10_0.1uF.csv"
+
+Data_IN1 = "Messdaten/IN1_INT_IN_HPF_Q10_0.01uF.csv"
+Data_IN2 = "Messdaten/IN2_INT_OUT_HPF_Q10_0.01uF.csv"
+
+
 # Data_IN = 'data/IN_UB_VBS_VBP'  # + str(datetime.now().strftime('%Y-%m-%d_%H_%M'))
 
 # DF_IN1 = pd.read_csv(Data_IN1 + '.csv')
 # DF_IN2 = pd.read_csv(Data_IN2 + '.csv')
 
-DF_IN1 = pd.read_parquet(Data_IN1 + '.parquet')
-DF_IN2 = pd.read_parquet(Data_IN2 + '.parquet')
+#DF_IN1 = pd.read_parquet(Data_IN1 + '.parquet')
+#DF_IN2 = pd.read_parquet(Data_IN2 + '.parquet')
+
+DF_IN1 = pd.read_csv(Data_IN1)
+DF_IN2 = pd.read_csv(Data_IN2)
+
+freqs = list(DF_IN1.columns)
+
+PHASE_xcorr = np.empty(len(freqs),dtype=float)
+
+freqsfloat = np.array([float(x) for x in freqs])
+
 
 # %% Fitting and extraction of sine params
 # SigParam_IN1 = pd.DataFrame()
@@ -96,9 +117,9 @@ MAG_dB = 20 * np.log10(np.abs(DF_IN2.std() / DF_IN1.std()))
 #     phase_IN2[n] = np.rad2deg(phase_rad_xcorr2)
 
 # %% Cross-correlation with dataframes and measured input signal as DF_IN1
-PHASE_xcorr = np.empty(len(freqs),dtype=float)
+PHASE_xcorr = np.empty(len(freqsfloat),dtype=float)
 
-for i,freq in enumerate(freqs):
+for i,freq in enumerate(freqsfloat):
     corr = sig.correlate(DF_IN1[str(freq)].values, DF_IN2[str(freq)],method="fft")
     lags = sig.correlation_lags(len(DF_IN1[str(freq)]), len(DF_IN2[str(freq)]))
     phase_rad_xcorr = 2 * np.pi * freq * lags[np.argmax(corr)] * ts
@@ -138,12 +159,14 @@ PHASE_deg = np.rad2deg(np.unwrap(PHASE_xcorr))
 plt.figure()
 plt.subplot(2, 1, 1)
 plt.title('Bode Plot')
-plt.semilogx(freqs, MAG_dB)
+#plt.semilogx(freqs, MAG_dB)
+plt.plot(MAG_dB)
 plt.grid()
 plt.ylabel('Magnitude in dB')
 #
 plt.subplot(2, 1, 2)
-plt.semilogx(freqs, PHASE_deg)
+#plt.semilogx(freqs, PHASE_deg)
+plt.plot(PHASE_deg)
 plt.grid()
 plt.xlabel('f in Hz')
 plt.ylabel('Phase in deg')

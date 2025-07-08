@@ -34,50 +34,59 @@ func = 'SINE'
 ampl = 1
 ampl1 = 1
 offset = 0.0
-endfreq = 100
+endfreq = 1000
 freqs = np.arange(50,endfreq, 10)
 
 print("Messung wird gestartet...")
 
 kondensatoren = ["1uF","0.1uF","0.01uF"]
 
-güte = ["Q1","Q10"]
+guete = ["Q1","Q10"]
 
 messung = ["BPF","LPF","HPF","BSF","LPF_Butterworth"]
 
-Anzahl = len(kondensatoren)*len(güte)*len(messung)
+Anzahl = len(kondensatoren)*len(guete)*len(messung)
 
 print(f"Gesamtanzahl aller Messungen: {Anzahl}")
 
 for f,cwert in enumerate(kondensatoren):
+    
     
     while True:
         ready1 = input("Kondensator "+cwert+" angelegt? Antworten sie mit Y: ")
 
         if ready1.upper() in ["Y"]:
             break
-        print("Ungültige Eingabe. Bitte geben Sie 'Y' ein wenn Sie soweit sind.")
+        print("Ungueltige Eingabe. Bitte geben Sie 'Y' ein wenn Sie soweit sind.")
     
-    for s,güteval in enumerate(güte):
+  
+    startfreq = float(input("Start Frequenz: "))
+    endfreq = float(input ("End freqeunz: "))
+    schrittweite = float(input("Geben sie die Schrittweite an: "))
+    
+
+    freqs = np.arange(startfreq,endfreq, schrittweite)   
+    
+    for s,gueteval in enumerate(guete):
         while True:
-            ready2 = input("Gütewiderstand für: "+güteval+" angelegt? Antworten sie mit Y: ")
+            ready2 = input("Guetewiderstand für: "+gueteval+" angelegt? Antworten sie mit Y: ")
 
             if ready2.upper() in ["Y"]:
                 break
-            print("Ungültige Eingabe. Bitte geben Sie 'Y' ein wenn Sie soweit sind.")
+            print("Ungueltige Eingabe. Bitte geben Sie 'Y' ein wenn Sie soweit sind.")
 
 
         for i,FilterTyp in enumerate(messung): # Diese schleife sorgt dafür dass Alle Filter Typen durch gemessen werden
-            AktuelleFilter = FilterTyp+"_"+güteval+"_"+cwert
+            AktuelleFilter = FilterTyp+"_"+gueteval+"_"+cwert
             while True:
-                ready3 =  input("Sind sie Bereit für die messung: "+AktuelleFilter+" Antworten sie mit Y: ")
+                ready3 =  input("Sind sie Bereit fuer die messung: "+AktuelleFilter+" Antworten sie mit Y: ")
                 
                 if ready3.upper() in ["Y"]:
                     break
-                print("Ungültige Eingabe. Bitte geben Sie 'Y' ein wenn Sie soweit sind.")
+                print("Ungueltige Eingabe. Bitte geben Sie 'Y' ein wenn Sie soweit sind.")
 
             if ready3 == "Y":
-                print("Great Success!")
+                #print("Great Success!")
                 for freq in freqs:
                     print("freq:",freq)
                     rp_s.tx_txt('GEN:RST')  # Signal Generator reset
@@ -122,8 +131,8 @@ for f,cwert in enumerate(kondensatoren):
 
             #Store data on disk as comma-seperated-values
             
-            #DF_IN1.to_csv(Data_IN1 + '.csv', index=False)
-            #DF_IN2.to_csv(Data_IN2 + '.csv', index=False)
+            DF_IN1.to_csv(Data_IN1 + '.csv', index=False)
+            DF_IN2.to_csv(Data_IN2 + '.csv', index=False)
 
             print("Messung: "+AktuelleFilter+" wurde gespeichert")
 

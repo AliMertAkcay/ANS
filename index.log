@@ -1,30 +1,30 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.10)  10 JUN 2025 19:21
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.27)  27 JUN 2025 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
-LaTeX2e <2025-06-01>
+LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-05-26>
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrreprt.cls
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrreprt.cls
 Document Class: scrreprt 2025/06/04 v3.45 KOMA-Script document class (report)
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
 Package: scrkbase 2025/06/04 v3.45 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrbase.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrbase.sty
 Package: scrbase 2025/06/04 v3.45 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile.sty
 Package: scrlfile 2025/06/04 v3.45 KOMA-Script package (file load hooks)
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
 Package: scrlfile-hook 2025/06/04 v3.45 KOMA-Script package (using LaTeX hooks)
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlogo.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrlogo.sty
 Package: scrlogo 2025/06/04 v3.45 KOMA-Script package (logo)
-))) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+))) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
 )
 Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
 Already applied: [0000/00/00] Usage of raw or classic option list on input line 370.
-)) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/tocbasic.sty
+)) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/tocbasic.sty
 Package: tocbasic 2025/06/04 v3.45 KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip49
 \scr@dte@tocline@numbox=\box53
@@ -34,9 +34,9 @@ Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             for `toc' on input line 137.
 Class scrreprt Info: File `scrsize11pt.clo' used instead of
 (scrreprt)           file `scrsize11.clo' to setup font sizes on input line 2697.
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
 File: scrsize11pt.clo 2025/06/04 v3.45 KOMA-Script font size class option (11pt)
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/typearea.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/koma-script/typearea.sty
 Package: typearea 2025/06/04 v3.45 KOMA-Script package (type area)
 \ta@bcor=\skip50
 \ta@div=\count271
@@ -121,15 +121,15 @@ Package tocbasic Info: omitting babel extension for `lot'
 \c@table=\count280
 Class scrreprt Info: Redefining `\numberline' on input line 7488.
 \bibindent=\dimen148
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: xetex.def on input line 274.
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
 File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `RGB' extended on input line 1365.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
@@ -138,17 +138,17 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/graphics/dvipsnam.def
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/xcolor/svgnam.def
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/xcolor/svgnam.def
 File: svgnam.def 2024/09/29 v3.02 Predefined colors according to SVG 1.1 (UK)
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
 File: x11nam.def 2024/09/29 v3.02 Predefined colors according to Unix/X11 (UK)
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 \Gm@cnth=\count281
@@ -163,20 +163,20 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layouthoffset=\dimen155
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks18
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/05/18 v2.17x AMS math features
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/06/16 v2.17y AMS math features
 \@mathmargin=\skip66
 For additional information on amsmath, use the `?' option.
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
 \ex@=\dimen157
-)) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+)) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen158
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count284
@@ -226,33 +226,33 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2949.
 LaTeX Info: Redefining \] on input line 2950.
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+)) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2025-05-26 L3 programming layer (loader) 
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2025-04-14 L3 backend support: XeTeX
 \g__graphics_track_int=\count296
 \g__pdfannot_backend_int=\count297
 \g__pdfannot_backend_link_int=\count298
 ))
 Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
 Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2024-08-16 L3 Experimental document command parser
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2024-08-16 LaTeX2e option processing using LaTeX3 keys
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_script_int=\count299
 \l__fontspec_language_int=\count300
@@ -268,11 +268,11 @@ Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_tmpa_dim=\dimen166
 \l__fontspec_tmpb_dim=\dimen167
 \l__fontspec_tmpc_dim=\dimen168
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
-) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
+) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
 Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 LaTeX Encoding Info:    Redeclaring text command \capitalcedilla (encoding TS1) on input line 49.
@@ -407,7 +407,7 @@ LaTeX Encoding Info:    Redeclaring text symbol \textdiv (encoding TS1) on input
 \g__um_fonts_used_int=\count311
 \l__um_primecount_int=\count312
 \g__um_primekern_muskip=\muskip18
-(/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/home/ali-mert-akcay/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+(/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/home/ali_mert_akcay/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -466,7 +466,7 @@ A font might not be found for many reasons.
 Here is how much of TeX's memory you used:
  12109 strings out of 470482
  260459 string characters out of 5490500
- 998913 words of memory out of 5000000
+ 998966 words of memory out of 5000000
  40319 multiletter control sequences out of 15000+600000
  626841 words of font info for 42 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191

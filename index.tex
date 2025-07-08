@@ -254,7 +254,7 @@
 \title{Entwurf und PCD Design eines universellen Biquad Filters}
 \author{Ali\_Mert\_Akcay \and Julian Stolle \and Erlich Nguefack
 Takoubo}
-\date{2025-06-10}
+\date{2025-06-27}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -319,12 +319,139 @@ eingestellte Grenzfreqeunz \$f\_0 = \frac{\omega_0}{2 \cdot \pi} \$ sich
 
 TODO: Das noch genauer Beschreiben
 
+\chapter{Charakterisierung}\label{charakterisierung}
+
 \chapter{Filter-Entwurf}\label{filter-entwurf}
 
 \section{Herleitung der Übertragungsfunktion des Biquad
 Filters}\label{herleitung-der-uxfcbertragungsfunktion-des-biquad-filters}
 
-TODO: Wolte Erlich machen
+In der oberen Schaltung aus Kicad sind die blauen Spannungen , die sie
+für uns interessant sind.
+
+Die KHN-Struktur liefert vier Ausgänge: Hochpass ( V\_\{01\}(s) ),
+Bandpass ( V\_\{02\}(s) ) , Tiefpass ( V\_\{03\}(s) ) und Bandsperre (
+V\_\{04\}(s) ).
+
+Ziel ist die Herleitung der Hochpass-Übertragungsfunktion:
+
+\begin{equation}
+H_{LP}(s) = \frac{V_{01}(s)}{V_{i}(s)}
+\label{eq:HLP_def}
+\end{equation}
+
+\subsection*{Schaltungsprinzip}
+
+Die Struktur besteht aus 2 Integratoren und 2 invertierenden Addierern .
+Daraus kann man folgende grundlegende Formeln herleiten :
+
+\begin{equation}
+V_{02}(s) = \frac{-1}{sRC} \cdot V_{01}(s)
+\label{eq:0P1}
+\end{equation}
+
+\begin{equation}
+V_{03}(s) = \frac{-1}{sRC} \cdot V_{02}(s)
+\label{eq:0P2}
+\end{equation}
+
+\begin{equation}
+V_{01}(s) = \frac{-R}{R} \cdot (V_{03}(s)+ V_{04}(s) ) = - (V_{03}(s)+ V_{04}(s) )
+\label{eq:0P3}
+\end{equation}
+
+\begin{equation}
+V_{04}(s) = \frac{-R}{R} \cdot ( \frac{V_{02}(s)}{Q} + V_{i}(s)\cdot H_{0} ) = - ( \frac{V_{02}(s)}{Q} + V_{i}(s)\cdot H_{0} )
+\label{eq:0P4}
+\end{equation}
+
+Im nächsten Schritt wollen wir die Gleichungen ineinander einsetzen :
+
+Nun setzen wir \eqref{eq:0P1} in \eqref{eq:0P2} ein:
+
+\eqref{eq:0P1} in \eqref{eq:0P2} \$ \Rightarrow \$ \begin{equation}
+V_{03}(s) = \frac{1}{(sRC)^2} \cdot V_{01}(s)
+\label{eq:0P5}
+\end{equation}
+
+\eqref{eq:0P2} in \eqref{eq:0P3} \$ \Rightarrow \$ \begin{equation}
+V_{01}(s) = - \left( V_{01}\cdot  \frac{1}{(sRC)^2} +  V_{04} \right) 
+\label{eq:0P6}
+\end{equation}
+
+\eqref{eq:0P1} in \eqref{eq:0P4} \$ \Rightarrow \$
+
+\begin{equation}
+V_{04}(s) = -  ( \frac{\frac{-1}{sRC}}{Q} + V_{i}(s)\cdot H_{0} )
+\label{eq:0P7}
+\end{equation}
+
+\eqref{eq:0P6} \$ \Rightarrow \$ \begin{equation}
+V_{04}(s) = -V_{01} \left( 1 +  \frac{1}{(sRC)^2}  \right) 
+\label{eq:0P8}
+\end{equation}
+
+\eqref{eq:0P7} und \eqref{eq:0P8} \$ \Rightarrow \$ \begin{equation}
+V_{01}(s) \cdot \frac{1}{sRCQ} - H_{0}\cdot V_{i} = -V_{01} \left( 1 +  \frac{1}{(sRC)^2}  \right) 
+\label{eq:0P9}
+\end{equation}
+
+\$ \Rightarrow \$
+
+\begin{equation}
+    V_{01} \left( 1 +  \frac{1}{(sRC)^2} + \frac{1}{sRCQ}  \right)  = H_{0}\cdot V_{i} 
+\label{eq:0P9}
+\end{equation}
+
+\$ \Rightarrow \$
+
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0}}{\left( 1 +  \frac{1}{(sRC)^2} + \frac{1}{sRCQ}  \right)  } 
+\label{eq:0P10}
+\end{equation}
+
+Da \(\omega_{0} = \frac{1}{RC}\) ergibt sich :
+
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0}}{\left( 1 +  \frac{ (\omega_{0})^2 }{(s^2}  + \frac{\omega_{0}}{s\cdot Q}  \right)  } 
+\label{eq:0P11}
+\end{equation}
+
+Multipliziert man mit \(s^2\) ergibt sich : \begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0} \cdot(s^2)}{\left( s^2 +  \omega_{0}^2  + \omega_{0} \frac{s}{Q} \right)  } 
+\label{eq:0P12}
+\end{equation} Teilt man oben und unten durch \(\omega_{0}^2\) ergibt
+sich endlich :
+
+\begin{equation}
+    \frac{V_{01}}{V_{i}} = \frac{H_{0} \frac{s^2}{\omega_{0}^2}}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P13}
+\end{equation}
+
+was die gesuchte Übertragungsfunktion darstellt.
+
+Verfährt man auf eine ähnliche Art und Weise gelangt man auch zu den
+anderen Übertragungsfunktionen für den Tiefpass , den Bandpass und die
+Bandsperre :
+
+Für den Bandpass : \begin{equation}
+    \frac{V_{02}}{V_{i}} = \frac{H_{0} \frac{s}{\omega_{0}}}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P14}
+\end{equation}
+
+Für den Tiefpass :
+
+\begin{equation}
+    \frac{V_{03}}{V_{i}} = \frac{H_{0}}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P15}
+\end{equation}
+
+und für die Bandsperre :
+
+\begin{equation}
+    \frac{V_{04}}{V_{i}} = \frac{H_{0} \cdot(1 + \frac{s^2}{\omega_{0}^2})}{\left( \frac{s^2}{\omega_{0}^2}  +  1  + \frac{s}{ \omega_{0} \cdot Q }  \right)  } 
+\label{eq:0P13}
+\end{equation}
 
 \section{Herleitung der Übertragungsfunktion Tiefpassfilter dritter
 Ordnung}\label{herleitung-der-uxfcbertragungsfunktion-tiefpassfilter-dritter-ordnung}
@@ -365,6 +492,8 @@ die daraus Resuliertende schaltung und die Gesammtschaltung ist in
 Abbildung\ldots{} gezeigt.
 
 \(\frac{\omega_0}{\omega_0 +s} = -\frac{R_2}{R_1} \cdot \frac{\frac{1}{R_{com} \cdot C_{com}}}{R_{com} \cdot C_{com} +s} \cdot -\frac{R_2}{R_1}\)
+
+\textbackslash begin\{\}
 
 \chapter{Messautomatisierung}\label{messautomatisierung}
 
@@ -606,8 +735,9 @@ mit seiner steileren Flankensteilheit zu erwarten ist
 \NormalTok{plt.title(}\StringTok{"Phasengang des Hochpassfilters"}\NormalTok{)}
 \NormalTok{plt.plot(f1,np.degrees(np.angle(Vhpf1)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Q1 HP Simulation"}\NormalTok{)}
 \NormalTok{plt.plot(f2,np.degrees(np.angle(Vhpf10)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Q10 HP Simulation"}\NormalTok{)}
-\NormalTok{plt.plot(fHPFQ1,phaseHPFQ1,label}\OperatorTok{=}\StringTok{\textquotesingle{}Hochpassfilter gemessen Q1\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.plot(fHPFQ10,phaseHPFQ10,label}\OperatorTok{=}\StringTok{\textquotesingle{}Hochpassfilter gemessen Q10\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fHPFQ1,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ1))),label}\OperatorTok{=}\StringTok{\textquotesingle{}Hochpassfilter gemessen Q1\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#plt.plot(fHPFQ10,phaseHPFQ10,label=\textquotesingle{}Hochpassfilter gemessen Q10\textquotesingle{})}
+\NormalTok{plt.plot(fHPFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ10))),label}\OperatorTok{=}\StringTok{\textquotesingle{}Hochpassfilter gemessen Q10\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.grid()}
 \NormalTok{plt.legend()}
@@ -689,7 +819,7 @@ mit seiner steileren Flankensteilheit zu erwarten ist
 
 \pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-12-output-1.png}}
 
-Die Güte hat ein Problem in der Rellen Schaltung
+(Baker 2010)
 
 \chapter{Butterworthfilter}\label{butterworthfilter}
 
@@ -760,6 +890,29 @@ Die Güte hat ein Problem in der Rellen Schaltung
 \end{Highlighting}
 \end{Shaded}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Einladen der Theorehtischen werte aus der Übertragungsfunktion}
+\CommentTok{\# {-}{-}{-}{-}{-} Butter1uF {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{Butterscipy1uF }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"./PythonData/Butterworth1uF.csv"}\NormalTok{,sep}\OperatorTok{=}\StringTok{\textquotesingle{},\textquotesingle{}}\NormalTok{)}
+\NormalTok{fButterscipy1uf }\OperatorTok{=}\NormalTok{ np.array(Butterscipy1uF[}\StringTok{\textquotesingle{}Frequency [Hz]\textquotesingle{}}\NormalTok{])}
+\NormalTok{gainscipy1uf}\OperatorTok{=}\NormalTok{np.array(Butterscipy1uF[}\StringTok{\textquotesingle{}Amplitude [dB]\textquotesingle{}}\NormalTok{])}
+\NormalTok{phasescipy1uf }\OperatorTok{=}\NormalTok{ np.array(Butterscipy1uF[}\StringTok{\textquotesingle{}Phase [deg]\textquotesingle{}}\NormalTok{])}
+
+\CommentTok{\# {-}{-}{-}{-}{-}{-}Butter 0.1 uF {-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{Butterscipy01uF }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"./PythonData/Butterworth0.1uF.csv"}\NormalTok{,sep}\OperatorTok{=}\StringTok{\textquotesingle{},\textquotesingle{}}\NormalTok{)}
+\NormalTok{fButterscipy01uf }\OperatorTok{=}\NormalTok{ np.array(Butterscipy01uF[}\StringTok{\textquotesingle{}Frequency [Hz]\textquotesingle{}}\NormalTok{])}
+\NormalTok{gainscipy01uf}\OperatorTok{=}\NormalTok{np.array(Butterscipy01uF[}\StringTok{\textquotesingle{}Amplitude [dB]\textquotesingle{}}\NormalTok{])}
+\NormalTok{phasescipy01uf }\OperatorTok{=}\NormalTok{ np.array(Butterscipy01uF[}\StringTok{\textquotesingle{}Phase [deg]\textquotesingle{}}\NormalTok{])}
+
+\CommentTok{\# {-}{-}{-}{-}{-}{-}Butter 0.01uF {-}{-}{-}{-}{-}{-}{-}{-} f0 = }
+\NormalTok{Butterscipy001uF }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"./PythonData/Butterworth0.01uF.csv"}\NormalTok{,sep}\OperatorTok{=}\StringTok{\textquotesingle{},\textquotesingle{}}\NormalTok{)}
+\NormalTok{fButterscipy001uf }\OperatorTok{=}\NormalTok{ np.array(Butterscipy001uF[}\StringTok{\textquotesingle{}Frequency [Hz]\textquotesingle{}}\NormalTok{])}
+\NormalTok{gainscipy001uf}\OperatorTok{=}\NormalTok{np.array(Butterscipy001uF[}\StringTok{\textquotesingle{}Amplitude [dB]\textquotesingle{}}\NormalTok{])}
+\NormalTok{phasescipy001uf }\OperatorTok{=}\NormalTok{ np.array(Butterscipy001uF[}\StringTok{\textquotesingle{}Phase [deg]\textquotesingle{}}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Plot und Vergleich:}\label{plot-und-vergleich}
 
 \subsection{Butterworth 1uF}\label{butterworth-1uf}
@@ -770,38 +923,7 @@ Die Güte hat ein Problem in der Rellen Schaltung
 \NormalTok{plt.title(}\StringTok{"Amplitudengang Butterworth 1uF"}\NormalTok{)}
 \NormalTok{plt.plot(f3,}\DecValTok{20}\OperatorTok{*}\NormalTok{np.log10(}\BuiltInTok{abs}\NormalTok{(Vout1u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
 \NormalTok{plt.plot(fButter1uf,gain1uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Tiefpassfilter gemessen\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.grid()}
-\NormalTok{plt.legend()}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-15-output-1.png}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.figure(}\StringTok{"Phasengang Butterworth TP 1uF"}\NormalTok{)}
-\NormalTok{plt.title(}\StringTok{"Phasengang Butterworth 1uF"}\NormalTok{)}
-\NormalTok{plt.plot(f3,np.degrees(np.angle(Vout1u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
-\NormalTok{plt.plot(fButter1uf,phase1uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Butterworth gemessen\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.grid()}
-\NormalTok{plt.legend()}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-16-output-1.png}}
-
-\subsection{Butterworthfilter 0.1uF}\label{butterworthfilter-0.1uf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plt.figure(}\StringTok{"Amplitudengang Butterworth TP 0.1uF"}\NormalTok{)}
-\NormalTok{plt.title(}\StringTok{"Amplitudengang Butterworth 0.1uF"}\NormalTok{)}
-\NormalTok{plt.plot(f4,}\DecValTok{20}\OperatorTok{*}\NormalTok{np.log10(}\BuiltInTok{abs}\NormalTok{(Vout01u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
-\NormalTok{plt.plot(fButter01uf,gain01uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Tiefpassfilter gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fButterscipy1uf,gainscipy1uf,label}\OperatorTok{=}\StringTok{"Scipy Übertragungsfunktion"}\NormalTok{)}
 \NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.grid()}
 \NormalTok{plt.legend()}
@@ -813,10 +935,11 @@ Die Güte hat ein Problem in der Rellen Schaltung
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plt.figure(}\StringTok{"Phasengang Butterworth TP 0.1uF"}\NormalTok{)}
-\NormalTok{plt.title(}\StringTok{"Phasengang Butterworth 0.1uF"}\NormalTok{)}
-\NormalTok{plt.plot(f4,np.degrees(np.angle(Vout01u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
-\NormalTok{plt.plot(fButter01uf,phase01uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Butterworth gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.figure(}\StringTok{"Phasengang Butterworth TP 1uF"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Phasengang Butterworth 1uF"}\NormalTok{)}
+\NormalTok{plt.plot(f3,np.degrees(np.angle(Vout1u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
+\NormalTok{plt.plot(fButter1uf,phase1uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Butterworth gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fButterscipy1uf,phasescipy1uf,label}\OperatorTok{=}\StringTok{"Scipy Übertragungsfunktion"}\NormalTok{)}
 \NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.grid()}
 \NormalTok{plt.legend()}
@@ -826,14 +949,15 @@ Die Güte hat ein Problem in der Rellen Schaltung
 
 \pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-18-output-1.png}}
 
-\subsection{Butterworthfilter 0.01uF}\label{butterworthfilter-0.01uf}
+\subsection{Butterworthfilter 0.1uF}\label{butterworthfilter-0.1uf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plt.figure(}\StringTok{"Amplitudengang Butterworth TP 0.01uF"}\NormalTok{)}
-\NormalTok{plt.title(}\StringTok{"Amplitudengang Butterworth 0.01uF"}\NormalTok{)}
-\NormalTok{plt.plot(f5,}\DecValTok{20}\OperatorTok{*}\NormalTok{np.log10(}\BuiltInTok{abs}\NormalTok{(Vout001u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
-\NormalTok{plt.plot(fButter001uf,gain001uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Tiefpassfilter gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.figure(}\StringTok{"Amplitudengang Butterworth TP 0.1uF"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Amplitudengang Butterworth 0.1uF"}\NormalTok{)}
+\NormalTok{plt.plot(f4,}\DecValTok{20}\OperatorTok{*}\NormalTok{np.log10(}\BuiltInTok{abs}\NormalTok{(Vout01u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
+\NormalTok{plt.plot(fButter01uf,gain01uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Tiefpassfilter gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fButterscipy01uf,gainscipy01uf,label}\OperatorTok{=}\StringTok{"Scipy Übertragungsfunktion"}\NormalTok{)}
 \NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.grid()}
 \NormalTok{plt.legend()}
@@ -845,10 +969,11 @@ Die Güte hat ein Problem in der Rellen Schaltung
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plt.figure(}\StringTok{"Phasengang Butterworth TP 0.01uF"}\NormalTok{)}
-\NormalTok{plt.title(}\StringTok{"Phasengang Butterworth 0.01uF"}\NormalTok{)}
-\NormalTok{plt.plot(f5,np.degrees(np.angle(Vout001u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
-\NormalTok{plt.plot(fButter001uf,phase001uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Butterworth gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.figure(}\StringTok{"Phasengang Butterworth TP 0.1uF"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Phasengang Butterworth 0.1uF"}\NormalTok{)}
+\NormalTok{plt.plot(f4,np.degrees(np.angle(Vout01u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
+\NormalTok{plt.plot(fButter01uf,phase01uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Butterworth gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fButterscipy01uf,phasescipy01uf,label}\OperatorTok{=}\StringTok{"Scipy Übertragungsfunktion"}\NormalTok{)}
 \NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.grid()}
 \NormalTok{plt.legend()}
@@ -858,9 +983,45 @@ Die Güte hat ein Problem in der Rellen Schaltung
 
 \pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-20-output-1.png}}
 
-(Baker 2010)
+\subsection{Butterworthfilter 0.01uF}\label{butterworthfilter-0.01uf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.figure(}\StringTok{"Amplitudengang Butterworth TP 0.01uF"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Amplitudengang Butterworth 0.01uF"}\NormalTok{)}
+\NormalTok{plt.plot(f5,}\DecValTok{20}\OperatorTok{*}\NormalTok{np.log10(}\BuiltInTok{abs}\NormalTok{(Vout001u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
+\NormalTok{plt.plot(fButter001uf,gain001uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Tiefpassfilter gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fButterscipy001uf,gainscipy001uf,label}\OperatorTok{=}\StringTok{"Scipy Übertragungsfunktion"}\NormalTok{)}
+\NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid()}
+\NormalTok{plt.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-21-output-1.png}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.figure(}\StringTok{"Phasengang Butterworth TP 0.01uF"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Phasengang Butterworth 0.01uF"}\NormalTok{)}
+\NormalTok{plt.plot(f5,np.degrees(np.angle(Vout001u)),}\StringTok{".:"}\NormalTok{,label}\OperatorTok{=}\StringTok{"Simulation"}\NormalTok{)}
+\NormalTok{plt.plot(fButter001uf,phase001uf,label}\OperatorTok{=}\StringTok{\textquotesingle{}Butterworth gemessen\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(fButterscipy001uf,phasescipy001uf,label}\OperatorTok{=}\StringTok{"Scipy Übertragungsfunktion"}\NormalTok{)}
+\NormalTok{plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.grid()}
+\NormalTok{plt.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-22-output-1.png}}
+
+\section{Diskussion der Messwerte}\label{diskussion-der-messwerte}
 
 \chapter{Entwurf der PCB Schaltung}\label{entwurf-der-pcb-schaltung}
+
+\chapter{Fazit}\label{fazit}
 
 \chapter*{Literaturverzeichnis}\label{literaturverzeichnis}
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
@@ -873,6 +1034,141 @@ Simulation}. 3. Aufl. Wiley-IEEE Press.
 \url{https://doi.org/10.1002/9780470891179}.
 
 \end{CSLReferences}
+
+\chapter{Alle Plots der Messautomatisierung (Alle
+Filter)}\label{alle-plots-der-messautomatisierung-alle-filter}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ scipy.signal }\ImportTok{as}\NormalTok{ sig}
+
+\NormalTok{kondensatoren }\OperatorTok{=}\NormalTok{ [}\StringTok{"1uF"}\NormalTok{,}\StringTok{"0.1uF"}\NormalTok{,}\StringTok{"0.01uF"}\NormalTok{]}
+
+\NormalTok{guete }\OperatorTok{=}\NormalTok{ [}\StringTok{"Q1"}\NormalTok{,}\StringTok{"Q10"}\NormalTok{]}
+
+\NormalTok{messung }\OperatorTok{=}\NormalTok{ [}\StringTok{"BPF"}\NormalTok{,}\StringTok{"LPF"}\NormalTok{,}\StringTok{"HPF"}\NormalTok{,}\StringTok{"BSF"}\NormalTok{,}\StringTok{"LPF\_Butterworth"}\NormalTok{]}
+
+\NormalTok{Anzahl }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(kondensatoren)}\OperatorTok{*}\BuiltInTok{len}\NormalTok{(guete)}\OperatorTok{*}\BuiltInTok{len}\NormalTok{(messung)}
+
+\ControlFlowTok{for}\NormalTok{ f,cwert }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(kondensatoren):}
+    \ControlFlowTok{for}\NormalTok{ s,gueteval }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(guete):}
+        \ControlFlowTok{for}\NormalTok{ i,FilterTyp }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(messung):}
+
+\NormalTok{            AktuelleFilter }\OperatorTok{=}\NormalTok{ FilterTyp}\OperatorTok{+}\StringTok{"\_"}\OperatorTok{+}\NormalTok{gueteval}\OperatorTok{+}\StringTok{"\_"}\OperatorTok{+}\NormalTok{cwert}
+
+\NormalTok{            Data\_IN1 }\OperatorTok{=} \StringTok{\textquotesingle{}./Messautomatisierung/Messdaten/IN1\_INT\_IN\_\textquotesingle{}}\OperatorTok{+}\NormalTok{AktuelleFilter}\OperatorTok{+}\StringTok{".csv"}
+\NormalTok{            Data\_IN2 }\OperatorTok{=} \StringTok{\textquotesingle{}./Messautomatisierung/Messdaten/IN2\_INT\_OUT\_\textquotesingle{}}\OperatorTok{+}\NormalTok{AktuelleFilter}\OperatorTok{+}\StringTok{".csv"}
+
+\NormalTok{            DF\_IN1 }\OperatorTok{=}\NormalTok{ pd.read\_csv(Data\_IN1)}
+\NormalTok{            DF\_IN2 }\OperatorTok{=}\NormalTok{ pd.read\_csv(Data\_IN2)}
+
+\NormalTok{            MAG\_dB }\OperatorTok{=} \DecValTok{20} \OperatorTok{*}\NormalTok{ np.log10(np.}\BuiltInTok{abs}\NormalTok{(DF\_IN2.std() }\OperatorTok{/}\NormalTok{ DF\_IN1.std()))}
+
+            
+\NormalTok{            freqs }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(DF\_IN1.columns)}
+
+\NormalTok{            PHASE\_xcorr }\OperatorTok{=}\NormalTok{ np.empty(}\BuiltInTok{len}\NormalTok{(freqs),dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+
+\NormalTok{            freqsfloat }\OperatorTok{=}\NormalTok{ np.array([}\BuiltInTok{float}\NormalTok{(x) }\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ freqs])}
+
+\NormalTok{            w }\OperatorTok{=} \DecValTok{2}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{*}\NormalTok{freqsfloat}
+\NormalTok{            N }\OperatorTok{=} \DecValTok{16384}  \CommentTok{\# length of data array, STEMlab buffer size}
+\NormalTok{            t }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\FloatTok{8.389e{-}3}\NormalTok{, N)}
+\NormalTok{            ts }\OperatorTok{=} \FloatTok{8.389e{-}3} \OperatorTok{/}\NormalTok{ N  }\CommentTok{\# sampling time}
+
+
+            \ControlFlowTok{for}\NormalTok{ i,freq }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(freqsfloat):}
+\NormalTok{                corr }\OperatorTok{=}\NormalTok{ sig.correlate(DF\_IN1[}\BuiltInTok{str}\NormalTok{(freq)].values, DF\_IN2[}\BuiltInTok{str}\NormalTok{(freq)],method}\OperatorTok{=}\StringTok{"fft"}\NormalTok{)}
+\NormalTok{                lags }\OperatorTok{=}\NormalTok{ sig.correlation\_lags(}\BuiltInTok{len}\NormalTok{(DF\_IN1[}\BuiltInTok{str}\NormalTok{(freq)]), }\BuiltInTok{len}\NormalTok{(DF\_IN2[}\BuiltInTok{str}\NormalTok{(freq)]))}
+\NormalTok{                phase\_rad\_xcorr }\OperatorTok{=} \DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi }\OperatorTok{*}\NormalTok{ freq }\OperatorTok{*}\NormalTok{ lags[np.argmax(corr)] }\OperatorTok{*}\NormalTok{ ts}
+\NormalTok{                PHASE\_xcorr[i] }\OperatorTok{=}\NormalTok{ phase\_rad\_xcorr}
+\NormalTok{            PHASE\_deg }\OperatorTok{=}\NormalTok{ np.rad2deg(np.unwrap(PHASE\_xcorr))}
+
+\NormalTok{            plt.figure(AktuelleFilter)}
+\NormalTok{            plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{            plt.title(AktuelleFilter)}
+            \CommentTok{\#plt.semilogx(freqs, MAG\_dB)}
+\NormalTok{            plt.plot(freqsfloat,MAG\_dB)}
+\NormalTok{            plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
+\NormalTok{            plt.grid()}
+\NormalTok{            plt.ylabel(}\StringTok{\textquotesingle{}Magnitude in dB\textquotesingle{}}\NormalTok{)}
+            \CommentTok{\#}
+\NormalTok{            plt.subplot(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+            \CommentTok{\#plt.semilogx(freqs, PHASE\_deg)}
+\NormalTok{            plt.plot(freqsfloat, PHASE\_deg)}
+\NormalTok{            plt.xscale(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{)}
+\NormalTok{            plt.grid()}
+\NormalTok{            plt.xlabel(}\StringTok{\textquotesingle{}f in Hz\textquotesingle{}}\NormalTok{)}
+\NormalTok{            plt.ylabel(}\StringTok{\textquotesingle{}Phase in deg\textquotesingle{}}\NormalTok{)}
+\NormalTok{            plt.savefig(}\StringTok{"./images/Images\_Messautomatisierung/"}\OperatorTok{+}\NormalTok{AktuelleFilter}\OperatorTok{+}\StringTok{".png"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+/tmp/ipykernel_27516/4094528378.py:45: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  plt.figure(AktuelleFilter)
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-2.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-3.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-4.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-5.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-6.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-7.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-8.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-9.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-10.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-11.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-12.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-13.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-14.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-15.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-16.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-17.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-18.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-19.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-20.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-21.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-22.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-23.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-24.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-25.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-26.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-27.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-28.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-29.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-30.png}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/cell-23-output-31.png}}
 
 
 
