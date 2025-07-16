@@ -55,7 +55,7 @@ number-sections: true
 bibliography: references.bib
 ---
 
-s
+
 {{< include content/_sec_Einleitung.qmd >}}
 {{< include content/_sec_OpAmp.qmd >}}
 <!--{{< include content/_sec_Charakterisierung.qmd >}}-->
@@ -66,5 +66,5 @@ s
 {{< include content/_sec_PCB_Entwurf.qmd >}}
 {{< include content/_sec_Fazit.qmd >}}
 {{< include content/references.qmd >}}
-<!--{{< include PCB_Messung.qmd >}}-->
+{{< include PCB_Messung.qmd >}}
 <!--{{< include content/_sec_test_plot_messung.qmd >}}-->
