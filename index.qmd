@@ -18,11 +18,31 @@ author:
   - name: Julian Stolle
     orcid: 
     corresponding: true
-    roles: "Lead author"
+    email: Jstolle@stud.hs-bremen.de
+    roles:
+      - Reschersche
+      - Project administration
+      - Software
+      - Visualization
+    affiliation:
+      - name: Hochschule Bremen - City University of Applied Sciences (HSB)
+        city: Bremen
+        state: Germany
+        url: https://www.hs-bremen.de  
   - name: Erlich Nguefack Takoubo
-    orcid:
-    corresponind: true
-    roles: "Lead author"
+    orcid: 
+    corresponding: true
+    email: etakoubo@stud.hs-bremen.de
+    roles:
+      - Reschersche
+      - Project administration
+      - Software
+      - Visualization
+    affiliation:
+      - name: Hochschule Bremen - City University of Applied Sciences (HSB)
+        city: Bremen
+        state: Germany
+        url: https://www.hs-bremen.de  
 keyword:
   - Filter Design 
   - PCB
@@ -35,8 +55,10 @@ number-sections: true
 bibliography: references.bib
 ---
 
+s
 {{< include content/_sec_Einleitung.qmd >}}
-{{< include content/_sec_Charakterisierung.qmd >}}
+{{< include content/_sec_OpAmp.qmd >}}
+<!--{{< include content/_sec_Charakterisierung.qmd >}}-->
 {{< include content/_sec_Filter.qmd >}}
 {{< include content/_sec_Messautomatisierung.qmd >}}
 {{< include content/_sec_BiquadFilterschaltung.qmd >}}
@@ -44,5 +66,5 @@ bibliography: references.bib
 {{< include content/_sec_PCB_Entwurf.qmd >}}
 {{< include content/_sec_Fazit.qmd >}}
 {{< include content/references.qmd >}}
-{{< include PCB_Messung.qmd >}}
+<!--{{< include PCB_Messung.qmd >}}-->
 <!--{{< include content/_sec_test_plot_messung.qmd >}}-->

@@ -1,0 +1,18 @@
+# Operationsverstärker
+@fig-BiquadKicad zeigt eine aktive Biquad-Filterschaltung. Um deren Funktionsweise nachvollziehen zu können, ist es zunächst hilfreich, sich mit dem Prinzip des Operationsverstärkers genauer auseinanderzusetzen und dessen Verschaltungs möglichkeiten vor Augen zu führen.
+
+## Nicht Invertierenderverstärker 
+Die nicht Invertierendeverstärker Schaltung mittels Operationsverstärker ist in @fig-Noninverting dargestellt.
+
+![Nicht Invertierenderverstärker Realisiert durch einen Opamp](images/NichtinvertierenderVerstarker.png){#fig-Noninverting}
+
+Die dazugehörige übertragungsfunktion ist in Gleichung 
+
+## Invertierenderverstärker
+
+![Invertierenderverstärker Realisiert durch einen Opamp](images/NichtinvertierenderVerstarker.png){#fig-Invgain}
+## Summierverstärker
+![Summierverstärker Realisiert durch einen Opamp](images/NichtinvertierenderVerstarker.png){#fig-Summgain}
+
+## Integrierverstärker
+![Integrierverstärker Realisiert durch einen Opamp](images/NichtinvertierenderVerstarker.png){#fig-Intgain}

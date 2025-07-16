@@ -1,11 +1,15 @@
 # Einleitung
 
-Diese Dokumention beschäftigt sich mit dem Filterentwurf eines Aktiven Biqaudfilters siehe Abbildung... sowie eines Aktiven Butterworth Tiefpassfilters dritter ordnung. Die dafür notwendige Schritte so wie der Implementierung wird in diesem Dokument vorgeführt und dessen Ergebnisse Diskutiert.
+Diese Dokumention beschäftigt sich mit dem Filterentwurf eines Aktiven Biqaudfilters Siehe @fig-BiquadKicad sowie eines Aktiven Butterworth Tiefpassfilters dritter ordnung. Die dafür notwendige Schritte so wie der Implementierung wird in diesem Dokument vorgeführt und dessen Ergebnisse Diskutiert.
+
+![Biquadfilter Schaltung](images/Biquadschaltung_16.png){#fig-BiquadKicad}
 
 Der Biquadfilter zweiter Ordnung beinhaltet alle vier genängigen Filtertypen, welche im Labor gemessen und verglichen werden mit der Theorehtischen Schaltung.
-Um ein Butterworth Tiefpassfilter zu erlangen wird die in der Abbildung.. gezeigte Schaltung um ein zusätzlichen Integrator mit einem invertierenden Verstärker ergänzt Siehe Abblidung...
+Um ein Butterworth Tiefpassfilter dritter Ordnung zu erlangen wird die in der Abbildung.. gezeigte Schaltung um ein zusätzlichen Integrator mit einem invertierenden Verstärker ergänzt Siehe Abbildung @fig-ButterworthKicad.
 
-TODO: BILD EINFÜGEN
+
+![Ergänzende Schaltung](images/Butterworthdritterodnung.png){#fig-ButterworthKicad}
+
 
 Die zu entwerfende Aktive Tiefpassschaltung wird für drei unterschiedliche passband edge Frequenz untersucht:
 
@@ -17,13 +21,13 @@ Die zu entwerfende Aktive Tiefpassschaltung wird für drei unterschiedliche pass
 
 Hier bei ergibt sich die passband edge Freqeunz aus der gleichung $\omega_0 = \frac{1}{R_{COM} \cdot C_{COM}}$ 
 
-Die Spezfikation von Filtern beruht auf einem Toleranzschema wie in Abbildung... gezeigt. 
+Die Spezfikation von Filtern beruht auf einem Toleranzschema wie in Abbildung @fig-Toleranzschema gezeigt. 
 
-TODO:Bild Einfügen
+![Toleranzschema für Filter [@Manolakis.2011]](images/Toleranzschema.png){#fig-Toleranzschema}
 
 Da der Biquadfilter durch eine Butterworthaproximation Entwurfen wurde so wie die Erweiterte schaltung ist im Durchlassbereich ein Glatterverlauf zu erwarten je nach Grundverstärkung entwerder um 0dB oder höher. 
 
 
-Die Güte an der Biquad Schaltung lässt sich mit dem Widerstand .. Einstellen. Die Güte gibt an wie sehr der Frequenzgang sich um die eingestellte Grenzfreqeunz $f_0 = \frac{\omega_0}{2 \cdot \pi} $ sich ändert 
+Die Güte an der Biquad Schaltung lässt sich mit dem Widerstand R5 Einstellen. Die Güte gibt an wie sehr der Frequenzgang sich um die eingestellte Grenzfreqeunz $f_0 = \frac{\omega_0}{2 \cdot \pi} $ sich ändert 
 
 TODO: Das noch genauer Beschreiben
