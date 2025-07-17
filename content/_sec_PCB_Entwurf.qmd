@@ -1,2 +1,6 @@
 # Entwurf der PCB Schaltung
 
+ TODO: Bild Von der fertigen PCB Schaltung einfügen
+ Und erklären was wir uns bei dem Entwurf gedacht haben.
+
+<!-- ![Fertige PCB Schaltung](images/Schaltung_erlich.jpeg){#fig-PCBSchaltung} -->

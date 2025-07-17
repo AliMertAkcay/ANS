@@ -21,49 +21,52 @@ Aus der ersten Eigenschaft folgt das bei einem begrenzten Ausgangssignal, die Sp
 ## Nicht Invertierenderverstärker 
 Die nicht Invertierendeverstärker Schaltung mittels Operationsverstärker ist in @fig-Noninverting dargestellt.
 
-![Nichtinvertierender Verstärker Realisiert durch einen Opamp](images/NichtinvertierenderVerstarker.png){#fig-Noninverting}
+<!-- ![Nichtinvertierender Verstärker Realisiert durch einen Opamp](images/TestOP123.png) -->
 
-Die Übertragungsfunktion des nicht Invertierendeverstärkers in @fig-Noninverting lässt sich durch die Spannungsteilerregel herleiten. Da die Spannung zwischen dem Eingung (+) am Operatrionsverstärker und der Rückkoplung als gleich angenommen werden darf auf grund der Ersten Idealen eigenschaft damit Folgt.
+![Nichtinvertierender Versterker Realisiert durch einen Opamp](images/TestOP123.png){#fig-Noninverting}
+
+Die Übertragungsfunktion des nicht Invertierendeverstärkers in @fig-Noninverting lässt sich durch die Spannungsteilerregel herleiten. Da die Spannung zwischen dem Eingung (+) am Operatrionsverstärker und der Rückkoplung (-) als gleich angenommen werden darf auf grund der Ersten Idealen eigenschaft folgt damit @eq-InvOP.
 
 $$
 V_{in} = V_{out} \cdot \frac{R_1}{R_1+R_2}
 $${#eq-InvOP}
-Aus @eq-InvOP folgt @
+Aus @eq-InvOP folgt @eq-InvOPfertig
 
 $$
 A_u = \frac{V_{out}}{V_{in}} = 1 + \frac{R_2}{R_1}
-$$
+$${#eq-InvOPfertig}
 
 ## Invertierenderverstärker
-![Invertierender Verstärker Realisiert durch einen Opamp](images/InvertierenderVerstarker.png){#fig-invgain}
-Die in @fig-invgain gezeigte Schaltung besitzt die in @eq-Invue Übertragungsfunktion.
+<!--Wegen Bild :(-->
+
+![Invertierender Verstärker Realisiert durch einen Opamp](images/InvOPamp.png){#fig-vgain2}
+
+Die in @fig-vgain2 gezeigte Schaltung besitzt die in @eq-Invue Übertragungsfunktion. Die Herleitung basiert auf der ersten und vierten Idealen Eigenschaft des OPs.
 
 $$
-A_u = \frac{V_{out}}{V_{in}} = - \frac{R_2}{R_1}
+A_u = \frac{V_{out}}{V_{in}} = - \frac{R_{16}}{R_{15}}
 $${#eq-Invue}
 
 ## Addierer Schaltung
-![Addierer Realisiert durch einen Opamp](images/Addiererschaltung.png){#fig-Summgain}
+![Addierer Realisiert durch einen Opamp](images/Addiererschaltung2.png){#fig-Summgain}
 
-Mit den Idealen eigenschaften des Operationsverstärkers darf angenommen werden das der Eingangsstrom nicht in den Operationsvertärker fließt somit gilt @eq-VoutStrom
+Mit den Idealen eigenschaften des Operationsverstärkers darf angenommen werden das der Eingangsstrom nicht in den Operationsvertärker fließt ($I_{NP} = 0$) somit gilt @eq-VoutStrom
 
 $$
-V_{out} = -I \cdot R_k
+V_{out} = -I \cdot R_0
 $${#eq-VoutStrom}
 
 Mit Hilfe der Knotenregel erhält man @eq-Isum
 
 $$
-I = \sum_{v = 1}^{N} I_v ; I_v = \frac{U_{ev}}{R_v} 
+I = \sum_{v = 1}^{N} I_v ; \text{wobei } I_v = \frac{V_{ev}}{R_v} 
 $${#eq-Isum}
 
-und aus @eq-Isum und @eq-VoutStrom das Aditions verhalten der Schaltung wenn z.b. alle Widerstände $R_1$ bis $R_N$ gleich sind so erhält man @eq-eq-SumforsameR
+und aus @eq-Isum und @eq-VoutStrom das Additions Verhalten der Schaltung wenn z.b. alle Widerstände $R_1$ bis $R_N$ gleich sind so erhält man @eq-SumforsameR
 
 $$
-V_{out} = -\frac{R_k}{R} \cdot \sum_{v = 1}^{N} U_{ev}
+V_{out} = -\frac{R_0}{R} \cdot \sum_{v = 1}^{N} V_{ev}
 $${#eq-SumforsameR}
-
-TODO: NOch verbessern
 
 ## Invertierende Integrations Schlatung
 ![Integrierverstärker Realisiert durch einen Opamp](images/Integrator_OpAmp.png){#fig-Intgain}
@@ -83,3 +86,4 @@ $${#eq-Integration}
 
 Der $\frac{1}{s}$ anteil beschreibt das Integrationsverhalten in der Komplexen S Ebene der Term $- \frac{1}{R_1 \cdot c}$ entspricht dem Negativen Vorfaktor
 
+Mit diesen vier Grundschaltungen lassen sich die gewünschen Übetragungsfunktionen der einzelnen Filter realisieren im nächsten abschnit werden diese aus der Biquadschaltung hergeleitet. 

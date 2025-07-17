@@ -62,7 +62,6 @@ bibliography: references.bib
 {{< include content/_sec_Filter.qmd >}}
 
 {{< include content/_sec_Diskreter_BiquadFilterschaltung.qmd >}}
-
 {{< include content/_sec_Diskreter_Butterworth.qmd >}}
 {{< include content/_sec_Messautomatisierung.qmd >}}
 {{< include content/_sec_PCB_Entwurf.qmd >}}
