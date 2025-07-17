@@ -1,1 +1,12 @@
-# Messautomatisierung
+# Messverfahren
+Die Messung der Biquadschaltung ist auf zwei wegen erfolg, einmal über die Messung der Grafischen Benutzeroberfläche und druch das Erweiterete Python-Messskript von Prof. Dr.-Ing. Mirco Meiners für den Red Pitaya  
+
+## Messung über die Grafische Benutzeroberfläche
+Um den Freqeunzgang der Schaltung zu ermitteln wurde die messung durch die Graphische oberfläche durchgeführt hier zu muss der Readpitaya wie in @fig-Readpitayaverschaltung gezeigt geschaltet werden.
+
+![Readpitaya Verschaltung](images/Bodemessung.png){#fig-Readpitayaverschaltung}
+
+<!--Compiler?Was los??-->
+
+## Messautomatisierung
+Auf grund dessen das die Erweiterte Biquadschaltung mit Butterworth dritter Ordnung sehr viele Messungen benötigt um alle Filtertypen abzudecken mit den jeweiligen einstellungen. Wurde des Messskript um for-schleifen erweitert. In der Praxis hat sich jedoch rausgestellt das die Messung im allgemeinen länger dauer als die Über die Graphische Oberfläche dem entsprechend wurde die Idee für eine Voll automatisierte Messung verforven und stattdessen wurde die messung Händisch über die Graphische Oberfläche weiter mit hilfe eines Messprotokoll weiter geführt.
