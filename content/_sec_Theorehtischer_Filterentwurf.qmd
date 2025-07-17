@@ -1,6 +1,101 @@
-# Filter-Entwurf
+# Theorehtischer_Filterentwurf
 
-## Herleitung der Übertragungsfunktion des Biquad Filters
+## Operationsverstärker
+![Biquadfilter Schaltung](images/Biquadschaltung_16.png){#fig-BiquadKicad}
+
+@fig-BiquadKicad zeigt eine aktive Biquad-Filterschaltung. Um deren Funktionsweise nachvollziehen zu können, ist es zunächst hilfreich, sich mit dem Prinzip des Operationsverstärkers genauer auseinanderzusetzen und dessen Verschaltungs möglichkeiten vor Augen zu führen.
+
+### Eigenschaften von idealen Operationsverstärkern
+Um das Übertragungsverhalten eines Operationsverstärkers in einer bestimmten Schaltung mathematisch zu modellieren, wird der Operationsverstärker aus Vereinfachungsgründen als ideal angenommen. Somit hat der Operationsverstärker folgende vier ideale Eigenschaften: 
+
+|Name  | Beschreibung | Ideale Eigenschaft                            |
+|------|--------------------------------------|-----------------------|
+|$A_u,d$|Differenzverstärkung / Open-loop gain |$A_u,d \rightarrow \infty$|
+|$R_{ein}$    | Eingangswiderstnad| $R_{ein} \rightarrow \infty$|
+|$R_{aus}$    | Ausgangswiderstand|$R_{aus} \rightarrow 0$|
+|$G$| Verstärkungsfaktor|$G \rightarrow \infty$|
+
+<!-- 1. $A_u,d \rightarrow \infty$ 
+2. $R_{ein} \rightarrow \infty$
+3. $R_{aus} \rightarrow 0$
+4. $G \rightarrow \infty$ -->
+
+Aus der ersten Eigenschaft folgt das bei einem begrenzten Ausgangssignal, die Spannungsdifferenz null sein muss. Mit der zweiten Eigenschaft kann angenommen werden,dass kein Strom in den eingang des Operationsverstärkers fließt.
+
+### Nicht Invertierenderverstärker 
+Die nicht Invertierendeverstärker Schaltung mittels Operationsverstärker ist in @fig-Noninverting dargestellt.
+
+<!-- ![Nichtinvertierender Verstärker Realisiert durch einen Opamp](images/TestOP123.png) -->
+
+![Nichtinvertierender Versterker Realisiert durch einen Opamp](images/TestOP123.png){#fig-Noninverting}
+
+Die Übertragungsfunktion des nicht Invertierendeverstärkers in @fig-Noninverting lässt sich durch die Spannungsteilerregel herleiten. Da die Spannung zwischen dem Eingung (+) am Operatrionsverstärker und der Rückkoplung (-) als gleich angenommen werden darf auf grund der Ersten Idealen eigenschaft folgt damit @eq-InvOP.
+
+$$
+V_{in} = V_{out} \cdot \frac{R_1}{R_1+R_2}
+$${#eq-InvOP}
+Aus @eq-InvOP folgt @eq-InvOPfertig
+
+$$
+A_u = \frac{V_{out}}{V_{in}} = 1 + \frac{R_2}{R_1}
+$${#eq-InvOPfertig}
+
+### Invertierenderverstärker
+<!--Wegen Bild :(-->
+
+![Invertierender Verstärker Realisiert durch einen Opamp](images/InvOPamp.png){#fig-vgain2}
+
+Die in @fig-vgain2 gezeigte Schaltung besitzt die in @eq-Invue Übertragungsfunktion. Die Herleitung basiert auf der ersten und vierten Idealen Eigenschaft des OPs.
+
+$$
+A_u = \frac{V_{out}}{V_{in}} = - \frac{R_{16}}{R_{15}}
+$${#eq-Invue}
+
+### Addierer Schaltung
+![Addierer Realisiert durch einen Opamp](images/Addiererschaltung2.png){#fig-Summgain}
+
+Mit den Idealen eigenschaften des Operationsverstärkers darf angenommen werden das der Eingangsstrom nicht in den Operationsvertärker fließt ($I_{NP} = 0$) somit gilt @eq-VoutStrom
+
+$$
+V_{out} = -I \cdot R_0
+$${#eq-VoutStrom}
+
+Mit Hilfe der Knotenregel erhält man @eq-Isum
+
+$$
+I = \sum_{v = 1}^{N} I_v ; \text{wobei } I_v = \frac{V_{ev}}{R_v} 
+$${#eq-Isum}
+
+und aus @eq-Isum und @eq-VoutStrom das Additions Verhalten der Schaltung wenn z.b. alle Widerstände $R_1$ bis $R_N$ gleich sind so erhält man @eq-SumforsameR
+
+$$
+V_{out} = -\frac{R_0}{R} \cdot \sum_{v = 1}^{N} V_{ev}
+$${#eq-SumforsameR}
+
+### Invertierende Integrations Schlatung
+![Integrierverstärker Realisiert durch einen Opamp](images/Integrator_OpAmp.png){#fig-Intgain}
+
+In @fig-Intgain ist die Schaltung zur Realisierung eines Integrators mit Hilfe eines Operationsverstärkes
+
+$$
+Z_c = \frac{1}{s \cdot c}
+$$ {#eq-SKpaImpedanz}
+
+die Herleitung der Übertragungsfunktion basiert auf @eq-Invue und  @eq-SKpaImpedanz welche die Impedanz der Kapazität im Laplace bereich beschreibt. 
+@eq-Invue eingesetzt in @eq-SKpaImpedanz resultiert in @eq-Integration
+
+$$
+A_u = -\frac{1}{R_1 \cdot c \cdot s} = - \frac{1}{R_1 \cdot c} \cdot \frac{1}{s}
+$${#eq-Integration}
+
+Der $\frac{1}{s}$ anteil beschreibt das Integrationsverhalten in der Komplexen S Ebene der Term $- \frac{1}{R_1 \cdot c}$ entspricht dem Negativen Vorfaktor
+
+Mit diesen vier Grundschaltungen lassen sich die gewünschen Übetragungsfunktionen der einzelnen Filter realisieren im nächsten abschnit werden diese aus der Biquadschaltung hergeleitet. 
+
+### Herleitung der Übertragungsfunktion des Biquad Filters
+
+<!--komp-->
+
 ![Biquadschaltung mit Spannungsnamen](images/Schaltung_erlich.jpeg){#fig-ErlichSchaltung}
 
 <!-- In der oberen Schaltung Siehe Abb. @fig-ErlichSchaltung aus Kicad sind die blauen  Spannungen , die sie für uns interessant sind.
