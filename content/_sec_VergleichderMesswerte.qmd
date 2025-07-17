@@ -1,1 +1,100 @@
 # Vergleich der Messung
+
+```{python}
+import scipy.signal as sig
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+kondensatoren = ["1uF","0.1uF","0.01uF"]
+
+guete = ["Q1","Q10"]
+
+messung = ["BPF","LPF","HPF","BSF","LPF_Butterworth"]
+
+Anzahl = len(kondensatoren)*len(guete)*len(messung)
+
+for f,cwert in enumerate(kondensatoren):
+    for s,gueteval in enumerate(guete):
+        for i,FilterTyp in enumerate(messung):
+            
+            # Vergleich mit scipy Aus den jeweiligen übertragungsfunktionen
+            #TODO: Das hier noch machen
+            # Filterparameter
+            #order = 3
+            
+           #R = 1000
+            #cwertnum = np.array([1e-6,0.1e-6,0.01e-6])
+            #Wc =   1/(R*cwertnum) # Cutoff frequency in rad/s
+
+            #fs = 10000 # Sampling frequency in Hz (nur relevant für digital)
+
+            # Butterworth Biquad (analog)
+            #b, a = signal.butter(N=order, Wn=Wc, btype='low', analog=True)
+
+            # Übertragungsfunktion anzeigen
+            #print("Zählerkoeffizienten (b):", b)
+            #print("Nennerkoeffizienten (a):", a)
+
+            # Bode-Diagramm
+            #w, h = signal.freqs(1*b, a)
+            
+            #plt.figure()
+            #frequenzgang = 20 * np.log10(abs(h))
+            #frequenzgangmitf = np.vstack((frequenzgang,w / (2*np.pi)))
+            #plt.semilogx(w / (2*np.pi), frequenzgang)
+            #plt.title('3nd Order Butterworth Low Pass Filter')
+            #plt.xlabel('Frequency [Hz]')
+            #plt.ylabel('Amplitude [dB]')
+            #plt.grid()
+            #plt.show()
+
+            # Auswertung für die Messung
+            AktuelleFilter = FilterTyp+"_"+gueteval+"_"+cwert
+
+            Data_IN1 = './Messautomatisierung/Messdaten/IN1_INT_IN_'+AktuelleFilter+".csv"
+            Data_IN2 = './Messautomatisierung/Messdaten/IN2_INT_OUT_'+AktuelleFilter+".csv"
+
+            DF_IN1 = pd.read_csv(Data_IN1)
+            DF_IN2 = pd.read_csv(Data_IN2)
+
+            MAG_dB = 20 * np.log10(np.abs(DF_IN2.std() / DF_IN1.std()))
+
+            
+            freqs = list(DF_IN1.columns)
+
+            PHASE_xcorr = np.empty(len(freqs),dtype=float)
+
+            freqsfloat = np.array([float(x) for x in freqs])
+
+            w = 2*np.pi*freqsfloat
+            N = 16384  # length of data array, STEMlab buffer size
+            t = np.linspace(0, 8.389e-3, N)
+            ts = 8.389e-3 / N  # sampling time
+
+
+            for i,freq in enumerate(freqsfloat):
+                corr = sig.correlate(DF_IN1[str(freq)].values, DF_IN2[str(freq)],method="fft")
+                lags = sig.correlation_lags(len(DF_IN1[str(freq)]), len(DF_IN2[str(freq)]))
+                phase_rad_xcorr = 2 * np.pi * freq * lags[np.argmax(corr)] * ts
+                PHASE_xcorr[i] = phase_rad_xcorr
+            PHASE_deg = np.rad2deg(np.unwrap(PHASE_xcorr))
+
+            plt.figure(AktuelleFilter)
+            plt.subplot(2, 1, 1)
+            plt.title(AktuelleFilter)
+            #plt.semilogx(freqs, MAG_dB)
+            plt.plot(freqsfloat,MAG_dB)
+            plt.xscale('log')
+            plt.grid()
+            plt.ylabel('Magnitude in dB')
+            #
+            plt.subplot(2, 1, 2)
+            #plt.semilogx(freqs, PHASE_deg)
+            plt.plot(freqsfloat, PHASE_deg)
+            plt.xscale('log')
+            plt.grid()
+            plt.xlabel('f in Hz')
+            plt.ylabel('Phase in deg')
+            plt.savefig("./images/Images_Messautomatisierung/"+AktuelleFilter+".png")
+plt.show()
+```
