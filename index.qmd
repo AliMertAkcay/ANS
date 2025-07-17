@@ -55,8 +55,21 @@ number-sections: true
 bibliography: references.bib
 ---
 
-{{< include content/_sec_Einleitung.qmd >}}
+<!-- {{< include content/_sec_Einleitung.qmd >}} -->
+{{< include content/_sec_EinleitungJulian.qmd >}}
+{{< include content/_sec_Zielsetzung.qmd >}}
 
+{{< include content/_sec_Theorehtischer_Filterentwurf.qmd >}}
+
+{{< include content/_sec_Diskreter_Filterentwurf.qmd >}}
+
+{{< include content/_sec_PCB_Entwurf.qmd >}}
+
+{{< include content/_sec_VergleichderMesswerte.qmd >}}
+{{< include content/_sec_Fazit.qmd >}}
+
+
+<!-- 
 {{< include content/_sec_OpAmp.qmd >}}
 {{< include content/_sec_Filter.qmd >}}
 {{< include content/_sec_Diskreter_BiquadFilterschaltung.qmd >}}
@@ -69,7 +82,7 @@ bibliography: references.bib
 {{< include PCB_Messung.qmd >}}
 
 {{< include content/_sec_Fazit.qmd >}}
-{{< include content/references.qmd >}}
+{{< include content/references.qmd >}} -->
 
 <!--{{< include content/_sec_Charakterisierung.qmd >}}-->
 <!--{{< include content/_sec_test_plot_messung.qmd >}}-->
