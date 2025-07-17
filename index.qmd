@@ -55,7 +55,7 @@ number-sections: true
 bibliography: references.bib
 ---
 
-<!-- {{< include content/_sec_Einleitung.qmd >}} -->
+
 {{< include content/_sec_EinleitungJulian.qmd >}}
 {{< include content/_sec_Zielsetzung.qmd >}}
 {{< include content/_sec_Theorehtischer_Filterentwurf.qmd >}}
@@ -65,7 +65,7 @@ bibliography: references.bib
 {{< include content/_sec_Fazit.qmd >}}
 
 
-
+<!-- {{< include content/_sec_Einleitung.qmd >}} -->
 <!-- {{< include content/_sec_OpAmp.qmd >}} -->
 <!-- {{< include content/_sec_Filter.qmd >}} -->
 <!-- {{< include content/_sec_Diskreter_BiquadFilterschaltung.qmd >}} -->

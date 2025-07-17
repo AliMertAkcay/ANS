@@ -3,13 +3,14 @@
 ```{python}
 import scipy.signal as sig
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-kondensatoren = ["1uF","0.1uF","0.01uF"]
+import numpy as np
 
-guete = ["Q1","Q10"]
+kondensatoren = ["1uF","100nF","10nF"]
 
-messung = ["BPF","LPF","HPF","BSF","LPF_Butterworth"]
+guete = ["1Q","10Q"]
+
+messung = ["BPF2","LPF2","HPF2","BSF2","LPF3"]
 
 Anzahl = len(kondensatoren)*len(guete)*len(messung)
 
@@ -49,35 +50,19 @@ for f,cwert in enumerate(kondensatoren):
             #plt.show()
 
             # Auswertung für die Messung
-            AktuelleFilter = FilterTyp+"_"+gueteval+"_"+cwert
-
-            Data_IN1 = './Messautomatisierung/Messdaten/IN1_INT_IN_'+AktuelleFilter+".csv"
-            Data_IN2 = './Messautomatisierung/Messdaten/IN2_INT_OUT_'+AktuelleFilter+".csv"
+            #AktuelleFilter = FilterTyp+"_"+gueteval+"_"+cwert
+            
+            AktuelleFilter = FilterTyp+"_"+cwert+"_"+gueteval
+            
+            Data_IN1 = './MessungenPCB/'+AktuelleFilter+".csv"
+            Data_IN2 = './MessungenPCB/'+AktuelleFilter+".csv"
 
             DF_IN1 = pd.read_csv(Data_IN1)
             DF_IN2 = pd.read_csv(Data_IN2)
 
-            MAG_dB = 20 * np.log10(np.abs(DF_IN2.std() / DF_IN1.std()))
-
-            
-            freqs = list(DF_IN1.columns)
-
-            PHASE_xcorr = np.empty(len(freqs),dtype=float)
-
-            freqsfloat = np.array([float(x) for x in freqs])
-
-            w = 2*np.pi*freqsfloat
-            N = 16384  # length of data array, STEMlab buffer size
-            t = np.linspace(0, 8.389e-3, N)
-            ts = 8.389e-3 / N  # sampling time
-
-
-            for i,freq in enumerate(freqsfloat):
-                corr = sig.correlate(DF_IN1[str(freq)].values, DF_IN2[str(freq)],method="fft")
-                lags = sig.correlation_lags(len(DF_IN1[str(freq)]), len(DF_IN2[str(freq)]))
-                phase_rad_xcorr = 2 * np.pi * freq * lags[np.argmax(corr)] * ts
-                PHASE_xcorr[i] = phase_rad_xcorr
-            PHASE_deg = np.rad2deg(np.unwrap(PHASE_xcorr))
+            MAG_dB = DF_IN1[" Amplitude [dB]"]
+            PHASE_deg = DF_IN1[" Phase [deg]"]
+            freqsfloat = DF_IN1["Frequency [Hz]"]
 
             plt.figure(AktuelleFilter)
             plt.subplot(2, 1, 1)
@@ -95,6 +80,6 @@ for f,cwert in enumerate(kondensatoren):
             plt.grid()
             plt.xlabel('f in Hz')
             plt.ylabel('Phase in deg')
-            plt.savefig("./images/Images_Messautomatisierung/"+AktuelleFilter+".png")
+            plt.savefig("./MessungenPCB/Figs/"+AktuelleFilter+".png")
 plt.show()
 ```
