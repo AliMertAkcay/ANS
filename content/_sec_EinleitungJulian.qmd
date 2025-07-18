@@ -1,1 +1,17 @@
 # Einleitung
+
+Filter zählen zu den grundlegenden Bauelementen der Signalverarbeitung und sind unerlässlich bei der gezielten Auswahl und Unterdrückung bestimmter Frequenzbereiche. Ihr Einsatz ist in zahlreichen technischen Disziplinen von zentraler Bedeutung, darunter die Kommunikationssysteme, die Messtechnik, die Steuerungs- und Regelungstechnik sowie die digitale und analoge Audiotechnik. Sie ermöglichen es, Störungen zu minimieren, gewünschte Signale zu extrahieren und die Systemfunktionalität insgesamt zu optimieren.
+
+Der Entwurf eines leistungsfähigen und flexiblen Filtersystems stellt eine Schlüsselkompetenz in der Elektrotechnik dar. Er verlangt ein tiefes Verständnis sowohl der theoretischen Grundlagen – etwa zur Übertragungsfunktion und Frequenzganganalyse – als auch der praktischen Umsetzung, die von der Auswahl geeigneter Schaltungstopologien bis hin zur Simulation und Realisierung auf Leiterplatten reicht. Dadurch entsteht ein praxisnaher Bezug, der es ermöglicht, mathematische Modelle und reale Schaltungen methodisch miteinander zu verknüpfen.
+
+In diesem Projekt wurde ein systematischer Ansatz gewählt, der drei zentrale Arbeitsschritte umfasst:
+1. **Theoretische Auslegung und Simulation** – Entwicklung eines geeigneten Filtermodells und Überprüfung der Filtereigenschaften mittels Simulation.
+2. **Diskreter Schaltungsentwurf** – Auswahl und Dimensionierung konkreter Bauelemente sowie Aufbau eines Prototyps zur funktionalen Überprüfung.
+3. **Leiterplatten-Entwurf (PCB-Design)** – Übertragung des Schaltplans auf eine gedruckte Schaltung unter Berücksichtigung fertigungstechnischer und elektrischer Gesichtspunkte.
+
+Im Mittelpunkt steht der Entwurf eines Biquad-Filters, der zu einem Butterworth-Tiefpass dritter Ordnung erweitert wird. Der Biquad-Filter ist eine besonders vielseitige Schaltung zweiter Ordnung, die sich zur Realisierung von Hochpass-, Tiefpass-, Bandpass- und Bandsperrenfunktionen eignet. Die Realisierung erfolgt typischerweise mit Operationsverstärkern oder digitalen Signalverarbeitungssystemen.
+
+Die Erweiterung zum Butterworth-Filter verleiht dem System eine maximal flache Amplitudengangcharakteristik im Durchlassbereich ohne Welligkeit. Im Vergleich zu alternativen Filterentwürfen (etwa Chebyshev- oder elliptische Filter) ist der Butterworth-Filter für Anwendungen prädestiniert, bei denen Signalverfälschungen oder Pegelschwankungen im Durchlassbereich minimiert werden sollen. Mit steigender Filterordnung nimmt zudem die Flankensteilheit im Sperrbereich zu, sodass eine effektive Unterdrückung unerwünschter Frequenzanteile möglich ist.
+
+Der gewählte Projektaufbau ermöglicht eine systematische Verknüpfung zwischen Theorie und Praxis. Von der mathematischen Analyse über die Schaltungsauslegung bis zur fertigen Leiterplatte erhält der Anwender ein vertieftes Verständnis für das Gesamtverhalten und die Optimierungsmöglichkeiten elektronischer Filtersysteme. Die schrittweise und dokumentierte Vorgehensweise trägt zudem dazu bei, die Nachvollziehbarkeit und Reproduzierbarkeit aller Arbeitsschritte sicherzustellen[6][4].
+

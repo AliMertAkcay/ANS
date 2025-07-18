@@ -9,4 +9,3 @@ Auf dem ASLK-Board befinden sich drei TL082-ICs, welche jeweils zwei Operationsv
 
 ## Fehlerquellen
 Beim Aufbau der diskreten Filterschaltung sind uns einige Fehler unterlaufen. Unter anderem gab es kaputte Drahtbrücken und falsche Widerstandswerte, die falsch angenommen wurden. Daher ist es wichtig, bei der Fehlersuche auf solche typischen Fehler zu achten.
- 
