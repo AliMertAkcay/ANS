@@ -4,10 +4,17 @@ Filter zählen zu den grundlegenden Bauelementen der Signalverarbeitung und sind
 
 Der Entwurf eines leistungsfähigen und flexiblen Filtersystems stellt eine Schlüsselkompetenz in der Elektrotechnik dar. Er verlangt ein tiefes Verständnis sowohl der theoretischen Grundlagen – etwa zur Übertragungsfunktion und Frequenzganganalyse – als auch der praktischen Umsetzung, die von der Auswahl geeigneter Schaltungstopologien bis hin zur Simulation und Realisierung auf Leiterplatten reicht. Dadurch entsteht ein praxisnaher Bezug, der es ermöglicht, mathematische Modelle und reale Schaltungen methodisch miteinander zu verknüpfen.
 
-In diesem Projekt wurde ein systematischer Ansatz gewählt, der drei zentrale Arbeitsschritte umfasst:
-1. **Theoretische Auslegung und Simulation** – Entwicklung eines geeigneten Filtermodells und Überprüfung der Filtereigenschaften mittels Simulation.
-2. **Diskreter Schaltungsentwurf** – Auswahl und Dimensionierung konkreter Bauelemente sowie Aufbau eines Prototyps zur funktionalen Überprüfung.
-3. **Leiterplatten-Entwurf (PCB-Design)** – Übertragung des Schaltplans auf eine gedruckte Schaltung unter Berücksichtigung fertigungstechnischer und elektrischer Gesichtspunkte.
+
+In diesem Projekt wurde ein systematischer Ansatz gewählt, der drei zentrale Arbeitsschritte umfasst
+
+1. **Theoretische Auslegung und Simulation:**
+   Entwicklung eines geeigneten Filtermodells und Überprüfung der Filtereigenschaften mittels Simulation.
+
+2. **Diskreter Schaltungsentwurf:** 
+   Auswahl und Dimensionierung konkreter Bauelemente sowie Aufbau eines Prototyps zur funktionalen Überprüfung.
+
+3. **Leiterplatten-Entwurf (PCB-Design):**
+   Übertragung des Schaltplans auf eine gedruckte Schaltung unter Berücksichtigung fertigungstechnischer und elektrischer Gesichtspunkte.
 
 Im Mittelpunkt steht der Entwurf eines Biquad-Filters, der zu einem Butterworth-Tiefpass dritter Ordnung erweitert wird. Der Biquad-Filter ist eine besonders vielseitige Schaltung zweiter Ordnung, die sich zur Realisierung von Hochpass-, Tiefpass-, Bandpass- und Bandsperrenfunktionen eignet. Die Realisierung erfolgt typischerweise mit Operationsverstärkern oder digitalen Signalverarbeitungssystemen.
 
@@ -20,9 +27,13 @@ Der gewählte Projektaufbau ermöglicht eine systematische Verknüpfung zwischen
 Die Entwicklung und Analyse von Filterschaltungen ist ein zentrales Thema in der Elektrotechnik, da Filter in einer Vielzahl von Anwendungen eingesetzt werden: von der Signalverarbeitung in Kommunikationssystemen über die Störunterdrückung in Messsystemen bis hin zur Audio- und Medizintechnik. Für Studierende und Ingenieure bietet das eigenständige Entwerfen, Simulieren und Realisieren eines Filters eine wertvolle Möglichkeit, theoretisches Wissen direkt mit praktischer Erfahrung zu verbinden.
 
 Besonders motivierend ist das Projekt durch die Integration mehrerer ingenieurwissenschaftlicher Disziplinen:
+
 - **Mathematische Modellierung:** Erarbeitung und Analyse von Übertragungsfunktionen und deren Auswirkung auf das Frequenzverhalten.
+
 - **Simulation:** Einsatz moderner Softwaretools zur Validierung der Theorie und Vorhersage des Systemverhaltens.
+
 - **Praktische Realisierung:** Übertragung der Simulationsergebnisse auf reale elektronische Schaltungen und deren Überprüfung im Labor.
+
 - **Schaltungsdesign und PCB-Layout:** Gestaltung einer eigenen Leiterplatte, die den Anforderungen an Funktionalität, Zuverlässigkeit und Fertigung entspricht.
 
 Die Arbeit an einem flexiblen und anwendungsnahen Filtersystem stärkt die Problemlösekompetenz, schult das systematische Arbeiten und fördert das Verständnis komplexer Zusammenhänge zwischen Theorie, Simulation und Praxis.
@@ -32,10 +43,15 @@ Die Arbeit an einem flexiblen und anwendungsnahen Filtersystem stärkt die Probl
 Im Verlauf des Projekts können verschiedene technische und organisatorische Herausforderungen auftreten:
 
 - **Parameterabstimmung:** Die Auswahl geeigneter Komponentenwerte verlangt hohe Präzision, um die geforderten Filtereigenschaften exakt zu erreichen. Schon geringe Toleranzen von Widerständen oder Kondensatoren können das Frequenzverhalten beeinflussen.
+
 - **Theorie-Praxis-Gap:** Diskrepanzen zwischen idealisierten Simulationen und realen Messergebnissen sind häufig. Diese entstehen durch Bauteilabweichungen, parasitäre Effekte im Aufbau oder nichtlineare Eigenschaften der Operationsverstärker.
+
 - **Schaltungsdesign:** Die praktische Implementierung eines Biquad-Filters mit Erweiterung zum Butterworthfilter erfordert ein tiefgehendes Verständnis der jeweiligen Topologien, Kopplungsmechanismen und Stabilitätskriterien.
+
 - **PCB-Umsetzung:** Das Platinenlayout muss nicht nur elektrisch korrekt, sondern auch EMV-gerecht und platzsparend gestaltet werden. Hierbei gilt es, Störungen durch Kreuzkopplungen, Masseführung und Schleifen zu minimieren.
+
 - **Messung und Analyse:** Für die präzise Charakterisierung des Filters ist eine automatisierte Messtechnik vorteilhaft, etwa zur Erfassung des Frequenz- und Impulsverhaltens. Die Interpretation der Messergebnisse kann komplex werden, insbesondere bei der Identifikation von Fehlerursachen.
+
 - **Zeitmanagement:** Die Koordination paralleler Arbeitsphasen, wie Schaltungsentwurf und Dokumentation, erfordert eine strukturierte Planung und kontinuierliche Fortschrittskontrolle.
 
 Die erfolgreiche Bewältigung dieser Herausforderungen trägt maßgeblich zur Entwicklung fundierter Kenntnisse im Bereich des analogen Filterentwurfs und dessen Anwendung in der technischen Praxis bei.
