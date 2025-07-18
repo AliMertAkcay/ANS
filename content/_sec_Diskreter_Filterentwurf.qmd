@@ -1,4 +1,4 @@
-# Diskreterfilterentwurf
+# Diskreter Filterentwurf
 Die Realisierung der Schaltung aus Abbildung @fig-BiquadKicad auf dem ALSK-Board ist in @fig-DiskreteSchaltung. Hier wurde darauf geachtet, möglichst wenige Drahtbrücken zu verwenden, um parasitäre Kapazitäten, Induktivitäten und Widerstände zu vermeiden. Diese könnten ansonsten den Frequenzgang beeinflussen. Da jedoch Frequenzen im Hz- bis kHz-Bereich auftreten, sind die Einflussfaktoren der Drahtbrücken nicht so groß. Es ist jedoch eine gute Praxis, die Drahtbrücken so kurz und kompakt wie möglich zu halten, um die Übersichtlichkeit zu verbessern.
 
 ![Diskreter Schaltungsaufbau auf dem ASLK-Board von Texas instruments](images/Diskreteschaltung_Richtig_Bearbeitet.png){#fig-DiskreteSchaltung}
