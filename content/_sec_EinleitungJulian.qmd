@@ -15,9 +15,34 @@ Die Erweiterung zum Butterworth-Filter verleiht dem System eine maximal flache A
 
 Der gewählte Projektaufbau ermöglicht eine systematische Verknüpfung zwischen Theorie und Praxis. Von der mathematischen Analyse über die Schaltungsauslegung bis zur fertigen Leiterplatte erhält der Anwender ein vertieftes Verständnis für das Gesamtverhalten und die Optimierungsmöglichkeiten elektronischer Filtersysteme. Die schrittweise und dokumentierte Vorgehensweise trägt zudem dazu bei, die Nachvollziehbarkeit und Reproduzierbarkeit aller Arbeitsschritte sicherzustellen[6][4].
 
+## Motivation
+
+Die Entwicklung und Analyse von Filterschaltungen ist ein zentrales Thema in der Elektrotechnik, da Filter in einer Vielzahl von Anwendungen eingesetzt werden: von der Signalverarbeitung in Kommunikationssystemen über die Störunterdrückung in Messsystemen bis hin zur Audio- und Medizintechnik. Für Studierende und Ingenieure bietet das eigenständige Entwerfen, Simulieren und Realisieren eines Filters eine wertvolle Möglichkeit, theoretisches Wissen direkt mit praktischer Erfahrung zu verbinden.
+
+Besonders motivierend ist das Projekt durch die Integration mehrerer ingenieurwissenschaftlicher Disziplinen:
+- **Mathematische Modellierung:** Erarbeitung und Analyse von Übertragungsfunktionen und deren Auswirkung auf das Frequenzverhalten.
+- **Simulation:** Einsatz moderner Softwaretools zur Validierung der Theorie und Vorhersage des Systemverhaltens.
+- **Praktische Realisierung:** Übertragung der Simulationsergebnisse auf reale elektronische Schaltungen und deren Überprüfung im Labor.
+- **Schaltungsdesign und PCB-Layout:** Gestaltung einer eigenen Leiterplatte, die den Anforderungen an Funktionalität, Zuverlässigkeit und Fertigung entspricht.
+
+Die Arbeit an einem flexiblen und anwendungsnahen Filtersystem stärkt die Problemlösekompetenz, schult das systematische Arbeiten und fördert das Verständnis komplexer Zusammenhänge zwischen Theorie, Simulation und Praxis.
+
+## Herausforderungen
+
+Im Verlauf des Projekts können verschiedene technische und organisatorische Herausforderungen auftreten:
+
+- **Parameterabstimmung:** Die Auswahl geeigneter Komponentenwerte verlangt hohe Präzision, um die geforderten Filtereigenschaften exakt zu erreichen. Schon geringe Toleranzen von Widerständen oder Kondensatoren können das Frequenzverhalten beeinflussen.
+- **Theorie-Praxis-Gap:** Diskrepanzen zwischen idealisierten Simulationen und realen Messergebnissen sind häufig. Diese entstehen durch Bauteilabweichungen, parasitäre Effekte im Aufbau oder nichtlineare Eigenschaften der Operationsverstärker.
+- **Schaltungsdesign:** Die praktische Implementierung eines Biquad-Filters mit Erweiterung zum Butterworthfilter erfordert ein tiefgehendes Verständnis der jeweiligen Topologien, Kopplungsmechanismen und Stabilitätskriterien.
+- **PCB-Umsetzung:** Das Platinenlayout muss nicht nur elektrisch korrekt, sondern auch EMV-gerecht und platzsparend gestaltet werden. Hierbei gilt es, Störungen durch Kreuzkopplungen, Masseführung und Schleifen zu minimieren.
+- **Messung und Analyse:** Für die präzise Charakterisierung des Filters ist eine automatisierte Messtechnik vorteilhaft, etwa zur Erfassung des Frequenz- und Impulsverhaltens. Die Interpretation der Messergebnisse kann komplex werden, insbesondere bei der Identifikation von Fehlerursachen.
+- **Zeitmanagement:** Die Koordination paralleler Arbeitsphasen, wie Schaltungsentwurf und Dokumentation, erfordert eine strukturierte Planung und kontinuierliche Fortschrittskontrolle.
+
+Die erfolgreiche Bewältigung dieser Herausforderungen trägt maßgeblich zur Entwicklung fundierter Kenntnisse im Bereich des analogen Filterentwurfs und dessen Anwendung in der technischen Praxis bei.
+
 ## Zeitmanagement
 
-Der zeitliche Verlauf des Projekts wird in Form eines Gantt-Diagramms dargestellt (siehe Abbildung). Das Diagramm bildet die sequenzielle und teilweise parallele Bearbeitung der einzelnen Arbeitsschritte ab, sodass eine effiziente Ressourcennutzung und termingerechte Fertigstellung gewährleistet werden.
+Der zeitliche Verlauf des Projekts wird in Form eines Gantt-Diagramms dargestellt (siehe @fig-Zeitplan). Das Diagramm bildet die sequenzielle und teilweise parallele Bearbeitung der einzelnen Arbeitsschritte ab, sodass eine effiziente Ressourcennutzung und termingerechte Fertigstellung gewährleistet werden.
 
 ![Zeitplan in Form eines Gantt-Diagramms](images/Zeitplan_ANS.png){#fig-Zeitplan}
 
