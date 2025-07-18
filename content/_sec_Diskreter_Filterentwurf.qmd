@@ -1,1 +1,12 @@
 # Diskreterfilterentwurf
+Die Realisierung der Schaltung aus Abbildung ... auf dem ALSK-Board ist in @fig-DiskreteSchaltung. Hier wurde darauf geachtet, möglichst wenige Drahtbrücken zu verwenden, um parasitäre Kapazitäten, Induktivitäten und Widerstände zu vermeiden. Diese könnten ansonsten den Frequenzgang beeinflussen. Da jedoch Frequenzen im Hz- bis kHz-Bereich auftreten, sind die Einflussfaktoren der Drahtbrücken nicht so groß. Es ist jedoch eine gute Praxis, die Drahtbrücken so kurz und kompakt wie möglich zu halten, um die Übersichtlichkeit zu verbessern.
+
+![Diskreter Schaltungsaufbau auf dem ASLK-Board von Texas instruments](images/Integrator_OpAmp.png){#fig-DiskreteSchaltung}
+
+## Aufbau auf dem ALSK-Board
+
+Auf dem ASLK-Board befinden sich drei TL082-ICs, welche jeweils zwei Operationsverstärker beinhalten. Diese benötigen eine Spannungsversorgung von ±10 Volt, welche mit dem in Abbildung 1 gezeigten oberen linearen Spannungsregler erfolgt. Dieser wird an ein bipolares Labornetzteil angeschlossen. Für die Realisierung der ursprünglichen Biquad-Filterschaltung werden der OPAMP Typ 1 und der OPAMP Typ Full verwendet, um möglichst viele Leitungen zu vermeiden. Der ganz rechte Operationsverstärker vom Typ „Basic” wird verwendet, um den Tiefpassfilter dritter Ordnung zu realisieren. Da für diesen Operationsverstärker jedoch keine Widerstände auf der Platine verbaut sind, müssen die Widerstände und Kondensatoren auf das obere Steckbrett verlagert werden, siehe Abbildung. .
+
+## Fehlerquellen
+Beim Aufbau der diskreten Filterschaltung sind uns einige Fehler unterlaufen. Unter anderem gab es kaputte Drahtbrücken und falsche Widerstandswerte, die falsch angenommen wurden. Daher ist es wichtig, bei der Fehlersuche auf solche typischen Fehler zu achten.
+ 
