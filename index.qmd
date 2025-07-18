@@ -57,10 +57,6 @@ bibliography: references.bib
 
 
 {{< include content/_sec_EinleitungJulian.qmd >}}
-<<<<<<< HEAD
-<!-- {{< include content/_sec_Zielsetzung.qmd >}} -->
-=======
->>>>>>> a4d75dd324c19dd2d1731ea47fc79e7f4069150a
 {{< include content/_sec_Theorehtischer_Filterentwurf.qmd >}}
 {{< include content/_sec_Diskreter_Filterentwurf.qmd >}}
 {{< include content/_sec_PCB_Entwurf.qmd >}}

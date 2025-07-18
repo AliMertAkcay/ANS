@@ -739,35 +739,52 @@ f_ue = np.logspace(1,6,10000)
 
 for f,cwert in enumerate(kondensatoren):
     for s,gueteval in enumerate(guete):
+        
+        filepath3 = './spice_kicad/Kicad_PCB_Simulation/Butterworththirdorder'+cwert+gueteval+'.raw'
+        l3 = Ltspice(filepath3)
+        l3.parse() # Data loading sequence. It may take few minutes for huge file.
+
+        fKicad = l3.get_frequency()
+        VbpfKicad = l3.get_data('v(bpf)')
+        VbsfKicad = l3.get_data('v(bsf)')
+        VhpfKicad = l3.get_data('v(hpf)')
+        Vlpf2Kicad = l3.get_data('v(lpf)')
+        Vlpf3Kicad  = l3.get_data('v(Vout)') # Dies ist der Spannungswert für den LPF Dritterordnug
+
+
         for i,FilterTyp in enumerate(messung):
             f0 = 1/((Rcom*kondensatortenzahl[f])*2*np.pi)
-
+                    
+            # Case Anweisung für die Plots
             match FilterTyp:
                 case "BPF2":
                     # Theorehtische Übertragungsfunktion
                     HE = H_BP2(f_ue,guetezahl[s],H0,f0)
                     # Kicad Simulation
+                    Vkicad = VbpfKicad
 
                 case "LPF2":
                     # Theorehtische Übertragungsfunktion
                     HE = H_LP2(f_ue,guetezahl[s],H0,f0)
                     # Kicad Simulation
+                    Vkicad = Vlpf2Kicad
 
                 case "HPF2":
                     # Theorehtische Übertragungsfunktion
                     HE = H_HP2(f_ue, H0, f0, guetezahl[s])
                     # Kicad Simulation
-
+                    Vkicad = VhpfKicad
                 case "BSF2":
                     # Theorehtische Übertragungsfunktion
                     HE = H_BS(f_ue, H0, f0, guetezahl[s])
                     # Kicad Simulation
-
+                    Vkicad = VbsfKicad
                 case "LPF3":
                     # Theorehtische Übertragungsfunktion        
                     HE = H_LPF3(f_ue, guetezahl[s], H0, f0)
                     # Kicad Simulation
-                    
+                    Vkicad = Vlpf3Kicad
+
             
             AktuelleFilter = FilterTyp+"_"+cwert+"_"+gueteval
             
@@ -808,6 +825,7 @@ for f,cwert in enumerate(kondensatoren):
             ax1.set_xscale('log')
             ax1.plot(freqsfloat, MAG_dB, "x-", label='Amplitudengang (dB) gemessen',color = "blue")
             ax1.plot(f_ue,20*np.log10(HE),label = "Übertragungsfunktion (db)",color = "blue")
+            ax1.plot(fKicad,20*np.log10(abs(Vkicad)),"^",label = "Amplitudengang Simulation",color = "blue") # plot(f3,20*np.log10(abs(Vout1u)),".:",label="Simulation")
             ax1.set_xlabel('Frequenz [Hz]')
             ax1.set_ylabel('Amplitude [dB]', color='b')
             ax1.tick_params(axis='y', labelcolor='b')
@@ -816,6 +834,8 @@ for f,cwert in enumerate(kondensatoren):
             ax2 = ax1.twinx()
             ax2.plot(freqsfloat, np.rad2deg(np.unwrap(np.deg2rad(PHASE_deg))), 'x-', label='Phasengang (°) gemessen',color = "red")
             ax2.plot(f_ue,np.rad2deg(np.unwrap(np.angle(HE))),label = "Übertragungsfunktion (°)",color = "red")
+            ax2.plot(fKicad,np.degrees(np.unwrap(np.angle(Vkicad))),"^",label="Simulation")
+        
 
             ax2.set_ylabel('Phase [°]', color='r')
             ax2.tick_params(axis='y', labelcolor='r')
