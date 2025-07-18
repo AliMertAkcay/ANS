@@ -1,12 +1,16 @@
-# Theorehtischer_Filterentwurf
+# Theoretischer Filterentwurf
 
 ## Operationsverstärker
 ![Biquadfilter Schaltung](images/Biquadschaltung_16.png){#fig-BiquadKicad}
 
-@fig-BiquadKicad zeigt eine aktive Biquad-Filterschaltung. Um deren Funktionsweise nachvollziehen zu können, ist es zunächst hilfreich, sich mit dem Prinzip des Operationsverstärkers genauer auseinanderzusetzen und dessen Verschaltungs möglichkeiten vor Augen zu führen.
+<!--@fig-BiquadKicad zeigt eine aktive Biquad-Filterschaltung. Um deren Funktionsweise nachvollziehen zu können, ist es zunächst hilfreich, sich mit dem Prinzip des Operationsverstärkers genauer auseinanderzusetzen und dessen Verschaltungs möglichkeiten vor Augen zu führen.-->
+
+Die Analyse der Biquad-Filterschaltung in @fig-BiquadKicad offenbart die Implementierung einer aktiven Biquad-Filterschaltung. Um die Funktionsweise der Operationsverstärker adäquat nachvollziehen zu können, empfiehlt es sich, sich eingehend mit dem zugrundeliegenden Prinzip des Operationsverstärkers auseinanderzusetzen und dessen Verschaltungsmöglichkeiten zu vergegenwärtigen.
 
 ### Eigenschaften von idealen Operationsverstärkern
-Um das Übertragungsverhalten eines Operationsverstärkers in einer bestimmten Schaltung mathematisch zu modellieren, wird der Operationsverstärker aus Vereinfachungsgründen als ideal angenommen. Somit hat der Operationsverstärker folgende vier ideale Eigenschaften: 
+<!--Um das Übertragungsverhalten eines Operationsverstärkers in einer bestimmten Schaltung mathematisch zu modellieren, wird der Operationsverstärker aus Vereinfachungsgründen als ideal angenommen. Somit hat der Operationsverstärker folgende vier ideale Eigenschaften: -->
+
+Die mathematische Modellierung des Übertragungsverhaltens eines Operationsverstärkers in einer spezifischen Schaltung erfolgt idealerweise unter der Prämisse der Vereinfachung. In diesem Fall wird der Operationsverstärker als ideal angenommen. Der Operationsverstärker weist demnach folgende vier ideale Eigenschaften auf:
 
 |Name  | Beschreibung | Ideale Eigenschaft                            |
 |------|--------------------------------------|-----------------------|
@@ -20,16 +24,21 @@ Um das Übertragungsverhalten eines Operationsverstärkers in einer bestimmten S
 3. $R_{aus} \rightarrow 0$
 4. $G \rightarrow \infty$ -->
 
-Aus der ersten Eigenschaft folgt das bei einem begrenzten Ausgangssignal, die Spannungsdifferenz null sein muss. Mit der zweiten Eigenschaft kann angenommen werden,dass kein Strom in den eingang des Operationsverstärkers fließt.
+<!--Aus der ersten Eigenschaft folgt das bei einem begrenzten Ausgangssignal, die Spannungsdifferenz null sein muss. Mit der zweiten Eigenschaft kann angenommen werden,dass kein Strom in den eingang des Operationsverstärkers fließt.-->
+
+Aus der ersten Eigenschaft folgt, dass bei einem begrenzten Ausgangssignal die Spannungsdifferenz null sein muss. Es wird angenommen, dass aufgrund der zweiten Eigenschaft kein Strom in den Eingang des Operationsverstärkers fließt.
 
 ### Nicht Invertierenderverstärker 
-Die nicht Invertierendeverstärker Schaltung mittels Operationsverstärker ist in @fig-Noninverting dargestellt.
+<!--Die nicht Invertierendeverstärker Schaltung mittels Operationsverstärker ist in @fig-Noninverting dargestellt.-->
 
+Die nicht invertierende Verstärker-Schaltung, welche mittels Operationsverstärker realisiert wird, ist in der Darstellung als @fig-Noninverting bezeichnet.
 <!-- ![Nichtinvertierender Verstärker Realisiert durch einen Opamp](images/TestOP123.png) -->
 
 ![Nichtinvertierender Versterker Realisiert durch einen Opamp](images/TestOP123.png){#fig-Noninverting}
 
-Die Übertragungsfunktion des nicht Invertierendeverstärkers in @fig-Noninverting lässt sich durch die Spannungsteilerregel herleiten. Da die Spannung zwischen dem Eingung (+) am Operatrionsverstärker und der Rückkoplung (-) als gleich angenommen werden darf auf grund der Ersten Idealen eigenschaft folgt damit @eq-InvOP.
+<!--Die Übertragungsfunktion des nicht Invertierendeverstärkers in @fig-Noninverting lässt sich durch die Spannungsteilerregel herleiten. Da die Spannung zwischen dem Eingung (+) am Operatrionsverstärker und der Rückkoplung (-) als gleich angenommen werden darf auf grund der Ersten Idealen eigenschaft folgt damit @eq-InvOP.-->
+
+Die Übertragungsfunktion des nicht invertierenden Verstärkers in @fig-Noninverting kann gemäß der Spannungsteilerregel ermittelt werden. Aufgrund der Ersten Idealen Eigenschaft kann die Spannung zwischen dem Eingang (+) am Operationsverstärker und der Rückkopplung (-) als gleich angenommen werden. Daraus folgt die Gleichung @eq-InvOP.
 
 $$
 V_{in} = V_{out} \cdot \frac{R_1}{R_1+R_2}
@@ -45,8 +54,9 @@ $${#eq-InvOPfertig}
 
 ![Invertierender Verstärker Realisiert durch einen Opamp](images/InvOPamp.png){#fig-vgain2}
 
-Die in @fig-vgain2 gezeigte Schaltung besitzt die in @eq-Invue Übertragungsfunktion. Die Herleitung basiert auf der ersten und vierten Idealen Eigenschaft des OPs.
+<!--Die in @fig-vgain2 gezeigte Schaltung besitzt die in @eq-Invue Übertragungsfunktion. Die Herleitung basiert auf der ersten und vierten Idealen Eigenschaft des OPs.-->
 
+Die in @fig-vgain2 dargestellte Schaltung weist die in @eq-Invue dargestellte Übertragungsfunktion auf. Die Herleitung fußt auf der ersten und vierten Idealen Eigenschaft des OPs.
 $$
 A_u = \frac{V_{out}}{V_{in}} = - \frac{R_{16}}{R_{15}}
 $${#eq-Invue}
@@ -54,43 +64,54 @@ $${#eq-Invue}
 ### Addierer Schaltung
 ![Addierer Realisiert durch einen Opamp](images/Addiererschaltung2.png){#fig-Summgain}
 
-Mit den Idealen eigenschaften des Operationsverstärkers darf angenommen werden das der Eingangsstrom nicht in den Operationsvertärker fließt ($I_{NP} = 0$) somit gilt @eq-VoutStrom
+<!-- Mit den Idealen eigenschaften des Operationsverstärkers darf angenommen werden das der Eingangsstrom nicht in den Operationsvertärker fließt ($I_{NP} = 0$) somit gilt @eq-VoutStrom -->
+
+Gemäß den idealen Eigenschaften des Operationsverstärkers ist die Annahme zulässig, dass der Eingangsstrom nicht in den Operationsverstärker fließt ($I_N = 0$). Folglich gilt die Gleichung für den Ausgangstrom: @eq-VoutStrom
 
 $$
 V_{out} = -I \cdot R_0
 $${#eq-VoutStrom}
 
-Mit Hilfe der Knotenregel erhält man @eq-Isum
+Die Knotenregel führt zu @eq-Isum.
 
 $$
 I = \sum_{v = 1}^{N} I_v ; \text{wobei } I_v = \frac{V_{ev}}{R_v} 
 $${#eq-Isum}
 
-und aus @eq-Isum und @eq-VoutStrom das Additions Verhalten der Schaltung wenn z.b. alle Widerstände $R_1$ bis $R_N$ gleich sind so erhält man @eq-SumforsameR
+Aus @eq-Isum und @eq-VoutStrom lässt sich das Additionsverhalten der Schaltung ableiten, wenn alle Widerstände von $R_1$ bis $R_N$ gleich sind. So erhält man @eq-SumforsameR.
 
 $$
 V_{out} = -\frac{R_0}{R} \cdot \sum_{v = 1}^{N} V_{ev}
 $${#eq-SumforsameR}
 
 ### Invertierende Integrations Schlatung
+<!--Comp-->
 ![Integrierverstärker Realisiert durch einen Opamp](images/Integrator_OpAmp.png){#fig-Intgain}
 
-In @fig-Intgain ist die Schaltung zur Realisierung eines Integrators mit Hilfe eines Operationsverstärkes
+<!--In @fig-Intgain ist die Schaltung zur Realisierung eines Integrators mit Hilfe eines Operationsverstärkes-->
 
+In @fig-Intgain ist die Schaltung zur Realisierung eines Integrators mit einem Operationsverstärker dargestellt.
 $$
 Z_c = \frac{1}{s \cdot c}
 $$ {#eq-SKpaImpedanz}
 
-die Herleitung der Übertragungsfunktion basiert auf @eq-Invue und  @eq-SKpaImpedanz welche die Impedanz der Kapazität im Laplace bereich beschreibt. 
-@eq-Invue eingesetzt in @eq-SKpaImpedanz resultiert in @eq-Integration
+<!-- die Herleitung der Übertragungsfunktion basiert auf @eq-Invue und  @eq-SKpaImpedanz welche die Impedanz der Kapazität im Laplace bereich beschreibt. 
+@eq-Invue eingesetzt in @eq-SKpaImpedanz resultiert in @eq-Integration -->
+
+Die Herleitung der Übertragungsfunktion basiert auf @eq-Invue und @eq-SKpaImpedanz, welche die Impedanz der Kapazität im Laplace-Bereich beschreibt.
+Die Verwendung von @eq-Invue in @eq-SKpaImpedanz führt zu @eq-Integration.
 
 $$
 A_u = -\frac{1}{R_1 \cdot c \cdot s} = - \frac{1}{R_1 \cdot c} \cdot \frac{1}{s}
 $${#eq-Integration}
 
-Der $\frac{1}{s}$ anteil beschreibt das Integrationsverhalten in der Komplexen S Ebene der Term $- \frac{1}{R_1 \cdot c}$ entspricht dem Negativen Vorfaktor
+<!-- Der $\frac{1}{s}$ anteil beschreibt das Integrationsverhalten in der Komplexen S Ebene der Term $- \frac{1}{R_1 \cdot c}$ entspricht dem Negativen Vorfaktor -->
 
-Mit diesen vier Grundschaltungen lassen sich die gewünschen Übetragungsfunktionen der einzelnen Filter realisieren im nächsten abschnit werden diese aus der Biquadschaltung hergeleitet. 
+Der Term $\frac{1}{s}$ beschreibt das Integrationsverhalten in der komplexen S-Ebene. Der Term $\frac{-1}{R_1 \cdot s}$ entspricht dem negativen Vorfaktor.
+
+<!-- Mit diesen vier Grundschaltungen lassen sich die gewünschen Übetragungsfunktionen der einzelnen Filter realisieren im nächsten abschnit werden diese aus der Biquadschaltung hergeleitet.  -->
+
+Mithilfe dieser vier Grundschaltungen lassen sich die gewünschten Übertragungsfunktionen der einzelnen Filter realisieren. Im nächsten Abschnitt werden diese aus der Biquad-Schaltung hergeleitet.
 
 ### Herleitung der Übertragungsfunktion des Biquad Filters
 
@@ -342,35 +363,56 @@ $$ {#eq-0P17}
 
 ## Herleitung der Übertragungsfunktion Tiefpassfilter dritter Ordnung
 
-Die Übertragungsfunktion eines Tiefpassfilters dritter Ordnung mit der Butterworth approximation ist in der Gleichung @eq-HBW gezeigt.
+<!--Die Übertragungsfunktion eines Tiefpassfilters dritter Ordnung mit der Butterworth approximation ist in der Gleichung @eq-HBW gezeigt.-->
+
+Die Übertragungsfunktion eines Tiefpassfilters dritter Ordnung mit Butterworth-Annäherung ist in der Gleichung @eq-HBW dargestellt.
+
 $$
 H_{BW}(s) = \frac{H_0 \cdot {\omega_0}^3}{a\cdot s^3 +b\cdot s^2 +c \cdot s + (\omega_0)^3}
 $$ {#eq-HBW}
-Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss die Gleichung @eq-HBW angepasst werden.
+<!-- Um aus dem vorhanden Tiefpassfilter zweiter odnung ein Butterworth Tiefpass Dritter ordnung zu gewinnen muss die Gleichung @eq-HBW angepasst werden. -->
+Um aus dem vorhandenen Tiefpassfilter zweiter Ordnung einen Butterworth-Tiefpass dritter Ordnung zu gewinnen, muss die Gleichung @eq-HBW angepasst werden.
 
-Die Gleichung @eq-0P16 kann zu besseren Herleitung als einfacher Bruch umgeschrieben werden siehe @eq-TPOhneBruch. 
+<!-- Die Gleichung @eq-0P16 kann zu besseren Herleitung als einfacher Bruch umgeschrieben werden siehe @eq-TPOhneBruch.  -->
+
+Die Gleichung @eq-0P16 lässt sich zur besseren Herleitung als einfacher Bruch umschreiben, siehe @eq-TPOhneBruch.
 
 $$
 \frac{H_0 \cdot (\omega_0)^2}{(\omega_0)^2+\frac{s}{Q} \cdot \omega_0 +s^2}
 $$ {#eq-TPOhneBruch}
-Bei Genauer Betrachung stellt man fest das mit dem Multiplizieren der Zusätzlichen @eq-losleyIntegrator
+
+<!-- Bei Genauer Betrachung stellt man fest das mit dem Multiplizieren der Zusätzlichen @eq-losleyIntegrator -->
+
+<!-- Bei genauerer Betrachtung stellt man fest, dass mit dem Multiplizieren der zusätzlichen @eq-losleyIntegrator , die Ursprüngliche Butterworth Übertragungsfunktion gewonnen werden kann siehe @eq-TPZusätzlichmitIntegrator -->
+
+Bei genauerer Betrachtung stellt man fest, dass sich die ursprüngliche Butterworth-Übertragungsfunktion durch Multiplizieren der zusätzlichen @eq-losleyIntegrator gewinnen lässt, siehe @eq-TPZusätzlichmitIntegrator.
+
 $$
 \frac{\omega_0}{\omega_0 + s}
 $${#eq-losleyIntegrator}
 
-die Ursprüngliche Butterworth Übertragungsfunktion gewonnen werden kann siehe @eq-TPZusätzlichmitIntegrator
+<!-- die Ursprüngliche Butterworth Übertragungsfunktion gewonnen werden kann siehe @eq-TPZusätzlichmitIntegrator -->
+
 $$
 \frac{H_0 \cdot (\omega_0)^2}{(\omega_0)^2+\frac{s}{Q} \cdot \omega_0 +s^2} \cdot \frac{\omega_0}{\omega_0 + s} = \frac{H_0 \cdot (\omega_0)^3} {(\omega_0)^3 + \frac{s}{Q}\omega_0^2+s^2\omega_0+\omega_0^2s + \frac{s^2}{Q}\omega_0 + s^3}
 $${#eq-TPZusätzlichmitIntegrator}
-Um geformt:
+Umgeformt:
 
 $$
 H_{BW3}(s) = \frac{H_0 \cdot (\omega_0)^3}{s^3 + s^2(\omega_0+\frac{\omega_0}{Q})+s(\frac{(\omega_0)^2}{Q}+(\omega_0)^2) +(\omega_0)^3}
 $${#eq-FertigeÜbertragungsfunktion}
-Um diese Gewünschte Übertragungsfunktion zu erhalten muss die @eq-losleyIntegrator an den Tiefpassfilter in der Schaltung dazu geschaltet werden.
-Die Gleichung @eq-losleyIntegrator wird mit der Übertragungsfunktion @eq-loslyIntegratoraufschaltungsebene Realisiert die daraus Resuliertende schaltung und die Gesammtschaltung ist in @fig-BiquadKicad und @fig-ButterworthKicad gezeigt.
 
+<!-- Um die Gewünschte Übertragungsfunktion @eq-FertigeÜbertragungsfunktion zu erhalten muss die @eq-losleyIntegrator an den Tiefpassfilter in der Schaltung dazu geschaltet werden.
+Die Gleichung @eq-losleyIntegrator wird mit der Übertragungsfunktion @eq-loslyIntegratoraufschaltungsebene Realisiert die daraus Resuliertende schaltung und die Gesammtschaltung ist in @fig-BiquadKicad und @fig-ButterworthKicad gezeigt. -->
+
+Um die gewünschte Übertragungsfunktion @eq-FertigeÜbertragungsfunktion zu erhalten, muss der Losley-Integrator siehe an den Tiefpassfilter in der Schaltung hinzugefügt werden.
+Die Gleichung @eq-losleyIntegrator wird mit der Übertragungsfunktion @eq-loslyIntegratorAufschaltungsebene realisiert. Die daraus resultierende Schaltung und die Gesamtschaltung sind in @fig-BiquadKicad und @fig-ButterworthSchaltung gezeigt.
+
+![Losley-Integrator mit einem invertierenden Verstärker als zusätzliche Ordnung.](images/Butterworthdritterodnung.png){#fig-ButterworthSchaltung}
+<!--Comp-->
 $$
 \frac{\omega_0}{\omega_0 +s} = -\frac{R_2}{R_1} \cdot \frac{\frac{1}{R_{com} \cdot C_{com}}}{R_{com} \cdot C_{com} +s} \cdot -\frac{R_2}{R_1}
 $${#eq-loslyIntegratoraufschaltungsebene}
+
+
 
