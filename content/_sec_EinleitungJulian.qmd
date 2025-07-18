@@ -15,3 +15,38 @@ Die Erweiterung zum Butterworth-Filter verleiht dem System eine maximal flache A
 
 Der gewählte Projektaufbau ermöglicht eine systematische Verknüpfung zwischen Theorie und Praxis. Von der mathematischen Analyse über die Schaltungsauslegung bis zur fertigen Leiterplatte erhält der Anwender ein vertieftes Verständnis für das Gesamtverhalten und die Optimierungsmöglichkeiten elektronischer Filtersysteme. Die schrittweise und dokumentierte Vorgehensweise trägt zudem dazu bei, die Nachvollziehbarkeit und Reproduzierbarkeit aller Arbeitsschritte sicherzustellen[6][4].
 
+## Zeitmanagement
+
+Der zeitliche Verlauf des Projekts wird in Form eines Gantt-Diagramms dargestellt (siehe Abbildung). Das Diagramm bildet die sequenzielle und teilweise parallele Bearbeitung der einzelnen Arbeitsschritte ab, sodass eine effiziente Ressourcennutzung und termingerechte Fertigstellung gewährleistet werden.
+
+![Zeitplan in Form eines Gantt-Diagramms](images/Zeitplan_ANS.png){#fig-Zeitplan}
+
+Das Projekt gliedert sich in folgende Hauptphasen und Aufgaben:
+
+1. **Theoretische Grundlagen** (22.04.2025 – 06.05.2025)  
+   In dieser Phase finden die theoretische Auslegung sowie die Vorbetrachtung des Filters statt. Sie beinhaltet die Recherche und das Verständnis der zugrundeliegenden Filtertheorie.
+
+2. **Simulation und Vorentwurf** (29.04.2025 – 06.05.2025)  
+   Nach der Vorbereitung erfolgt der Entwurf und die Validierung des Filtersystems mittels Simulation, unterstützt durch den Einsatz von KiCad.
+
+3. **Umsetzung und Analyse** (06.05.2025 – 27.05.2025)  
+   Diese Phase beinhaltet die praktische Umsetzung des Filters sowie die Analyse der Impulsantwort der Filterschaltung. Parallel dazu erfolgt die Ausarbeitung eines diskreten Filterentwurfs und einer spezifischen Butterworth-Topologie.
+
+4. **PCB- und Layout-Entwurf** (27.05.2025 – 08.07.2025)  
+   Aufbauend auf den Vorarbeiten wird der Entwurf auf eine Leiterplatte übertragen. Dies umfasst das Design in KiCad und die Optimierung des PCB-Layouts.
+
+5. **Messung, Automatisierung und Analyse** (27.05.2025 – 08.07.2025)  
+   Parallel zum PCB-Design werden die Messabläufe automatisiert und die spätere Analyse der fertigen Platine vorbereitet.
+
+6. **Dokumentation und Präsentation** (24.06.2025 – 21.07.2025)  
+   Die begleitende Dokumentation beginnt noch während der abschließenden Arbeitsphasen und gewährleistet eine kontinuierliche Nachverfolgung und Aufbereitung der Zwischenergebnisse. Sie wird ergänzt durch die Abschlusspräsentation der Projektergebnisse.
+
+7. **Versionierung und Infrastruktur** (24.06.2025 – 15.07.2025)  
+   Einrichtung und Nutzung einer Git-basierten Versionsverwaltung zur Sicherstellung der Nachvollziehbarkeit und Zusammenarbeit.
+
+8. **Abschließende Messung und Analyse** (01.07.2025 – 08.07.2025)  
+   Nach Fertigstellung der Platine folgt die abschließende Messung und Analyse der Filtereigenschaften.
+
+Durch die strukturierte Planung lässt sich eine effiziente Verteilung der Aufgaben sowie eine sinnvolle Überlappung einzelner Tätigkeiten erkennen (z. B. parallele Durchführung von PCB-Design und Messautomatisierung). Der Zeitplan sorgt für transparente Abläufe und unterstützt die Einhaltung der Projekttermine. Wichtige Meilensteine sind insbesondere die Fertigstellung der Simulation, der diskreten Schaltung, des PCB-Designs und schließlich die Präsentation der Ergebnisse.
+
+Die detaillierte Zeitstruktur bildet die Grundlage für einen erfolgreichen Projektverlauf und gewährleistet eine vollständige und transparente Dokumentation aller Projektschritte.
