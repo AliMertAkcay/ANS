@@ -23,14 +23,16 @@ Um alle Filtertypen mit den jeweiligen Einstellungen abzudecken, sind viele Mess
 <!--TEst-->
 <!-- Bevor der Biquad von der diskreten Schaltungsebene auf die PCB-Schaltungsebene übertragen werden kann, muss die diskrete Schaltung verifiziert werden. Hierzu wurden folgende Messungen durchgeführt: -->
 
-Bevor der Biquad von der diskreten Schaltungsebene auf die PCB-Schaltungsebene übertragen werden kann, muss die diskrete Schaltung zunächst verifiziert werden. Hierzu wurden folgende Messungen durchgeführt, die für einen Kondensatorwert von 1 µF bzw. 0,1 µF gelten und entsprechend die in Tabelle 1 aufgelisteten Passbandedgefrequenzen haben.
+Bevor der Biquad von der diskreten Schaltungsebene auf die PCB-Schaltungsebene übertragen werden kann, muss die diskrete Schaltung zunächst verifiziert werden. Hierzu wurden folgende Messungen durchgeführt, die für einen Kondensatorwert von 1 µF bzw. 0,1 µF gelten und entsprechend die in @tbl-Passbandedge aufgelisteten Passbandedgefrequenzen haben.
+
+::: {.table #tbl-Passbandedge tbl-cap="Verwendete Komponenten und dessen Grenzfrequenzen des Durchlassbereichs"}
 
 |           | $f_0 = 159.155$  | $f_0 = 1591.55$  | $f_0 =15915.494$   |
 |-----------|------------------|------------------|--------------------|
 | $R_{com}$ |   $1k\Omega$     |   $1k\Omega$     |    $1k\Omega$      |
 | $C_{com}$ |   $1\mu F$       |   $0.1 \mu F$    |   $0.01 \mu F$     |
 
-
+:::
 ```{python}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -115,18 +117,144 @@ Vlpf10 = l2.get_data('v(lpf)')
 ```
 
 
-### Tiefpassfilter
-In 
 ```{python}
-#| label: fig-DiskretTiefpassfilter
+
+def H_LPF3(f, Q, H0, f0):
+    """
+    Berechnet den Frequenzgang H_BW3(f) eines Bandpassfilters 3. Ordnung.
+
+    Parameter:
+    f : float oder ndarray - Frequenz (Hz)
+    Q : float              - Gütefaktor
+    H0 : float             - Verstärkung
+    f0 : float             - Mittenfrequenz (Hz)
+
+    Rückgabewert:
+    complex oder ndarray - Frequenzgang bei f
+    """
+    s = 1j * 2 * np.pi * f
+    w0 = 2 * np.pi * f0
+
+    numerator = H0 * w0**3
+    denominator = (s**3
+                   + s**2 * (w0 + w0 / Q)
+                   + s * ((w0**2) / Q + w0**2)
+                   + w0**3)
+
+    return numerator / denominator
+
+def H_BP2(f, Q, H0, f0):
+    """
+    Berechnet den Frequenzgang H_BP2(f) eines Bandpassfilters 2. Ordnung.
+
+    Parameter:
+    f : float oder ndarray - Frequenz (Hz)
+    Q : float              - Gütefaktor
+    H0 : float             - Verstärkung
+    f0 : float             - Mittenfrequenz (Hz)
+
+    Rückgabewert:
+    complex oder ndarray - Frequenzgang bei f
+    """
+    s = 1j * 2 * np.pi * f
+    w0 = 2 * np.pi * f0
+
+    numerator = H0 * (s / w0)
+    denominator = (s**2 / w0**2) + 1 + (s / (w0 * Q))
+
+    return numerator / denominator
+
+def H_LP2(f, Q, H0, f0):
+    """
+    Berechnet den Frequenzgang H_LP2(f) eines Tiefpassfilters 2. Ordnung.
+
+    Parameter:
+    f : float oder ndarray - Frequenz (Hz)
+    Q : float              - Gütefaktor
+    H0 : float             - Verstärkung
+    f0 : float             - Grenzfrequenz (Hz)
+
+    Rückgabewert:
+    complex oder ndarray - Frequenzgang bei f
+    """
+    s = 1j * 2 * np.pi * f
+    w0 = 2 * np.pi * f0
+
+    denominator = (s**2 / w0**2) + 1 + (s / (w0 * Q))
+    return H0 / denominator
+
+def H_BS(f, H0, f0, Q):
+    """
+    Berechnet den Frequenzgang eines 2. Ordnung Notch-Filters (Bandsperre).
+
+    Parameter:
+    f : float oder ndarray - Frequenz in Hz
+    H0 : float             - Verstärkung
+    f0 : float             - Sperrfrequenz in Hz
+    Q : float              - Gütefaktor
+
+    Rückgabe:
+    complex oder ndarray  - Frequenzgang bei f
+    """
+    w0 = 2 * np.pi * f0
+    s = 1j * 2 * np.pi * f
+
+    numerator = H0 * (1 + (s**2) / (w0**2))
+    denominator = (s**2 / w0**2) + 1 + (s / (w0 * Q))
+
+    return numerator / denominator
+
+def H_HP2(f, H0, f0, Q):
+    """
+    Berechnet den Frequenzgang eines 2. Ordnung Hochpassfilters.
+
+    Parameter:
+    f : float oder ndarray - Frequenz (Hz)
+    H0 : float             - Verstärkung
+    f0 : float             - Grenzfrequenz (Hz)
+    Q : float              - Gütefaktor
+
+    Rückgabe:
+    complex oder ndarray - Frequenzgang bei f
+    """
+    w0 = 2 * np.pi * f0
+    s = 1j * 2 * np.pi * f
+
+    numerator = H0 * (s**2) / (w0**2)
+    denominator = (s**2 / w0**2) + 1 + (s / (w0 * Q))
+
+    return numerator / denominator
+
+
+
+```
+
+### Tiefpassfilter
+In @fig-DiskretTiefpassfilter 
+```{python}
+#| label: fig-DiskretTiefpassfilterAmp
 #| fig-cap: "Amplitudengang des Tiefpassfilters"
+fHThe = np.logspace(1,6,10000)
+
+HQ1_159_155 = H_LP2(fHThe, 1, 1,159.155)
+HQ2_1591_55 = H_LP2(fHThe,10,1,1591.55)
 
 plt.figure("Amplitudengang des Tiefpass filters")
 plt.title("Amplitudengang des Tiefpassfilters")
-plt.plot(f1,20*np.log10(abs(Vlpf1)),".:",label="Q1 TP Simulation")
-plt.plot(f2,20*np.log10(abs(Vlpf10)),".:",label="Q10 TP Simulation")
-plt.plot(fTPQ1,gainTPQ1,label='Tiefpassfilter gemessen Q1')
-plt.plot(fTPQ10,gainTPQ10,label='Tiefpassfilter gemessen Q10')
+
+
+plt.plot(f1,20*np.log10(abs(Vlpf1)),label="Q1 TP Simulation")
+plt.plot(f2,20*np.log10(abs(Vlpf10)),label="Q10 TP Simulation")
+plt.plot(fTPQ1,gainTPQ1,".:",label='Tiefpassfilter gemessen Q1')
+plt.plot(fTPQ10,gainTPQ10,".:",label='Tiefpassfilter gemessen Q10')
+
+plt.plot(fHThe,20*np.log10(abs(HQ1_159_155)),label = "Übertragungsfunktion Q1")
+plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10")
+
+
+plt.vlines(159.155,-150,10,colors="magenta")
+plt.vlines(1591.55,-150,20,colors="magenta")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -135,12 +263,20 @@ plt.show()
 
 
 ```{python}
+#| label: fig-DiskretTiefpassfilterPhase
+#| fig-cap: "Phasenengang des Tiefpassfilters"
+
 plt.figure("Phasengang des Tiefpass filters")
 plt.title("Phasengang des Tiefpass filters")
-plt.plot(f1,np.degrees(np.angle(Vlpf1)),".:",label="Q1 TP Simulation")
-plt.plot(f2,np.degrees(np.angle(Vlpf10)),".:",label="Q10 TP Simulation")
-plt.plot(fTPQ1,phaseTPQ1,".:",label='Tiefpassfilter gemessen Q1')
-plt.plot(fTPQ10,phaseTPQ10,".:",label='Tiefpassfilter gemessen Q10')
+plt.plot(f1,np.degrees(np.unwrap(np.angle(Vlpf1))),label="Q1 TP Simulation")
+plt.plot(f2,np.degrees(np.unwrap(np.angle(Vlpf10))),label="Q10 TP Simulation")
+
+plt.plot(fTPQ1,np.degrees(np.unwrap(np.deg2rad(phaseTPQ1))),".:",label='Tiefpassfilter gemessen Q1')
+plt.plot(fTPQ10,np.degrees(np.unwrap(np.deg2rad(phaseTPQ10))),".:",label='Tiefpassfilter gemessen Q10')
+
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -149,12 +285,30 @@ plt.show()
 
 ### Hochpassfilter
 ```{python}
+#| label: fig-DiskretHochpassfilterAmp
+#| fig-cap: "Amplitudengang des Hochpassfilters"
+
+
+HQ1_159_155 = H_HP2(fHThe, 1,159.155,1)
+HQ2_1591_55 = H_HP2(fHThe,1,1591.55,10)
+
+
 plt.figure("Amplitudengang des Hochpassfilters")
 plt.title("Amplitudengang des Hochpassfilters")
-plt.plot(f1,20*np.log10(abs(Vhpf1)),".:",label="Q1 HP Simulation")
-plt.plot(f2,20*np.log10(abs(Vhpf10)),".:",label="Q10 HP Simulation")
-plt.plot(fHPFQ1,gainHPFQ1,label='Hochpassfilter gemessen Q1')
-plt.plot(fHPFQ10,gainHPFQ10,label='Hochpassfilter gemessen Q10')
+
+plt.plot(f1,20*np.log10(abs(Vhpf1)),label="Q1 HP Simulation")
+plt.plot(f2,20*np.log10(abs(Vhpf10)),label="Q10 HP Simulation")
+
+plt.plot(fHPFQ1,gainHPFQ1,".:",label='Hochpassfilter gemessen Q1')
+plt.plot(fHPFQ10,gainHPFQ10,".:",label='Hochpassfilter gemessen Q10')
+
+plt.plot(fHThe,20*np.log10(abs(HQ1_159_155)),label = "Übertragungsfunktion Q1")
+plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10")
+
+plt.vlines(159.155,-150,10,colors="magenta")
+plt.vlines(1591.55,-150,20,colors="magenta")
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -163,13 +317,20 @@ plt.show()
 
 
 ```{python}
+#| label: fig-DiskretHochpassfilterPhase
+#| fig-cap: "Phasenengang des Hochpassfilters"
+
 plt.figure("Phasengang des Hochpassfilters")
 plt.title("Phasengang des Hochpassfilters")
-plt.plot(f1,np.degrees(np.angle(Vhpf1)),".:",label="Q1 HP Simulation")
-plt.plot(f2,np.degrees(np.angle(Vhpf10)),".:",label="Q10 HP Simulation")
-plt.plot(fHPFQ1,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ1))),label='Hochpassfilter gemessen Q1')
-#plt.plot(fHPFQ10,phaseHPFQ10,label='Hochpassfilter gemessen Q10')
-plt.plot(fHPFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ10))),label='Hochpassfilter gemessen Q10')
+plt.plot(f1,np.degrees(np.unwrap(np.angle(Vhpf1))),label="Q1 HP Simulation")
+plt.plot(f2,np.degrees(np.unwrap(np.angle(Vhpf10))),label="Q10 HP Simulation")
+
+plt.plot(fHPFQ1,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ1))),".:",label='Hochpassfilter gemessen Q1')
+plt.plot(fHPFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ10))),".:",label='Hochpassfilter gemessen Q10')
+
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -178,12 +339,35 @@ plt.show()
 
 ### Bandpassfilter
 ```{python}
+#| label: fig-DiskretBandpassfilterAmp
+#| fig-cap: "Amplitudengang des Bandpassfilters"
+
+#H_BP2(f, Q, H0, f0)
+
+# H_BP2(f, Q, H0, f0):
+
+HQ1_159_155 = H_BP2(fHThe, 1,1,159.155)
+HQ2_1591_55 = H_BP2(fHThe,10,1,1591.55)
+
+
 plt.figure("Amplitudengang des Bandpassfilters")
 plt.title("Amplitudengang des Bandpassfilters")
-plt.plot(f1,20*np.log10(abs(Vbpf1)),".:",label="Q1 BPF Simulation")
-plt.plot(f2,20*np.log10(abs(Vbpf10)),".:",label="Q10 BPF Simulation")
-plt.plot(fBPFQ1,gainBPFQ1,label='Bandpassfilter gemessen Q1')
-plt.plot(fBPFQ10,gainBPFQ10,label='Bandpassfilter gemessen Q10')
+
+plt.vlines(159.155,-150,10,colors="magenta")
+plt.vlines(1591.55,-150,20,colors="magenta")
+
+plt.plot(f1,20*np.log10(abs(Vbpf1)),label="Q1 BPF Simulation")
+plt.plot(f2,20*np.log10(abs(Vbpf10)),label="Q10 BPF Simulation")
+
+plt.plot(fHThe,20*np.log10(abs(HQ1_159_155)),label = "Übertragungsfunktion Q1")
+plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10")
+
+
+plt.plot(fBPFQ1,gainBPFQ1,".:",label='Bandpassfilter gemessen Q1')
+plt.plot(fBPFQ10,gainBPFQ10,".:",label='Bandpassfilter gemessen Q10')
+
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -191,12 +375,22 @@ plt.show()
 ```
 
 ```{python}
+#| label: fig-DiskretBandpassfilterPhase
+#| fig-cap: "Phasengang des Bandpassfilters"
+
 plt.figure("Phasengang des Bandpassfilters")
 plt.title("Phasengang des Bandpassfilters")
-plt.plot(f1,np.degrees(np.angle(Vbpf1)),".:",label="Q1 BPF Simulation")
-plt.plot(f2,np.degrees(np.angle(Vbpf10)),".:",label="Q10 BPF Simulation")
-plt.plot(fBPFQ1,phaseBPFQ1,label='Bandpassfilter gemessen Q1')
-plt.plot(fBPFQ10,phaseBPFQ10,label='Bandpassfilter gemessen Q10')
+
+plt.plot(f1,np.degrees(np.unwrap(np.angle(Vbpf1))),".:",label="Q1 BPF Simulation")
+plt.plot(f2,np.degrees(np.unwrap(np.angle(Vbpf10))),".:",label="Q10 BPF Simulation")
+
+plt.plot(fBPFQ1,np.rad2deg(np.unwrap(np.deg2rad(phaseBPFQ1))),label='Bandpassfilter gemessen Q1')
+plt.plot(fBPFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseBPFQ10))),label='Bandpassfilter gemessen Q10')
+
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -206,12 +400,30 @@ plt.show()
 ### Bandstopfilter
 
 ```{python}
+#| label: fig-DiskretBandstopfilterAmp
+#| fig-cap: "Amplitudengang des Bandstopfilters"
+
+#H_BS(f, H0, f0, Q)
+
+HQ1_159_155 = H_BS(fHThe, 1,159.155,1)
+HQ2_1591_55 = H_BS(fHThe,1,1591.55,10)
+
 plt.figure("Amplitudengang des Bandstopfilters")
 plt.title("Amplitudengang des Bandstopfilters")
+
 plt.plot(f1,20*np.log10(abs(Vbsf1)),".:",label="Q1 BSF Simulation")
 plt.plot(f2,20*np.log10(abs(Vbsf10)),".:",label="Q10 BSF Simulation")
+
+
 plt.plot(fBSFQ1,gainBSFQ1,label='Bandstopfilter gemessen Q1')
 plt.plot(fBSFQ10,gainBSFQ10,label='Bandstopfilter gemessen Q10')
+
+plt.plot(fHThe,20*np.log10(abs(HQ1_159_155)),label = "Übertragungsfunktion Q1")
+plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10")
+
+plt.vlines(159.155,-150,10,colors="magenta")
+plt.vlines(1591.55,-150,20,colors="magenta")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -219,12 +431,26 @@ plt.show()
 ```
 
 ```{python}
+#| label: fig-DiskretBandstopfilterPhase
+#| fig-cap: "Phasenengang des Bandstopfilters"
+
 plt.figure("Phasengang des Bandstopfilters")
 plt.title("Phasengang des Bandstopfilters")
-plt.plot(f1,np.degrees(np.angle(Vbsf1)),".:",label="Q1 BSF Simulation")
-plt.plot(f2,np.degrees(np.angle(Vbsf10)),".:",label="Q10 BSF Simulation")
-plt.plot(fBSFQ1,phaseBSFQ1,label='Bandstopfilter gemessen Q1')
-plt.plot(fBSFQ10,phaseBSFQ10,label='Bandstopfilter gemessen Q10')
+
+plt.plot(f1,np.degrees(np.unwrap(np.angle(Vbsf1))),".:",label="Q1 BSF Simulation")
+plt.plot(f2,np.degrees(np.unwrap(np.angle(Vbsf10))),".:",label="Q10 BSF Simulation")
+
+# plt.plot(fBSFQ1,phaseBSFQ1,label='Bandstopfilter gemessen Q1')
+# plt.plot(fBSFQ10,phaseBSFQ10,label='Bandstopfilter gemessen Q10')
+
+plt.plot(fBSFQ1,np.rad2deg(np.unwrap(np.deg2rad(phaseBSFQ1))),label='Bandpassfilter gemessen Q1')
+plt.plot(fBSFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseBSFQ10))),label='Bandpassfilter gemessen Q10')
+
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
+plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -322,14 +548,18 @@ phasescipy001uf = np.array(Butterscipy001uF['Phase [deg]'])
 Wie in Abbildung @fig-butterworthamp und @fig-butterworthphase gezeigt, ...
 
 ```{python}
-#| label: fig-butterworthamp
+#| label: fig-butterworthamp1ufamp
 #| fig-cap: "Amplitudengang des Butterworth-Tiefpassfilters mit 1 µF"
 
 plt.figure("Amplitudengang Butterworth TP 1uF")
 plt.title("Amplitudengang Butterworth 1uF")
 plt.plot(f3,20*np.log10(abs(Vout1u)),".:",label="Simulation")
+
 plt.plot(fButter1uf,gain1uf,label='Tiefpassfilter gemessen')
 plt.plot(fButterscipy1uf,gainscipy1uf,label="Scipy Übertragungsfunktion")
+
+plt.vlines(159.155,-150,10,colors="magenta")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -337,14 +567,16 @@ plt.show()
 ```
 
 ```{python}
-#| label: fig-butterworthphase
+#| label: fig-butterworthphase1ufphase
 #| fig-cap: "Phasengang des Butterworth-Tiefpassfilters mit 1 µF"
 
 plt.figure("Phasengang Butterworth TP 1uF")
 plt.title("Phasengang Butterworth 1uF")
-plt.plot(f3,np.degrees(np.angle(Vout1u)),".:",label="Simulation")
-plt.plot(fButter1uf,phase1uf,label='Butterworth gemessen')
-plt.plot(fButterscipy1uf,phasescipy1uf,label="Scipy Übertragungsfunktion")
+plt.plot(f3,np.degrees(np.unwrap(np.angle(Vout1u))),".:",label="Simulation")
+plt.plot(fButter1uf,np.rad2deg(np.unwrap(np.deg2rad(phase1uf))),label='Butterworth gemessen')
+
+plt.plot(fButterscipy1uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy1uf))),label="Scipy Übertragungsfunktion")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -352,11 +584,18 @@ plt.show()
 ```
 ### Butterworthfilter 0.1uF
 ```{python}
+#| label: fig-butterworthphase01ufamp
+#| fig-cap: "Amplitudengang des Butterworth-Tiefpassfilters mit 0,1 µF"
+
 plt.figure("Amplitudengang Butterworth TP 0.1uF")
 plt.title("Amplitudengang Butterworth 0.1uF")
 plt.plot(f4,20*np.log10(abs(Vout01u)),".:",label="Simulation")
 plt.plot(fButter01uf,gain01uf,label='Tiefpassfilter gemessen')
 plt.plot(fButterscipy01uf,gainscipy01uf,label="Scipy Übertragungsfunktion")
+
+plt.vlines(1591.55,-150,10,colors="magenta")
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -364,11 +603,18 @@ plt.show()
 ```
 
 ```{python}
+#| label: fig-butterworthphase01ufphase
+#| fig-cap: "Phasengang des Butterworth-Tiefpassfilters mit 0,1 µF"
+
 plt.figure("Phasengang Butterworth TP 0.1uF")
 plt.title("Phasengang Butterworth 0.1uF")
-plt.plot(f4,np.degrees(np.angle(Vout01u)),".:",label="Simulation")
-plt.plot(fButter01uf,phase01uf,label='Butterworth gemessen')
-plt.plot(fButterscipy01uf,phasescipy01uf,label="Scipy Übertragungsfunktion")
+plt.plot(f4,np.degrees(np.unwrap(np.angle(Vout01u))),".:",label="Simulation")
+
+plt.plot(fButter01uf,np.degrees(np.unwrap(np.deg2rad(phase01uf))),label='Butterworth gemessen')
+
+
+plt.plot(fButterscipy01uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy01uf))),label="Scipy Übertragungsfunktion")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -377,11 +623,17 @@ plt.show()
 ### Butterworthfilter 0.01uF
 
 ```{python}
+#| label: fig-butterworthphase001ufamp
+#| fig-cap: "Amplitudengang des Butterworth-Tiefpassfilters mit 0,01 µF"
+
 plt.figure("Amplitudengang Butterworth TP 0.01uF")
 plt.title("Amplitudengang Butterworth 0.01uF")
 plt.plot(f5,20*np.log10(abs(Vout001u)),".:",label="Simulation")
 plt.plot(fButter001uf,gain001uf,label='Tiefpassfilter gemessen')
 plt.plot(fButterscipy001uf,gainscipy001uf,label="Scipy Übertragungsfunktion")
+
+plt.vlines(15915.494,-150,10,colors="magenta")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -389,11 +641,25 @@ plt.show()
 ```
 
 ```{python}
+#| label: fig-butterworthphase001ufphase
+#| fig-cap: "Phasengang des Butterworth-Tiefpassfilters mit 0,01 µF"
+
 plt.figure("Phasengang Butterworth TP 0.01uF")
 plt.title("Phasengang Butterworth 0.01uF")
-plt.plot(f5,np.degrees(np.angle(Vout001u)),".:",label="Simulation")
-plt.plot(fButter001uf,phase001uf,label='Butterworth gemessen')
-plt.plot(fButterscipy001uf,phasescipy001uf,label="Scipy Übertragungsfunktion")
+
+plt.plot(f5,np.degrees(np.unwrap(np.angle(Vout001u))),".:",label="Simulation")
+
+plt.plot(fButter001uf,np.degrees(np.unwrap(np.deg2rad(phase001uf))),label='Butterworth gemessen')
+
+
+plt.plot(fButterscipy001uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy001uf))),label="Scipy Übertragungsfunktion")
+
+
+# plt.plot(fButter01uf,np.degrees(np.unwrap(np.deg2rad(phase01uf))),label='Butterworth gemessen')
+
+
+# plt.plot(fButterscipy01uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy01uf))),label="Scipy Übertragungsfunktion")
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
