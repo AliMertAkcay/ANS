@@ -236,6 +236,10 @@ In @fig-DiskretTiefpassfilter
 #| fig-cap: "Amplitudengang des Tiefpassfilters"
 fHThe = np.logspace(1,6,10000)
 
+Xachse = "Frequenz [Hz]" 
+YAchseAmp = "Amplitude [dB]"
+YAchsePhase = "Phase [°]"
+
 HQ1_159_155 = H_LP2(fHThe, 1, 1,159.155)
 HQ2_1591_55 = H_LP2(fHThe,10,1,1591.55)
 
@@ -251,6 +255,8 @@ plt.plot(fTPQ10,gainTPQ10,".:",label='Tiefpassfilter gemessen Q10')
 plt.plot(fHThe,20*np.log10(abs(HQ1_159_155)),label = "Übertragungsfunktion Q1")
 plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
 
 plt.vlines(159.155,-150,10,colors="magenta")
 plt.vlines(1591.55,-150,20,colors="magenta")
@@ -276,6 +282,9 @@ plt.plot(fTPQ10,np.degrees(np.unwrap(np.deg2rad(phaseTPQ10))),".:",label='Tiefpa
 
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
 
 plt.xscale('log')
 plt.grid()
@@ -308,6 +317,8 @@ plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10"
 plt.vlines(159.155,-150,10,colors="magenta")
 plt.vlines(1591.55,-150,20,colors="magenta")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
 
 plt.xscale('log')
 plt.grid()
@@ -330,6 +341,10 @@ plt.plot(fHPFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseHPFQ10))),".:",label='Hoch
 
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
+
 
 plt.xscale('log')
 plt.grid()
@@ -366,7 +381,8 @@ plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10"
 plt.plot(fBPFQ1,gainBPFQ1,".:",label='Bandpassfilter gemessen Q1')
 plt.plot(fBPFQ10,gainBPFQ10,".:",label='Bandpassfilter gemessen Q10')
 
-
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
 
 plt.xscale('log')
 plt.grid()
@@ -389,6 +405,9 @@ plt.plot(fBPFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseBPFQ10))),label='Bandpassf
 
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
+
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
 
 
 plt.xscale('log')
@@ -424,6 +443,9 @@ plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10"
 plt.vlines(159.155,-150,10,colors="magenta")
 plt.vlines(1591.55,-150,20,colors="magenta")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -449,6 +471,8 @@ plt.plot(fBSFQ10,np.rad2deg(np.unwrap(np.deg2rad(phaseBSFQ10))),label='Bandpassf
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ1_159_155))),label = "Übertragungsfunktion")
 plt.plot(fHThe,np.rad2deg(np.unwrap(np.angle(HQ2_1591_55))),label = "Übertragungsfunktion")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
 
 
 plt.xscale('log')
@@ -560,6 +584,9 @@ plt.plot(fButterscipy1uf,gainscipy1uf,label="Scipy Übertragungsfunktion")
 
 plt.vlines(159.155,-150,10,colors="magenta")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -576,6 +603,9 @@ plt.plot(f3,np.degrees(np.unwrap(np.angle(Vout1u))),".:",label="Simulation")
 plt.plot(fButter1uf,np.rad2deg(np.unwrap(np.deg2rad(phase1uf))),label='Butterworth gemessen')
 
 plt.plot(fButterscipy1uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy1uf))),label="Scipy Übertragungsfunktion")
+
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
 
 plt.xscale('log')
 plt.grid()
@@ -595,6 +625,8 @@ plt.plot(fButterscipy01uf,gainscipy01uf,label="Scipy Übertragungsfunktion")
 
 plt.vlines(1591.55,-150,10,colors="magenta")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
 
 plt.xscale('log')
 plt.grid()
@@ -615,6 +647,10 @@ plt.plot(fButter01uf,np.degrees(np.unwrap(np.deg2rad(phase01uf))),label='Butterw
 
 plt.plot(fButterscipy01uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy01uf))),label="Scipy Übertragungsfunktion")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -633,6 +669,9 @@ plt.plot(fButter001uf,gain001uf,label='Tiefpassfilter gemessen')
 plt.plot(fButterscipy001uf,gainscipy001uf,label="Scipy Übertragungsfunktion")
 
 plt.vlines(15915.494,-150,10,colors="magenta")
+
+plt.xlabel(Xachse)
+plt.ylabel(YAchseAmp)
 
 plt.xscale('log')
 plt.grid()
@@ -660,6 +699,10 @@ plt.plot(fButterscipy001uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy001uf))),la
 
 # plt.plot(fButterscipy01uf,np.rad2deg(np.unwrap(np.deg2rad(phasescipy01uf))),label="Scipy Übertragungsfunktion")
 
+plt.xlabel(Xachse)
+plt.ylabel(YAchsePhase)
+
+
 plt.xscale('log')
 plt.grid()
 plt.legend()
@@ -682,49 +725,49 @@ Rcom = 1000 # Angenomener widerstand für alle Messungen (Rcom der Schaltung)
 
 kondensatortenzahl = np.array([1e-6,100e-9,10e-9])
 
+guetezahl = np.array([1,10])
+
+H0 = 1
+
 guete = ["1Q","10Q"]
 
 messung = ["BPF2","LPF2","HPF2","BSF2","LPF3"]
 
 Anzahl = len(kondensatoren)*len(guete)*len(messung)
 
+f_ue = np.logspace(1,6,10000)
+
 for f,cwert in enumerate(kondensatoren):
     for s,gueteval in enumerate(guete):
         for i,FilterTyp in enumerate(messung):
-            
-            # Vergleich mit scipy Aus den jeweiligen übertragungsfunktionen
-            #TODO: Das hier noch machen
-            # Filterparameter
-            #order = 3
-            
-           #R = 1000
-            #cwertnum = np.array([1e-6,0.1e-6,0.01e-6])
-            #Wc =   1/(R*cwertnum) # Cutoff frequency in rad/s
+            f0 = 1/((Rcom*kondensatortenzahl[f])*2*np.pi)
 
-            #fs = 10000 # Sampling frequency in Hz (nur relevant für digital)
+            match FilterTyp:
+                case "BPF2":
+                    # Theorehtische Übertragungsfunktion
+                    HE = H_BP2(f_ue,guetezahl[s],H0,f0)
+                    # Kicad Simulation
 
-            # Butterworth Biquad (analog)
-            #b, a = signal.butter(N=order, Wn=Wc, btype='low', analog=True)
+                case "LPF2":
+                    # Theorehtische Übertragungsfunktion
+                    HE = H_LP2(f_ue,guetezahl[s],H0,f0)
+                    # Kicad Simulation
 
-            # Übertragungsfunktion anzeigen
-            #print("Zählerkoeffizienten (b):", b)
-            #print("Nennerkoeffizienten (a):", a)
+                case "HPF2":
+                    # Theorehtische Übertragungsfunktion
+                    HE = H_HP2(f_ue, H0, f0, guetezahl[s])
+                    # Kicad Simulation
 
-            # Bode-Diagramm
-            #w, h = signal.freqs(1*b, a)
-            
-            #plt.figure()
-            #frequenzgang = 20 * np.log10(abs(h))
-            #frequenzgangmitf = np.vstack((frequenzgang,w / (2*np.pi)))
-            #plt.semilogx(w / (2*np.pi), frequenzgang)
-            #plt.title('3nd Order Butterworth Low Pass Filter')
-            #plt.xlabel('Frequency [Hz]')
-            #plt.ylabel('Amplitude [dB]')
-            #plt.grid()
-            #plt.show()
+                case "BSF2":
+                    # Theorehtische Übertragungsfunktion
+                    HE = H_BS(f_ue, H0, f0, guetezahl[s])
+                    # Kicad Simulation
 
-            # Auswertung für die Messung
-            #AktuelleFilter = FilterTyp+"_"+gueteval+"_"+cwert
+                case "LPF3":
+                    # Theorehtische Übertragungsfunktion        
+                    HE = H_LPF3(f_ue, guetezahl[s], H0, f0)
+                    # Kicad Simulation
+                    
             
             AktuelleFilter = FilterTyp+"_"+cwert+"_"+gueteval
             
@@ -737,23 +780,55 @@ for f,cwert in enumerate(kondensatoren):
             MAG_dB = DF_IN1[" Amplitude [dB]"]
             PHASE_deg = DF_IN1[" Phase [deg]"]
             freqsfloat = DF_IN1["Frequency [Hz]"]
+            #%% Berechung der Übertragungsfunktion
 
-            plt.figure(AktuelleFilter)
-            plt.subplot(2, 1, 1)
-            plt.title(AktuelleFilter)
-            #plt.semilogx(freqs, MAG_dB)
-            plt.plot(freqsfloat,MAG_dB)
-            plt.xscale('log')
-            plt.grid()
-            plt.ylabel('Magnitude in dB')
-            #
-            plt.subplot(2, 1, 2)
-            #plt.semilogx(freqs, PHASE_deg)
-            plt.plot(freqsfloat, PHASE_deg)
-            plt.xscale('log')
-            plt.grid()
-            plt.xlabel('f in Hz')
-            plt.ylabel('Phase in deg')
-            plt.savefig("./MessungenPCB/Figs/"+AktuelleFilter+".png")
+            
+            # Alte Plots
+            # plt.figure(AktuelleFilter)
+            # plt.subplot(2, 1, 1)
+            # plt.title(AktuelleFilter)
+            # #plt.semilogx(freqs, MAG_dB)
+            # plt.plot(freqsfloat,MAG_dB)
+            # plt.xscale('log')
+            # plt.grid()
+            # plt.ylabel('Magnitude in dB')
+            # #
+            # plt.subplot(2, 1, 2)
+            # #plt.semilogx(freqs, PHASE_deg)
+            # plt.plot(freqsfloat, PHASE_deg)
+            # plt.xscale('log')
+            # plt.grid()
+            # plt.xlabel('f in Hz')
+            # plt.ylabel('Phase in deg')
+            # plt.savefig("./MessungenPCB/Figs/"+AktuelleFilter+".png")
+
+            fig, ax1 = plt.subplots()
+
+            # Linke Achse: Amplitude
+            ax1.set_xscale('log')
+            ax1.plot(freqsfloat, MAG_dB, "x-", label='Amplitudengang (dB) gemessen',color = "blue")
+            ax1.plot(f_ue,20*np.log10(HE),label = "Übertragungsfunktion (db)",color = "blue")
+            ax1.set_xlabel('Frequenz [Hz]')
+            ax1.set_ylabel('Amplitude [dB]', color='b')
+            ax1.tick_params(axis='y', labelcolor='b')
+
+            # Rechte Achse: Phase
+            ax2 = ax1.twinx()
+            ax2.plot(freqsfloat, np.rad2deg(np.unwrap(np.deg2rad(PHASE_deg))), 'x-', label='Phasengang (°) gemessen',color = "red")
+            ax2.plot(f_ue,np.rad2deg(np.unwrap(np.angle(HE))),label = "Übertragungsfunktion (°)",color = "red")
+
+            ax2.set_ylabel('Phase [°]', color='r')
+            ax2.tick_params(axis='y', labelcolor='r')
+
+            # Gitter und Titel
+            ax1.grid(True, which='both', linestyle='--', linewidth=0.5)
+            plt.title('Amplituden- und Phasengang von '+AktuelleFilter)
+
+            # Legenden kombinieren
+            lines1, labels1 = ax1.get_legend_handles_labels()
+            lines2, labels2 = ax2.get_legend_handles_labels()
+            ax1.legend(lines1 + lines2, labels1 + labels2, loc='best')
+
+            plt.tight_layout()
 plt.show()
 ```

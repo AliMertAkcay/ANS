@@ -57,11 +57,10 @@ bibliography: references.bib
 
 
 {{< include content/_sec_EinleitungJulian.qmd >}}
-{{< include content/_sec_Zielsetzung.qmd >}}
+<!-- {{< include content/_sec_Zielsetzung.qmd >}} -->
 {{< include content/_sec_Theorehtischer_Filterentwurf.qmd >}}
 {{< include content/_sec_Diskreter_Filterentwurf.qmd >}}
 {{< include content/_sec_PCB_Entwurf.qmd >}}
-
 
 {{< include content/_sec_VergleichderMesswerte.qmd >}}
 {{< include content/_sec_Fazit.qmd >}}
