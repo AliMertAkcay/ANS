@@ -16,7 +16,7 @@ Um den Frequenzgang der Schaltung zu ermitteln, wurde die Messung über die graf
 
 <!-- Aufgrund der vielen benötigten Messungen, um alle Filtertypen mit den jeweiligen Einstellungen abzudecken, wurde das Messskript erweitert Deshalb wurde das Messskript um For-Schleifen erweitert. In der Praxis hat sich jedoch herausgestellt, dass die Messung im Allgemeinen länger dauert als die Messung über die grafische Oberfläche. Entsprechend wurde die Idee für eine vollautomatisierte Messung verworfen und die Messung stattdessen händisch über die grafische Oberfläche mit Hilfe eines Messprotokolls weitergeführt. -->
 
-Um alle Filtertypen mit den jeweiligen Einstellungen abzudecken, sind viele Messungen erforderlich. Deshalb wurde das Messskript um For-Schleifen erweitert. In der Praxis hat sich jedoch herausgestellt, dass die Messung im Allgemeinen länger dauert als die Messung über die grafische Oberfläche. Die Idee für eine vollautomatisierte Messung wurde entsprechend verworfen und die Messung stattdessen manuell über die grafische Oberfläche mithilfe eines Messprotokolls fortgeführt.
+Um alle Filtertypen mit den jeweiligen Einstellungen abzudecken, sind viele Messungen erforderlich. Deshalb wurde das Messskript um For-Schleifen erweitert. In der Praxis hat sich jedoch herausgestellt, dass die Messautomatisierung im Allgemeinen länger dauert als die Messung über die grafische Oberfläche. Die Idee für eine vollautomatisierte Messung wurde entsprechend verworfen und die Messung stattdessen manuell über die grafische Oberfläche mithilfe eines Messprotokolls fortgeführt.
 <!--Test-->
 
 ## Messwerte der Diskretenschaltung
