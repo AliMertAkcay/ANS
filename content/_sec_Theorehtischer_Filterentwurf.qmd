@@ -417,4 +417,18 @@ $${#eq-loslyIntegratoraufschaltungsebene}
 
 ## Simulation mit Kicad 
 
+Wie bereits erläutert, stellt die Simulation die erste Phase bei der Entwicklung der Biquad-Schaltung dar. Für die Durchführung der Simulation kamen die Software KiCad sowie die darin integrierten SPICE-Simulatoren zum Einsatz. SPICE steht für „Simulation Program with Integrated Circuit Emphasis“ und bezeichnet eine Programmiersprache bzw. ein Simulationssystem zur Analyse elektronischer Schaltungen. KiCad unterstützt verschiedene SPICE-Implementierungen, wobei in diesem Projekt sowohl PSpice als auch LTspice zur Anwendung kamen.
+
+Die grundlegende Funktionsweise von SPICE besteht darin, die in KiCad erstellte Schaltung mithilfe eines Parsers in ein System algebraischer Gleichungen zu überführen, das anschließend numerisch gelöst wird. Die Lösung dieser Gleichungssysteme erfolgt in der Regel durch Verfahren der linearen Algebra und iterative Algorithmen.
+
+Die Schaltung wird, wie in Abbildung … dargestellt, mithilfe der grafischen Benutzeroberfläche von KiCad aufgebaut. Die hierfür benötigten elektrischen Symbole lassen sich über die integrierte Bibliothek einfügen (vgl. Abbildung …). Sollte ein spezifisches Bauteil nicht in der Standardbibliothek enthalten sein, besteht die Möglichkeit, benutzerdefinierte Symbole zu erstellen (siehe Abbildung …).
+
+Vor der Durchführung der eigentlichen Simulation müssen den jeweiligen Bauteilen entsprechende SPICE-Modelle zugewiesen werden. Diese Modelle liegen typischerweise in Form von .lib- oder .cir-Dateien vor. Die .lib-Dateien enthalten unter anderem sogenannte .subckt-Definitionen, also SPICE-Modelle einzelner elektronischer Komponenten, wie beispielsweise des im Labor eingesetzten Operationsverstärkers TL082 von Texas Instruments.
+
+Die Einbindung dieser Modelle in KiCad erfolgt, indem das jeweilige Symbol selektiert und unter „Simulationsmodell...” die zugehörige Bibliotheksdatei verknüpft wird. Anschließend können unter dem Reiter „Pinbelegung“ die Anschlüsse des Schaltungssymbols den Anschlüssen des Simulationsmodells zugewiesen werden, um eine korrekte Zuordnung für die Simulation zu gewährleisten.
+
+Nach der Zuordnung der SPICE-Modelle zu den jeweiligen Schaltungssymbolen kann über den Menüpunkt „Inspektion“ -> „Simulator“ ein neuer Analyse-Tab erstellt werden. Innerhalb dieses Moduls stehen verschiedene Simulationsarten zur Verfügung. Für die im Labor durchgeführten Untersuchungen ist insbesondere die AC-Analyse (Kleinsignalanalyse) von Relevanz, da sie den Frequenzgang der Schaltung ermittelt und grafisch in Form eines Bode-Diagramms darstellt.
+
+Um die Simulationsergebnisse mit der theoretisch berechneten Übertragungsfunktion sowie den Messergebnissen vergleichen zu können, wurden die in Abbildung … gezeigten Befehle verwendet, um die Rohdaten (RAW-Dateien) der Simulation zu exportieren. Diese Dateien wurden anschließend mithilfe der Python-Bibliothek ltspice eingelesen und weiterverarbeitet, um eine systematische Analyse und Gegenüberstellung der verschiedenen Ergebnisse zu ermöglichen.
+
 
