@@ -33,6 +33,8 @@ Bevor der Biquad von der diskreten Schaltungsebene auf die PCB-Schaltungsebene �
 | $C_{com}$ |   $1\mu F$       |   $0.1 \mu F$    |   $0.01 \mu F$     |
 
 :::
+
+<!--Test-->
 ```{python}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -230,7 +232,7 @@ def H_HP2(f, H0, f0, Q):
 ```
 
 ### Tiefpassfilter
-In @fig-DiskretTiefpassfilter 
+
 ```{python}
 #| label: fig-DiskretTiefpassfilterAmp
 #| fig-cap: "Amplitudengang des Tiefpassfilters"
@@ -267,6 +269,7 @@ plt.legend()
 plt.show()
 ```
 
+<!---->
 
 ```{python}
 #| label: fig-DiskretTiefpassfilterPhase
@@ -291,6 +294,11 @@ plt.grid()
 plt.legend()
 plt.show()
 ```
+
+<!--Comp-->
+
+Wie aus den Abbildungen @fig-DiskretTiefpassfilterAmp und @fig-DiskretTiefpassfilterPhase ersichtlich, zeigt der Amplitudengang der gemessenen diskreten Tiefpassschaltung eine gute Übereinstimmung mit der mathematischen sowie der simulierten Übertragungsfunktion. Der Phasengang des Tiefpassfilters weicht jedoch ab einer Frequenz von 10 kHz vom theoretisch erwarteten Verlauf ab.
+
 
 ### Hochpassfilter
 ```{python}
@@ -351,6 +359,13 @@ plt.grid()
 plt.legend()
 plt.show()
 ```
+
+<!---->
+
+Wie aus den Abbildungen @fig-DiskretHochpassfilterAmp und @fig-DiskretHochpassfilterPhase ersichtlich ist, stimmt der gemessene Amplitudengang des Hochpassfilters weitgehend mit dem theoretischen Amplitudengang überein – mit Ausnahme des Resonanzbereichs. Die Ursache dafür ist dieselbe wie beim Tiefpassfilter: Der Red Pitaya wurde nicht auf den High-Voltage-Modus eingestellt. Dadurch war die tatsächliche Ausgangsspannung größer, als vom Messsystem erfasst werden konnte.
+Wie beim Tiefpassfilter zeigt sich zudem ab einer Frequenz von 10 kHz eine Abweichung im Phasenverlauf. In diesem Bereich stimmt die gemessene Phase nicht mehr mit der simulierten Phase und der mathematischen Übertragungsfunktion überein.
+Darüber hinaus ist anzumerken, dass die orangefarbene Kurve, also die Simulation mit einer Güte von 10, eine invertierte Phase aufweist.
+
 
 ### Bandpassfilter
 ```{python}
@@ -416,10 +431,16 @@ plt.legend()
 plt.show()
 ```
 
+Der gemessene Amplituden- und Phasengang des Bandpassfilters ist in den Abbildungen @fig-DiskretBandpassfilterAmp und @fig-DiskretBandpassfilterPhase dargestellt. Auch hier zeigt sich, dass der Amplitudengang – mit Ausnahme des Resonanzbereichs bei einer Güte von 10 – gut mit der theoretischen und simulierten Übertragungsfunktion übereinstimmt. Die Abweichung im Resonanzbereich lässt sich, wie bereits beim Hochpassfilter, auf die fehlende Aktivierung des High-Voltage-Modus am Red Pitaya zurückführen.
+
+Der Phasengang weist ebenfalls deutliche Unterschiede auf: Zum einen sind der gemessene und der simulierte Phasengang gegenüber dem der mathematischen Übertragungsfunktion invertiert. Zum anderen weicht der simulierte Phasengang ab einer Frequenz von 30 kHz vom gemessenen Verlauf ab. Bis zu diesem Punkt zeigen jedoch alle drei Betrachtungsweisen einen weitgehend identischen Verlauf.
+
 ### Bandstopfilter
 
+
+<!--Comp-->
 ```{python}
-#| label: fig-DiskretBandstopfilterAmp
+#| label: fig-diskretBandstopfilterAmp
 #| fig-cap: "Amplitudengang des Bandstopfilters"
 
 #H_BS(f, H0, f0, Q)
@@ -430,18 +451,18 @@ HQ2_1591_55 = H_BS(fHThe,1,1591.55,10)
 plt.figure("Amplitudengang des Bandstopfilters")
 plt.title("Amplitudengang des Bandstopfilters")
 
-plt.plot(f1,20*np.log10(abs(Vbsf1)),".:",label="Q1 BSF Simulation")
-plt.plot(f2,20*np.log10(abs(Vbsf10)),".:",label="Q10 BSF Simulation")
+plt.plot(f1,20*np.log10(abs(Vbsf1)),label="Q1 BSF Simulation")
+plt.plot(f2,20*np.log10(abs(Vbsf10)),label="Q10 BSF Simulation")
 
 
-plt.plot(fBSFQ1,gainBSFQ1,label='Bandstopfilter gemessen Q1')
-plt.plot(fBSFQ10,gainBSFQ10,label='Bandstopfilter gemessen Q10')
+plt.plot(fBSFQ1,gainBSFQ1,".:",label='Bandstopfilter gemessen Q1')
+plt.plot(fBSFQ10,gainBSFQ10,".:",label='Bandstopfilter gemessen Q10')
 
 plt.plot(fHThe,20*np.log10(abs(HQ1_159_155)),label = "Übertragungsfunktion Q1")
 plt.plot(fHThe,20*np.log10(abs(HQ2_1591_55)),label = "Übertragungsfunktion Q10")
 
-plt.vlines(159.155,-150,10,colors="magenta")
-plt.vlines(1591.55,-150,20,colors="magenta")
+#plt.vlines(159.155,-150,10,colors="magenta")
+#plt.vlines(1591.55,-150,20,colors="magenta")
 
 plt.xlabel(Xachse)
 plt.ylabel(YAchseAmp)
@@ -452,8 +473,11 @@ plt.legend()
 plt.show()
 ```
 
+<!--Comp-->
+<!--Comp-->
+
 ```{python}
-#| label: fig-DiskretBandstopfilterPhase
+#| label: fig-diskretBandstopfilterPhase
 #| fig-cap: "Phasenengang des Bandstopfilters"
 
 plt.figure("Phasengang des Bandstopfilters")
@@ -480,6 +504,10 @@ plt.grid()
 plt.legend()
 plt.show()
 ```
+
+Der Amplitudengang des Bandsperrfilters siehe @fig-diskretBandstopfilterAmp und @fig-diskretBandstopfilterPhase stimmt weitgehend mit dem der theoretischen Übertragungsfunktion überein. Die Notch-Position weicht jedoch leicht von der mathematisch berechneten Übertragungsfunktion ab. Dies ist auf die begrenzte Frequenzauflösung zurückzuführen, da der tiefste Punkt im Frequenzgang nicht exakt erfasst werden konnte.
+
+Die Phasengänge aller drei Betrachtungen (mathematisch, simulativ und gemessen) verlaufen hingegen weitgehend identisch. Es ist jedoch ein konstanter Offset zwischen der mathematischen Phasenberechnung und den gemessenen bzw. simulierten Phasenverläufen festzustellen.
 
 ```{python} 
 # Einladen der Messwerte
@@ -569,7 +597,13 @@ phasescipy001uf = np.array(Butterscipy001uF['Phase [deg]'])
 
 
 ### Butterworth 1uF
-Wie in Abbildung @fig-butterworthamp und @fig-butterworthphase gezeigt, ...
+
+In den folgenden Abbildungen @fig-butterworthamp1ufamp bis @fig-butterworthphase001ufphase sind sowohl der Amplituden- als auch der Phasengang des Tiefpassfilters dritter Ordnung dargestellt.
+
+Es zeigt sich, dass der gemessene Amplitudengang für alle drei Resonanzfrequenzen eine sehr gute Übereinstimmung mit dem theoretischen Frequenzgang aufweist. Gleiches gilt für den Phasengang – mit Ausnahme von Abweichungen, die ab bestimmten Frequenzen auftreten: Beim Butterworth-Filter mit 1 µF beginnt der Phasenverlauf ab etwa 1 kHz vom theoretischen Verlauf abzuweichen. Beim Filter mit 0,1 µF und 0,01 µF treten vergleichbare Abweichungen ab etwa 10 kHz auf.
+
+Zudem ist zu beobachten, dass die Dämpfung nach der Passband-Grenzfrequenz nicht ideal weiter in den negativen Bereich verläuft. Stattdessen nähert sich der gemessene Amplitudenverlauf einem Plateau, das sich mit zunehmender Frequenz sogar leicht ansteigend verhält – was von der theoretischen Erwartung abweicht.
+
 
 ```{python}
 #| label: fig-butterworthamp1ufamp
@@ -711,7 +745,14 @@ plt.show()
 
 ## Messwerte der PCB-Schaltung
 <!--Comp-->
-Im Folgenden sind alle Messungen der PCB-Schaltung sowie der direkte Vergleich zwischen Simulation und theoretischer Übertragungsfunktion dargestellt.
+Im Folgenden sind sämtliche Messungen der PCB-Schaltung sowie der direkte Vergleich mit der Simulation und der theoretischen Übertragungsfunktion dargestellt. Bei genauer Betrachtung zeigt sich, dass der Amplitudengang der beiden unterschiedlichen Modelle sowohl auf mathematischer Ebene als auch in der Simulation in hoher Übereinstimmung mit dem gemessenen Amplitudengang steht. Diese Übereinstimmung lässt sich für alle untersuchten Filtertypen und deren Einstellungen beobachten.
+
+Aus dem Phasenverlauf lässt sich erkennen, dass die Messergebnisse und die beiden Modellvarianten nicht vollständig übereinstimmen. Eine mögliche Ursache hierfür liegt in den unterschiedlichen Verfahren zur Phasenberechnung. Zur Vermeidung von Phasensprüngen wurde daher in allen Fällen die sogenannte Unwrap-Funktion angewendet.
+
+Beim Bandpassfilter zweiter Ordnung (BPF2) zeigt sich zwar ein ähnlicher Verlauf (Simulation und Messung der Übertragungsfunktion), jedoch ist die Phase gegenüber der mathematischen Übertragungsfunktion invertiert. Beim Tiefpassfilter zweiter Ordnung (LPF2) stimmen die Phasengänge zu Beginn in allen drei Betrachtungen überein; im weiteren Frequenzbereich driftet jedoch nur die Simulation weiter ins Negative ab. Dieses Verhalten ist auch beim Hochpassfilter zweiter Ordnung (HPF2) zu beobachten. Beim Bandsperrfilter zweiter Ordnung (BSF2) weichen alle drei Phasenverläufe voneinander ab. Der Tiefpassfilter dritter Ordnung (LPF3) zeigt zunächst eine Übereinstimmung der Phasengänge, wobei gegen Ende – ähnlich wie bei LPF2 und HPF2 – die simulierte Phase verstärkt ins Negative abfällt.
+
+Zusammenfassend lässt sich festhalten, dass die Amplitudengänge in allen drei Betrachtungen weitgehend übereinstimmen, während bei der Phase teilweise deutliche Abweichungen auftreten. Diese könnten auf Berechnungsfehler, Messunsicherheiten oder systematische Abweichungen zurückzuführen sein. Die genaue Ursache für diese Diskrepanzen konnte bisher nicht identifiziert werden und bedarf einer weiteren, sorgfältigen Untersuchung.
+
 
 ```{python}
 import scipy.signal as sig
@@ -834,7 +875,7 @@ for f,cwert in enumerate(kondensatoren):
             ax2 = ax1.twinx()
             ax2.plot(freqsfloat, np.rad2deg(np.unwrap(np.deg2rad(PHASE_deg))), 'x-', label='Phasengang (°) gemessen',color = "red")
             ax2.plot(f_ue,np.rad2deg(np.unwrap(np.angle(HE))),label = "Übertragungsfunktion (°)",color = "red")
-            ax2.plot(fKicad,np.degrees(np.unwrap(np.angle(Vkicad))),"^",label="Simulation")
+            ax2.plot(fKicad,np.degrees(np.unwrap(np.angle(Vkicad))),"^",label="Simulation",color = "red")
         
 
             ax2.set_ylabel('Phase [°]', color='r')
