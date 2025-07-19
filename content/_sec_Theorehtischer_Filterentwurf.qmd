@@ -113,7 +113,7 @@ Der Term $\frac{1}{s}$ beschreibt das Integrationsverhalten in der komplexen S-E
 
 Mithilfe dieser vier Grundschaltungen lassen sich die gewünschten Übertragungsfunktionen der einzelnen Filter realisieren. Im nächsten Abschnitt werden diese aus der Biquad-Schaltung hergeleitet.
 
-### Herleitung der Übertragungsfunktion des Biquad Filters
+## Herleitung der Übertragungsfunktion des Biquad Filters
 
 <!--komp-->
 
@@ -414,5 +414,7 @@ $$
 \frac{\omega_0}{\omega_0 +s} = -\frac{R_2}{R_1} \cdot \frac{\frac{1}{R_{com} \cdot C_{com}}}{R_{com} \cdot C_{com} +s} \cdot -\frac{R_2}{R_1}
 $${#eq-loslyIntegratoraufschaltungsebene}
 
+
+## Simulation mit Kicad 
 
 
