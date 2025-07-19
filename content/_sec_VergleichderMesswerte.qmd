@@ -431,6 +431,8 @@ plt.legend()
 plt.show()
 ```
 
+<!-- -->
+
 Der gemessene Amplituden- und Phasengang des Bandpassfilters ist in den Abbildungen @fig-DiskretBandpassfilterAmp und @fig-DiskretBandpassfilterPhase dargestellt. Auch hier zeigt sich, dass der Amplitudengang – mit Ausnahme des Resonanzbereichs bei einer Güte von 10 – gut mit der theoretischen und simulierten Übertragungsfunktion übereinstimmt. Die Abweichung im Resonanzbereich lässt sich, wie bereits beim Hochpassfilter, auf die fehlende Aktivierung des High-Voltage-Modus am Red Pitaya zurückführen.
 
 Der Phasengang weist ebenfalls deutliche Unterschiede auf: Zum einen sind der gemessene und der simulierte Phasengang gegenüber dem der mathematischen Übertragungsfunktion invertiert. Zum anderen weicht der simulierte Phasengang ab einer Frequenz von 30 kHz vom gemessenen Verlauf ab. Bis zu diesem Punkt zeigen jedoch alle drei Betrachtungsweisen einen weitgehend identischen Verlauf.
