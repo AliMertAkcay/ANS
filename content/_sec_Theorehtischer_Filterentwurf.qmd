@@ -7,7 +7,7 @@
 
 Die Analyse der Biquad-Filterschaltung in @fig-BiquadKicad offenbart die Implementierung einer aktiven Biquad-Filterschaltung. Um die Funktionsweise der Operationsverstärker adäquat nachvollziehen zu können, empfiehlt es sich, sich eingehend mit dem zugrundeliegenden Prinzip des Operationsverstärkers auseinanderzusetzen und dessen Verschaltungsmöglichkeiten zu vergegenwärtigen.
 
-### Eigenschaften von idealen Operationsverstärkern
+### Eigenschaften idealer Operationsverstärker
 <!--Um das Übertragungsverhalten eines Operationsverstärkers in einer bestimmten Schaltung mathematisch zu modellieren, wird der Operationsverstärker aus Vereinfachungsgründen als ideal angenommen. Somit hat der Operationsverstärker folgende vier ideale Eigenschaften: -->
 
 Die mathematische Modellierung des Übertragungsverhaltens eines Operationsverstärkers in einer spezifischen Schaltung erfolgt idealerweise unter der Prämisse der Vereinfachung. In diesem Fall wird der Operationsverstärker als ideal angenommen. Der Operationsverstärker weist demnach folgende vier ideale Eigenschaften auf:
@@ -26,9 +26,9 @@ Die mathematische Modellierung des Übertragungsverhaltens eines Operationsverst
 
 <!--Aus der ersten Eigenschaft folgt das bei einem begrenzten Ausgangssignal, die Spannungsdifferenz null sein muss. Mit der zweiten Eigenschaft kann angenommen werden,dass kein Strom in den eingang des Operationsverstärkers fließt.-->
 
-Aus der ersten Eigenschaft folgt, dass bei einem begrenzten Ausgangssignal die Spannungsdifferenz null sein muss. Es wird angenommen, dass aufgrund der zweiten Eigenschaft kein Strom in den Eingang des Operationsverstärkers fließt.
+Aus der ersten Eigenschaft folgt, dass bei einem begrenzten Ausgangssignal die Spannungsdifferenz null sein muss. Es wird angenommen, dass aufgrund der zweiten Eigenschaft kein Strom in den Eingang des Operationsverstärkers fließt[@Göbel.2019]. 
 
-### Nicht Invertierenderverstärker 
+### Nicht-invertierender Verstärker
 <!--Die nicht Invertierendeverstärker Schaltung mittels Operationsverstärker ist in @fig-Noninverting dargestellt.-->
 
 Die nicht invertierende Verstärker-Schaltung, welche mittels Operationsverstärker realisiert wird, ist in der Darstellung als @fig-Noninverting bezeichnet.
@@ -38,7 +38,7 @@ Die nicht invertierende Verstärker-Schaltung, welche mittels Operationsverstär
 
 <!--Die Übertragungsfunktion des nicht Invertierendeverstärkers in @fig-Noninverting lässt sich durch die Spannungsteilerregel herleiten. Da die Spannung zwischen dem Eingung (+) am Operatrionsverstärker und der Rückkoplung (-) als gleich angenommen werden darf auf grund der Ersten Idealen eigenschaft folgt damit @eq-InvOP.-->
 
-Die Übertragungsfunktion des nicht invertierenden Verstärkers in @fig-Noninverting kann gemäß der Spannungsteilerregel ermittelt werden. Aufgrund der Ersten Idealen Eigenschaft kann die Spannung zwischen dem Eingang (+) am Operationsverstärker und der Rückkopplung (-) als gleich angenommen werden. Daraus folgt die Gleichung @eq-InvOP.
+Die Übertragungsfunktion des nicht invertierenden Verstärkers in @fig-Noninverting kann gemäß der Spannungsteilerregel ermittelt werden. Aufgrund der Ersten Idealen Eigenschaft kann die Spannung zwischen dem Eingang (+) am Operationsverstärker und der Rückkopplung (-) als gleich angenommen werden. Daraus folgt die Gleichung @eq-InvOP [@Göbel.2019].
 
 $$
 V_{in} = V_{out} \cdot \frac{R_1}{R_1+R_2}
@@ -49,7 +49,7 @@ $$
 A_u = \frac{V_{out}}{V_{in}} = 1 + \frac{R_2}{R_1}
 $${#eq-InvOPfertig}
 
-### Invertierenderverstärker
+### Invertierender Verstärker
 <!--Wegen Bild :(-->
 
 ![Invertierender Verstärker Realisiert durch einen Opamp](images/InvOPamp.png){#fig-vgain2}
@@ -61,12 +61,12 @@ $$
 A_u = \frac{V_{out}}{V_{in}} = - \frac{R_{16}}{R_{15}}
 $${#eq-Invue}
 
-### Addierer Schaltung
+### Addiererschaltung 
 ![Addierer Realisiert durch einen Opamp](images/Addiererschaltung2.png){#fig-Summgain}
 
 <!-- Mit den Idealen eigenschaften des Operationsverstärkers darf angenommen werden das der Eingangsstrom nicht in den Operationsvertärker fließt ($I_{NP} = 0$) somit gilt @eq-VoutStrom -->
 
-Gemäß den idealen Eigenschaften des Operationsverstärkers ist die Annahme zulässig, dass der Eingangsstrom nicht in den Operationsverstärker fließt ($I_N = 0$). Folglich gilt die Gleichung für den Ausgangstrom: @eq-VoutStrom
+Gemäß den idealen Eigenschaften des Operationsverstärkers ist die Annahme zulässig, dass der Eingangsstrom nicht in den Operationsverstärker fließt ($I_N = 0$). Folglich gilt die Gleichung für den Ausgangstrom: @eq-VoutStrom [@Göbel.2019]
 
 $$
 V_{out} = -I \cdot R_0
@@ -84,7 +84,7 @@ $$
 V_{out} = -\frac{R_0}{R} \cdot \sum_{v = 1}^{N} V_{ev}
 $${#eq-SumforsameR}
 
-### Invertierende Integrations Schlatung
+### Invertierende Integrationsschaltung
 <!--Comp-->
 ![Integrierverstärker Realisiert durch einen Opamp](images/Integrator_OpAmp.png){#fig-Intgain}
 
@@ -99,7 +99,7 @@ $$ {#eq-SKpaImpedanz}
 @eq-Invue eingesetzt in @eq-SKpaImpedanz resultiert in @eq-Integration -->
 
 Die Herleitung der Übertragungsfunktion basiert auf @eq-Invue und @eq-SKpaImpedanz, welche die Impedanz der Kapazität im Laplace-Bereich beschreibt.
-Die Verwendung von @eq-Invue in @eq-SKpaImpedanz führt zu @eq-Integration.
+Die Verwendung von @eq-Invue in @eq-SKpaImpedanz führt zu @eq-Integration [@Göbel.2019].
 
 $$
 A_u = -\frac{1}{R_1 \cdot c \cdot s} = - \frac{1}{R_1 \cdot c} \cdot \frac{1}{s}
@@ -107,13 +107,13 @@ $${#eq-Integration}
 
 <!-- Der $\frac{1}{s}$ anteil beschreibt das Integrationsverhalten in der Komplexen S Ebene der Term $- \frac{1}{R_1 \cdot c}$ entspricht dem Negativen Vorfaktor -->
 
-Der Term $\frac{1}{s}$ beschreibt das Integrationsverhalten in der komplexen S-Ebene. Der Term $\frac{-1}{R_1 \cdot s}$ entspricht dem negativen Vorfaktor.
+Der Term $\frac{1}{s}$ beschreibt das Integrationsverhalten in der komplexen S-Ebene. Der Term $\frac{-1}{R_1 \cdot s}$ entspricht dem negativen Vorfaktor [@Göbel.2019].
 
 <!-- Mit diesen vier Grundschaltungen lassen sich die gewünschen Übetragungsfunktionen der einzelnen Filter realisieren im nächsten abschnit werden diese aus der Biquadschaltung hergeleitet.  -->
 
 Mithilfe dieser vier Grundschaltungen lassen sich die gewünschten Übertragungsfunktionen der einzelnen Filter realisieren. Im nächsten Abschnitt werden diese aus der Biquad-Schaltung hergeleitet.
 
-## Herleitung der Übertragungsfunktion des Biquad Filters
+## Herleitung der Übertragungsfunktion des Biquad-Filters
 
 <!--komp-->
 
@@ -361,7 +361,7 @@ $$
 $$ {#eq-0P17}
 
 
-## Herleitung der Übertragungsfunktion Tiefpassfilter dritter Ordnung
+## Herleitung der Übertragungsfunktion des Tiefpassfilters dritter Ordnung
 
 <!--Die Übertragungsfunktion eines Tiefpassfilters dritter Ordnung mit der Butterworth approximation ist in der Gleichung @eq-HBW gezeigt.-->
 
@@ -415,7 +415,7 @@ $$
 $${#eq-loslyIntegratoraufschaltungsebene}
 
 
-## Simulation mit Kicad 
+## Simulation mit KiCad
 
 Wie bereits erläutert, stellt die Simulation die erste Phase bei der Entwicklung der Biquad-Schaltung dar. Für die Durchführung der Simulation kamen die Software KiCad sowie die darin integrierten SPICE-Simulatoren zum Einsatz. SPICE steht für „Simulation Program with Integrated Circuit Emphasis“ und bezeichnet eine Programmiersprache bzw. ein Simulationssystem zur Analyse elektronischer Schaltungen. KiCad unterstützt verschiedene SPICE-Implementierungen, wobei in diesem Projekt sowohl PSpice als auch LTspice zur Anwendung kamen.
 
@@ -429,7 +429,7 @@ Die Einbindung dieser Modelle in KiCad erfolgt, indem das jeweilige Symbol selek
 
 Nach der Zuordnung der SPICE-Modelle zu den jeweiligen Schaltungssymbolen kann über den Menüpunkt „Inspektion“ -> „Simulator“ ein neuer Analyse-Tab erstellt werden. Innerhalb dieses Moduls stehen verschiedene Simulationsarten zur Verfügung. Für die im Labor durchgeführten Untersuchungen ist insbesondere die AC-Analyse (Kleinsignalanalyse) von Relevanz, da sie den Frequenzgang der Schaltung ermittelt und grafisch in Form eines Bode-Diagramms darstellt.
 
-Um die Simulationsergebnisse mit der theoretisch berechneten Übertragungsfunktion sowie den Messergebnissen vergleichen zu können, wurden die in Abbildung @fig-icadBefehl gezeigten Befehle verwendet, um die Rohdaten (RAW-Dateien) der Simulation zu exportieren. Diese Dateien wurden anschließend mithilfe der Python-Bibliothek ltspice eingelesen und weiterverarbeitet, um eine systematische Analyse und Gegenüberstellung der verschiedenen Ergebnisse zu ermöglichen.
+Um die Simulationsergebnisse mit der theoretisch berechneten Übertragungsfunktion sowie den Messergebnissen vergleichen zu können, wurden die in Abbildung @fig-KicadBefehl gezeigten Befehle verwendet, um die Rohdaten (RAW-Dateien) der Simulation zu exportieren. Diese Dateien wurden anschließend mithilfe der Python-Bibliothek ltspice eingelesen und weiterverarbeitet, um eine systematische Analyse und Gegenüberstellung der verschiedenen Ergebnisse zu ermöglichen.
 
 ![KiCad Befehl zur abspeicherung der Raw Daten](images/KicadBefehl.png){#fig-KicadBefehl}
 

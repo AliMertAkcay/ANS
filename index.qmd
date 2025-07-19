@@ -62,7 +62,6 @@ bibliography: references.bib
 {{< include content/_sec_PCB_Entwurf.qmd >}}
 
 
-
 {{< include content/_sec_VergleichderMesswerte.qmd >}}
 {{< include content/_sec_Fazit.qmd >}}
 

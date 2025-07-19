@@ -19,6 +19,7 @@ format:
     crossref: 
       #labels: true
       eq-prefix: Gleichung
+      fig-prefix: Abbildung
   pdf:
     documentclass: scrreprt
 #    lof: true

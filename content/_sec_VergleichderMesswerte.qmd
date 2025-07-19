@@ -25,17 +25,18 @@ Um alle Filtertypen mit den jeweiligen Einstellungen abzudecken, sind viele Mess
 
 Bevor der Biquad von der diskreten Schaltungsebene auf die PCB-Schaltungsebene übertragen werden kann, muss die diskrete Schaltung zunächst verifiziert werden. Hierzu wurden folgende Messungen durchgeführt, die für einen Kondensatorwert von 1 µF bzw. 0,1 µF gelten und entsprechend die in @tbl-Passbandedge aufgelisteten Passbandedgefrequenzen haben.
 
-::: {.table #tbl-Passbandedge tbl-cap="Verwendete Komponenten und dessen Grenzfrequenzen des Durchlassbereichs"}
+<!--::: {.table #tbl-Passbandedge tbl-cap="Verwendete Komponenten und dessen Grenzfrequenzen des Durchlassbereichs"}-->
 
 |           | $f_0 = 159.155$  | $f_0 = 1591.55$  | $f_0 =15915.494$   |
 |-----------|------------------|------------------|--------------------|
 | $R_{com}$ |   $1k\Omega$     |   $1k\Omega$     |    $1k\Omega$      |
 | $C_{com}$ |   $1\mu F$       |   $0.1 \mu F$    |   $0.01 \mu F$     |
 
-:::
+<!--:::-->
 
 <!--Test-->
 ```{python}
+#| label: ImportBib
 import matplotlib.pyplot as plt
 import numpy as np
 from ltspice import Ltspice
@@ -43,6 +44,7 @@ import pandas as pd
 ```
 
 ```{python}
+#| label: AndereMesswerte
 # Messwerte Tiefpassfilter mit Q1
 dfLPFQ1 = pd.read_csv("Data/Messung1_LPF.csv", sep=',')
 fTPQ1 = np.array(dfLPFQ1['Frequency [Hz]'])
@@ -93,7 +95,7 @@ phaseBSFQ10 = np.array(dfBSFQ10[' Phase [deg]'])
 ```
 
 ```{python} 
-# -----------------------------------Einladen der Simulations Werte -----------------------------------------
+#| label: Einladen der messwerte
 # Werte für die Tiefpassfilter mit güte 1
 filepath1 = './spice_kicad/FSQ1.raw'
 l1 = Ltspice(filepath1)
@@ -120,7 +122,7 @@ Vlpf10 = l2.get_data('v(lpf)')
 
 
 ```{python}
-
+#| label: Funktionen
 def H_LPF3(f, Q, H0, f0):
     """
     Berechnet den Frequenzgang H_BW3(f) eines Bandpassfilters 3. Ordnung.
@@ -272,7 +274,7 @@ plt.show()
 <!---->
 
 ```{python}
-#| label: fig-DiskretTiefpassfilterPhase
+#| label: fig-AbbPhase
 #| fig-cap: "Phasenengang des Tiefpassfilters"
 
 plt.figure("Phasengang des Tiefpass filters")
@@ -297,7 +299,7 @@ plt.show()
 
 <!--Comp-->
 
-Wie aus den Abbildungen @fig-DiskretTiefpassfilterAmp und @fig-DiskretTiefpassfilterPhase ersichtlich, zeigt der Amplitudengang der gemessenen diskreten Tiefpassschaltung eine gute Übereinstimmung mit der mathematischen sowie der simulierten Übertragungsfunktion. Der Phasengang des Tiefpassfilters weicht jedoch ab einer Frequenz von 10 kHz vom theoretisch erwarteten Verlauf ab.
+Wie aus den Abbildungen @fig-DiskretTiefpassfilterAmp und @fig-AbbPhase ersichtlich, zeigt der Amplitudengang der gemessenen diskreten Tiefpassschaltung eine gute Übereinstimmung mit der mathematischen sowie der simulierten Übertragungsfunktion. Der Phasengang des Tiefpassfilters weicht jedoch ab einer Frequenz von 10 kHz vom theoretisch erwarteten Verlauf ab.
 
 
 ### Hochpassfilter
@@ -480,7 +482,7 @@ plt.show()
 
 ```{python}
 #| label: fig-diskretBandstopfilterPhase
-#| fig-cap: "Phasenengang des Bandstopfilters"
+#| fig-cap: Phasenengang des Bandstopfilters
 
 plt.figure("Phasengang des Bandstopfilters")
 plt.title("Phasengang des Bandstopfilters")
