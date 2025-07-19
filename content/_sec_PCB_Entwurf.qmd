@@ -1,6 +1,78 @@
-# Entwurf der PCB Schaltung
+# PCB-Design
+## Zielsetzung und Designüberlegungen
+Das Ziel des PCB-Designs dieses Projektes ist es, ein funktionales und effizientes Layout fpr den Biquad-Filter mit einer Erweiterung zum Butterworth-Filter 3. Ordnung zu entwickeln. Der Entwurf einer Leiterplatte (PCB) bietet nicht nur die Möglichkeit, das Filter als physikalische Schaltung umzusetzen, sondern stekkt auch wichtige eine Schnittstelle zwischen er theoretischen Planung und er praktischen Umsetzung aus der Elektrotechnik dar.
 
- TODO: Bild Von der fertigen PCB Schaltung einfügen
- Und erklären was wir uns bei dem Entwurf gedacht haben.
+### Zielsetzung des PCB-Designs
+Das Hauptziel ist es, eine Platine zu entwickeln, die strukturierte und leicht bedienbare Funktionen bietet. Das bedeutet, dass das Design so gestaltet werden muss, dass alle Filterstufen (Hochpass, Tiefpass, Bandpass und Bandsperre) auf einer übersichtlichen und logisch gegliederten Platine vereint sind. Eine klare Anordnung und eine benutzerfreundliche Schnittstelle für die Eingaben und Ausgaben des Filters soll gewährleistet werden.
 
-<!-- ![Fertige PCB Schaltung](images/Schaltung_erlich.jpeg){#fig-PCBSchaltung} -->
+Besondere Bedeutung wird dabei der Benutzerfreundlichkeit zugemessen. Das Design soll so gestaltet sein, dass eine einfache Handhabung und Wartung möglich sind. Das bedeutet konkret: klare, übersichtliche Bauteilanordnungen und eine Anordnung, die intuitiv verständlich ist, sodass auch zukünftige Anpassungen oder Reparaturen problemlos durchgeführt werden können.
+
+Ein weiteres Ziel ist es, die Signalverarbeitungseffizienz zu optimieren. Dies beinhaltete die Minimierung von Signalverzerrungen durch möglichst kurze Signalwege und die Vermeidung von elektromagnetischen Störungen. Zudem ist es wichtig, die Stabilität der Schaltung durch eine optimale Bauteilplatzierung und -auswahl sicherzustellen, um Verzerrungen und Rauschen zu vermeiden.
+
+### Designüberlegungen und Herausforderungen
+Bei der Entwicklung des PCB-Layouts müssen mehrere Designüberlegungen berücksichtigt werden, um sowohl die funktionalen Anforderungen zu erfüllen als auch das Design effizient und praktikabel zu gestalten. Dabei sind vor allem folgende Faktoren entscheidend:
+
+1. Platzierung der Bauteile:
+    Eine wichtige Überlegung ist, wie die Bauteile auf der Platine am besten angeordnet werden können, um den Signalfluss zu optimieren. Dies betrifft insbesondere die Operationsverstärker, die als zentraler Bestandteil des Filters fungieren. Sie müssen so platziert werden, dass die Verbindungen zu den Kondensatoren und Widerständen möglichst kurz und direkt sind, um parasitäre Effekte und Signalverluste zu minimieren.
+
+    Darüber hinaus sollemn alle anderen Bauteile wie Widerstände und Kondensatoren in unmittelbarer Nähe zu den relevanten Schaltkreisen platziert werden, um deren Funktionalität nicht zu beeinträchtigen. Ein weiterer Aspekt ist die Stromversorgung der Schaltung, die ebenfalls direkt und störungsfrei erfolgen muss, um die Leistung des Filters nicht zu beeinträchtigen.
+
+2. Effizienz der Signalverbindungen:
+    Ein weiteres Designziel ist es, die Leiterbahnen so kurz und direkt wie möglich zu halten, um Rauschen und Signalverluste zu minimieren. Lange Leiterbahnen können nicht nur zu einer Erhöhung der parasitären Induktivitäten und Kapazitäten führen, sondern auch als Antennen wirken, die elektromagnetische Störungen erzeugen können. Dies war besonders bei der Nutzung von Operationsverstärkern als Signalverstärker von Bedeutung.
+
+    Durch eine durchdachte Platzierung der Bauteile und eine effiziente      Verkabelung kann das PCB so gestaltet werden, dass die Signalübertragung optimal erfolgt, ohne dass sich störende Effekte in der Signalqualität bemerkbar machen.
+
+3. Benutzerfreundlichkeit und Wartbarkeit:
+    Bei der Gestaltung des PCBs wird besonders darauf geachtet, dass es auch für den Endnutzer einfach zu bedienen und zu warten ist. Dies beinhaltete unter anderem eine gute Dokumentation der Anschlüsse und eine logische Anordnung der Bauteile. Insbesondere sollte der Eingangs- und Ausgangsbereich klar markiert und von anderen Schaltungsteilen getrennt sein, sodass die Bedienung und zukünftige Änderungen (z. B. beim Tausch von Bauteilen) schnell und unkompliziert erfolgen können.
+
+    Es wird ebenfalls darauf geachtet, dass alle Bauteile zugänglich sind, um eine einfache Wartung zu ermöglichen. Diese Designentscheidungen tragen dazu bei, dass das Filter nicht nur im ersten Einsatz, sondern auch langfristig einfach verwendet und gewartet werden kann.
+
+4. Platzbedarf und Kompaktheit:
+    Ein wichtiges Kriterium bei der PCB-Entwicklung ist die Platzierung der Bauteile, um den Platz auf der Platine optimal zu nutzen. Es wird darauf geachtet, das Design so zu gestalten, dass es möglichst kompakt bleibt, ohne dass dabei die Funktionalität oder die Benutzerfreundlichkeit beeinträchtigt wird.
+
+    Dies stellte jedoch eine gewisse Herausforderung dar, da die Platine aufgrund der Vielzahl an Bauteilen (insbesondere bei der Erweiterung auf das Butterworth-Filter 3. Ordnung) größer wurde, als ursprünglich geplant. Der Platzbedarf wuchs mit der Anzahl der Bauteile und der Notwendigkeit, die Bauteile sicher und stabil zu platzieren. Die Entscheidung, ein strukturiertes Design mit klarer Anordnung zu wählen, führte dazu, dass mehr Platz für die Bauteile eingeplant wurde, was zu einer größeren Platine führte. Es ist möglich weiteren Platz zu sparen, wurde aber jedoch durch Zeitgründen verworfen.
+
+5. Kosten und Fertigung:
+    Schließlich werden auch die Kosten und fertigungstechnischen Aspekte berücksichtigt. Das Design muss nicht nur funktional und effizient, sondern auch fertigungsgerecht sein. Hierzu zählen unter anderem die Wahl von Standardbauteilen, die Vermeidung von teuren oder schwer zu beschaffenden Komponenten sowie die Berücksichtigung von gängigen Fertigungsprozessen und Toleranzen bei der Leiterplattenherstellung. Dies gewährleistete, dass das PCB kostengünstig und in akzeptabler Zeit produziert werden kann
+
+## Umsetzung des Schlatungsentwurfs in das Layout
+Nachdem die Zielsetzung und die Designüberlegungen vollständig definiert wurden, folgt die nächste Phase des Projekts: die Umsetzung der Schaltung in ein funktionierendes PCB-Layout. Diese Umwandlung stellt eine kritische Phase des Designs dar, in der die theoretische Schaltung auf eine physische Leiterplatte übertragen wird, die später tatsächlich als funktionale Schaltung im realen Betrieb dient.
+
+Die Umsetzung des Schaltungsentwurfs in das Layout umfasst mehrere Schritte, darunter die Bauteilplatzierung, die Verlegung der Leiterbahnen und die abschließende Überprüfung des Designs. Dabei gilt es, sowohl technische als auch praktische Anforderungen zu erfüllen, um ein robustes und funktionales Design zu gewährleisten.
+
+### Vorbereitung und Software-Tools
+Für die Gestaltung des PCB-Layouts wird KiCad, eine Open-Source-Software für das Design von Leiterplatten, verwendet. KiCad bietet umfangreiche Funktionen für den Entwurf und die Simulation von Schaltungen und deren Übertragung auf Leiterplatten. Es ermöglicht die einfache Erstellung des Schaltplans und bietet anschließend die Möglichkeit, diesen in ein Layout umzuwandeln, das den physikalischen Anforderungen entspricht.
+
+Die Schaltbilder aus der vorherigen Phase (siehe Kapitel 2) werden als Grundlage verwendet und in KiCad übertragen. Alle Bauteile wie Operationsverstärker (OP-Amps), Widerstände, Kondensatoren und Verbindungen zwischen den Komponenten wurden in das Layout importiert.
+
+### Bauteilplatzierung und Layout-Strategie
+Die erste Aufgabe bei der Umsetzung des Schaltungsentwurfs in das Layout ist die Platzierung der Bauteile. Bei dieser Aufgabe muss berücksichtigt werden, dass die Bauteile optimal positioniert werden, um die Signalketten kurz und effizient zu halten. Gleichzeitig sollen alle Bauteile auf der Platine so platziert werden, dass sie für die Montage und zukünftige Wartungsarbeiten gut zugänglich sind.
+
+- **Zentralisierung der Operationsverstärker:**
+    Die Operationsverstärker (z. B. TL082) werden zentral auf der Platine platziert, da sie als Kernkomponenten die wichtigsten Signalverarbeitungsfunktionen übernehmen. Sie sollen möglichst nah an den entsprechenden Passivbauelementen wie Widerständen und Kondensatoren angeordnet werden, um die Signalverarbeitung zu optimieren und parasitäre Effekte zu minimieren.
+
+- **Gruppe der passiven Bauteile:** 
+    Widerstände und Kondensatoren wurden in logischen Gruppen angeordnet, die den verschiedenen Filterstufen entsprechen. Dies bedeutet, dass die Bauteile, die für den Tiefpass, Hochpass und Bandpass zuständig sind, räumlich zusammengeführt werden. Diese Platzierung minimiert die Signalwege und sorgt für eine übersichtliche Anordnung.
+
+- **Stromversorgung und Entkopplung:**
+    Die Bauteile für die Stromversorgung und die Entkopplung der Operationsverstärker (z. B. Kondensatoren zur Stabilisierung der Spannung) werden ebenfalls strategisch in der Nähe der Operationsverstärker angeordnet, um den Stromfluss zu optimieren und Störungen zu vermeiden.
+
+- **Signal- und Versorgungspfade:**
+    Die Versorgungsleitungen werden von den Signalpfaden getrennt geführt, um sicherzustellen, dass keine Störungen von der Stromversorgung auf die Signalverarbeitung übergreifen. Diese Trennung minimiert Rauschen und gewährleistet eine stabile Signalqualität.
+
+## Verlegung der Leiterbahnen
+Nachdem die Bauteile positioniert sind, beginnt der nächste Schritt: die Verlegung der Leiterbahnen. Dies ist eine entscheidende Phase, da die Art und Weise, wie die Verbindungen zwischen den Bauteilen gestaltet werden, direkte Auswirkungen auf die Performance der Schaltung hat.
+
+- **Minimierung der Signalwege:** 
+    Um Parasiteneffekte wie Induktivitäten und Kapazitäten zu minimieren, werden die Leiterbahnen möglichst kurz und direkt geführt. Lange Verbindungen können zu einer Erhöhung der parasitären Effekte führen, die das Signal verzerren könnten. Daher wird viel Wert auf kurze und effiziente Leitungen gelegt, die unnötige Störungen vermeiden.
+
+- **Verminderung von Störungen:** 
+    Die Platzierung der Massefläche wird sorgfältig durchgeführt, um eine stabile Referenzspannung zu gewährleisten und Störungen durch unzureichende Masseführung zu vermeiden. Zudem wurden Leiterbahnen, die von empfindlichen Signalen getragen werden, so platziert, dass sie möglichst wenig von anderen Signalpfaden oder der Stromversorgung beeinflusst werden.
+
+- **Leiterbahnbreiten und -abstände:** 
+    Für jede Verbindung wird die Leiterbahnbreite 0,8 mm gewählt, um den Strombedarf der jeweiligen Schaltung zu erfüllen. Ebenso wurden Abstände zwischen den Bahnen gemäß den Designregeln eingehalten, um Kurzschlüsse oder Fehler während der Fertigung zu vermeiden. Die Ecken der Leiterbahnen müssen 45 Grad haben und gerade auf ein Pad geführt werden, um Signalreflexionen und elektromagnetische Interferenzen zu minimieren sowie die Fertigungstoleranzen zu berücksichtigen, was die elektrischen Eigenschaften der Platine optimiert und die Fertigungsqualität sicherstellt.
+
+- **Überprüfung der Leiterbahnen:** 
+    Die Leiterbahnüberprüfung ist ein wichtiger Schritt, um sicherzustellen, dass keine ungewollten Kurzschlüsse oder offenen Verbindungen bestehen. In KiCad gibt es eine Funktion zur DRC-Überprüfung (Design Rule Check), die automatisch auf Fehler hinweist und sicherstellt, dass alle Verbindungen korrekt und den Fertigungsvorgaben entsprechend sind.
+
+<!-- ![Platine](images/PCB_Platine.webp){#fig-Platine} -->
